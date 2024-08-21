@@ -104,7 +104,7 @@
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-hexagon-fill"></i>
-                        <span>Pengajaun</span>
+                        <span>Pengajuan</span>
                     </a>
 
                     <ul class="submenu ">
@@ -158,7 +158,7 @@
                     <ul class="submenu ">
 
                         <li class="submenu-item  ">
-                            <a href="{{ route('pengguna.viewPengguna') }}" class="submenu-link">Data Pengguna</a>
+                            <a href="{{ route('pengguna.view') }}" class="submenu-link">Data Pengguna</a>
 
                         </li>
 

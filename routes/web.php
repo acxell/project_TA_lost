@@ -24,8 +24,10 @@ Route::get('/login', [loginController::class, 'getView'])->name('master.login');
 
 Route::get('/dashboard', [dashboardController::class, 'getView'])->name('dashboard.dashboard');
 
-Route::get('/data-pengguna', [penggunaController::class, 'index'])->name('pengguna.viewPengguna');
-Route::get('/create-data-pengguna', [penggunaController::class, 'create'])->name('pengguna.createPengguna');
+//Actions Manajemen Data Pengguna
+Route::get('/data-pengguna', [penggunaController::class, 'index'])->name('pengguna.view');
+Route::get('/pengguna/{pengguna}/detail', [penggunaController::class, 'show'])->name('pengguna.detail');
+Route::get('/create-data-pengguna', [penggunaController::class, 'create'])->name('pengguna.create');
 Route::post('/pengguna', [penggunaController::class, 'store'])->name('pengguna.store');
 Route::get('/pengguna/{pengguna}/edit', [penggunaController::class, 'edit'])->name('pengguna.edit');
 Route::post('/pengguna/{pengguna}/update', [penggunaController::class, 'update'])->name('pengguna.update');

@@ -12,7 +12,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('pengguna.viewPengguna') }}">Data Pengguna</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('pengguna.view') }}">Data Pengguna</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Insert</li>
                     </ol>
                 </nav>

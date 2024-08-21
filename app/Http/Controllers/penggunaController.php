@@ -49,10 +49,10 @@ class penggunaController extends Controller
         $pengguna = pengguna::create($validateData);
 
         if ($pengguna) {
-            return to_route('pengguna.viewPengguna')->with('success', 'Data Telah Ditambahkan');
+            return to_route('pengguna.view')->with('success', 'Data Telah Ditambahkan');
         }
         else {
-            return to_route('pengguna.viewPengguna')->with('failed', 'Data Gagal Ditambahkan');
+            return to_route('pengguna.view')->with('failed', 'Data Gagal Ditambahkan');
         }
         
     }
@@ -60,9 +60,10 @@ class penggunaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Pengguna $pengguna)
     {
         //
+        return view('pengguna.detail', ['pengguna' => $pengguna]);
     }
 
     /**
@@ -94,10 +95,10 @@ class penggunaController extends Controller
             $pengguna->update($validateData);
     
             if ($pengguna) {
-                return to_route('pengguna.viewPengguna')->with('success', 'Data Berhasil Diubah');
+                return to_route('pengguna.view')->with('success', 'Data Berhasil Diubah');
             }
             else {
-                return to_route('pengguna.viewPengguna')->with('failed', 'Data Gagal Diubah');
+                return to_route('pengguna.view')->with('failed', 'Data Gagal Diubah');
             }
     }
 
@@ -109,10 +110,10 @@ class penggunaController extends Controller
         $pengguna->delete();
     
             if ($pengguna) {
-                return to_route('pengguna.viewPengguna')->with('success', 'Data Telah Dihapus');
+                return to_route('pengguna.view')->with('success', 'Data Telah Dihapus');
             }
             else {
-                return to_route('pengguna.viewPengguna')->with('failed', 'Data Gagal Dihapus');
+                return to_route('pengguna.view')->with('failed', 'Data Gagal Dihapus');
             }
     }
 }

@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-md-12 order-md-2 order-last">
-                        <a class="btn btn-primary" href="{{ route('pengguna.createPengguna') }}">Create</a>
+                        <a class="btn btn-primary" href="{{ route('pengguna.create') }}">Create</a>
                     </div>
                 </div>
                 <table class="table table-striped" id="table1">
@@ -49,7 +49,7 @@
                             <td>
                                 <span class="badge bg-success">{{ $pengguna->status }}</span>
                             </td>
-                            <td><a href="#"><i class="badge-circle font-small-1"
+                            <td><a href="{{ route('pengguna.detail', $pengguna->id) }}"><i class="badge-circle font-small-1"
                                         data-feather="eye"></i></a>
                                 <a href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $pengguna->id }}').submit();">
                                     <i class="badge-circle font-medium-1" data-feather="trash"></i>
