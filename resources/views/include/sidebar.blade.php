@@ -174,6 +174,16 @@
 
 
                     </ul>
+                    
+                <li class="sidebar-item  ">
+                    <a href="{{ route('unit.view') }}" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-medical-fill"></i>
+                        <span>Unit</span>
+                    </a>
+
+
+                </li>
+                    <br>
                     @auth 
                     <form method="post" action="{{ route('logout') }}">
                         @csrf

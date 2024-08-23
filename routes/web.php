@@ -4,6 +4,7 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\penggunaController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,3 +42,12 @@ Route::post('/permission', [permissionController::class, 'store'])->name('permis
 Route::get('/permission/{permission}/edit', [permissionController::class, 'edit'])->name('permission.edit');
 Route::post('/permission/{permission}/update', [permissionController::class, 'update'])->name('permission.update');
 Route::delete('/permission/{permission}', [permissionController::class, 'destroy'])->name('permission.destroy');
+
+//Actions Manajemen Data Unit
+Route::get('/data-unit', [UnitController::class, 'index'])->name('unit.view');
+Route::get('/create-data-unit', [UnitController::class, 'create'])->name('unit.create');
+Route::get('/unit/{unit}/detail', [UnitController::class, 'show'])->name('unit.detail');
+Route::post('/unit', [UnitController::class, 'store'])->name('unit.store');
+Route::get('/unit/{unit}/edit', [UnitController::class, 'edit'])->name('unit.edit');
+Route::post('/unit/{unit}/update', [UnitController::class, 'update'])->name('unit.update');
+Route::delete('/unit/{unit}', [UnitController::class, 'destroy'])->name('unit.destroy');
