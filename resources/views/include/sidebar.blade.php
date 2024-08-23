@@ -37,7 +37,7 @@
                 <li class="sidebar-title">Menu Pengguna</li>
 
                 <li class="sidebar-item ">
-                    <a href="{{ route('dashboard.dashboard') }}" class='sidebar-link'>
+                    <a href="{{ route('dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
@@ -167,9 +167,19 @@
 
                         </li>
 
+                        <li class="submenu-item  ">
+                            <a href="{{ route('permission.view') }}" class="submenu-link">Permission Pengguna</a>
+
+                        </li>
+
 
                     </ul>
-
+                    @auth 
+                    <form method="post" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="btn btn-danger">Log Out</button>
+                    </form>
+                    @endauth
 
                 </li>
             </ul>

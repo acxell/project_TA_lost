@@ -24,18 +24,35 @@
                     <h1 class="auth-title">Login</h1>
                     <p class="auth-subtitle mb-5">Lakukan Login dengan Input Email dan Password</p>
 
-                    <form action="index.html">
+                    <form method="post" action="{{ route('login.store') }}">
+                        @csrf
+                        @if (session()->has('loginError'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('loginError') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Email">
+                            <input type="text" id="email" name="email" class="form-control 
+                                            @error ('email') is invalid
+                                            @enderror form-control-xl" placeholder="Email">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
+                            @error('email')
+                            <small class="btn btn-danger"> {{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Password">
+                            <input type="password" id="password" name="password" class="form-control
+                                            @error ('password') is invalid
+                                            @enderror form-control-xl" placeholder="Password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
+                            @error('password')
+                            <small class="btn btn-danger"> {{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-check form-check-lg d-flex align-items-end">
                             <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
