@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Str;
 
 class Permission extends Model
 {
-    use HasFactory, Notifiable, HasUuids;
+    use HasFactory, Notifiable, HasUuids, HasRoles;
 
-    protected $lable = "permissions";
+    protected $table = "permissions";
     protected $primaryKey = "id";
 
     protected $fillable = [
@@ -29,4 +30,13 @@ class Permission extends Model
     {
         return 'string';
     }
+    public static function bootUuidTrait()
+        {
+            static::creating(function ($model) {
+                $model->keyType = 'string';
+                $model->incrementing = false;
+
+                $model->{$model->getKeyName()} = $model->{$model->getKeyName()} ?: (string) Str::orderedUuid();
+            });
+        }
 }

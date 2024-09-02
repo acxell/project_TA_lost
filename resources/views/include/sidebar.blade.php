@@ -163,7 +163,7 @@
                         </li>
 
                         <li class="submenu-item  ">
-                            <a href="ui-widgets-pricing.html" class="submenu-link">Role Pengguna</a>
+                            <a href="{{ route('role.view') }}" class="submenu-link">Role Pengguna</a>
 
                         </li>
 
@@ -171,6 +171,7 @@
                             <a href="{{ route('permission.view') }}" class="submenu-link">Permission Pengguna</a>
 
                         </li>
+
 
 
                     </ul>

@@ -4,6 +4,7 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\penggunaController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,18 @@ Route::post('/permission', [permissionController::class, 'store'])->name('permis
 Route::get('/permission/{permission}/edit', [permissionController::class, 'edit'])->name('permission.edit');
 Route::post('/permission/{permission}/update', [permissionController::class, 'update'])->name('permission.update');
 Route::delete('/permission/{permission}', [permissionController::class, 'destroy'])->name('permission.destroy');
+
+//Actions Manajemen Data Role Pengguna
+Route::get('/data-role', [RoleController::class, 'index'])->name('role.view');
+Route::get('/create-data-role', [RoleController::class, 'create'])->name('role.create');
+Route::post('/role', [RoleController::class, 'store'])->name('role.store');
+Route::get('/role/{role}/edit', [RoleController::class, 'edit'])->name('role.edit');
+Route::post('/role/{role}/update', [RoleController::class, 'update'])->name('role.update');
+Route::delete('/role/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
+
+//Actions Role Permissions Pengguna
+Route::get('/role/{role}/give-permission', [RoleController::class, 'addPermissionToRole'])->name('addRolePermission.create');
+Route::post('/role/{role}/store-permission', [RoleController::class, 'storePermissionToRole'])->name('addRolePermission.store');
 
 //Actions Manajemen Data Unit
 Route::get('/data-unit', [UnitController::class, 'index'])->name('unit.view');

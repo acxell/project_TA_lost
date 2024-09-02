@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
-use App\Models\Permission;
-use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {

@@ -75,7 +75,7 @@ class UnitController extends Controller
     public function update(Request $request, unit $unit)
     {
         $validateData = $request->validate([
-            'nama' => 'string|required|unique:units',
+            'nama' => 'string|required',
             'description' => 'string|required',
             'status' => 'integer|required',
         ]);

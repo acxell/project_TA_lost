@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\pengguna;
 
@@ -46,6 +47,8 @@ class penggunaController extends Controller
         'unit_id' => 'integer|required',
         ]);
 
+        $validateData['password'] = Hash::make($validateData['password']);
+
         $pengguna = pengguna::create($validateData);
 
         if ($pengguna) {
@@ -84,13 +87,15 @@ class penggunaController extends Controller
         $validateData = $request->validate([
             'id' . $pengguna->id,
             'nama' => 'string|required',
-            'email' => 'string|required|unique:penggunas,email,',
+            'email' => 'string|required',
             'password' => 'string|required|min:10',
             'status' => 'integer|required',
             'nomor_rekening' => 'string|required',
             'role' => 'string|required',
             'unit_id' => 'integer|required',
             ]);
+
+            $validateData['password'] = Hash::make($validateData['password']);
     
             $pengguna->update($validateData);
     
