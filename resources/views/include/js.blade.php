@@ -16,6 +16,10 @@
 <script src="{{ asset('template/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
 <script src="{{ asset('template/assets/static/js/pages/simple-datatables.js') }}"></script>
 
+<!-- Select Element -->
+<script src="{{ asset('template/assets/extensions/choices.js/public/assets/scripts/choices.js') }}"></script>
+<script src="{{ asset('template/assets/static/js/pages/form-element-select.js') }}"></script>
+
 {{-- script sidebar --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {

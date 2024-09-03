@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('password');
             $table->integer('status');
             $table->string('nomor_rekening');
-            $table->string('role');
             $table->bigInteger('unit_id');
             $table->timestamps();
         });

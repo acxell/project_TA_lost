@@ -44,7 +44,13 @@
                             <td>{{ $pengguna->nama }}</td>
                             <td>{{ $pengguna->email }}</td>
                             <td>{{ $pengguna->nomor_rekening }}</td>
-                            <td>{{ $pengguna->role }}</td>
+                            <td>
+                                @if (!empty($pengguna->getRoleNames()))
+                                @foreach ($pengguna->getRoleNames() as $rolename)
+                                <label class="badge bg-primary mx-1">{{ $rolename }}</label>
+                                @endforeach
+                                @endif
+                            </td>
                             <td>{{ $pengguna->unit_id }}</td>
                             <td>
                                 <span class="badge bg-success">{{ $pengguna->status }}</span>

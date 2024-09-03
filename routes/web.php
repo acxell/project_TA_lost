@@ -25,7 +25,9 @@ Route::get('/', [loginController::class, 'getView'])->name('login')->middleware(
 Route::post('/login', [loginController::class, 'login'])->name('login.store');
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', [dashboardController::class, 'getView'])->name('dashboard')->middleware('auth');
+//Route::get('/dashboard', [dashboardController::class, 'getView'])->name('dashboard')->middleware('auth');
+
+Route::get('/dashboard', [dashboardController::class, 'getView'])->name('dashboard');
 
 //Actions Manajemen Data Pengguna
 Route::get('/data-pengguna', [penggunaController::class, 'index'])->name('pengguna.view');

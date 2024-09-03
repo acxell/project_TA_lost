@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class pengguna extends Authenticatable
@@ -21,9 +22,9 @@ class pengguna extends Authenticatable
         'password',
         'status',
         'nomor_rekening',
-        'role',
         'unit_id',
     ];
+
 
     public function getIncrementing()
     {

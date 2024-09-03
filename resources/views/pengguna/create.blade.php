@@ -36,9 +36,9 @@
                                             @error ('nama') is invalid
                                             @enderror"
                                                 placeholder="Nama" name="nama" value="{{ old('nama') }}">
-                                                @error('nama')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                            @error('nama')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -48,9 +48,9 @@
                                             @error ('email') is invalid
                                             @enderror"
                                                 placeholder="Email" name="email" value="{{ old('email') }}">
-                                                @error('email')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                            @error('email')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -60,9 +60,9 @@
                                             @error ('password') is invalid
                                             @enderror"
                                                 placeholder="Password" name="password" value="{{ old('password') }}">
-                                                @error('password')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                            @error('password')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -72,9 +72,9 @@
                                             @error ('status') is invalid
                                             @enderror"
                                                 placeholder="Status" name="status" value="{{ old('status') }}">
-                                                @error('status')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                            @error('status')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -84,21 +84,9 @@
                                             @error ('nomor_rekening') is invalid
                                             @enderror"
                                                 placeholder="Nomor Rekening" name="nomor_rekening" value="{{ old('nomor_rekening') }}">
-                                                @error('nomor_rekening')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label>Role</label>
-                                            <input type="text" id="role" class="form-control 
-                                            @error ('role') is invalid
-                                            @enderror"
-                                                placeholder="Role" name="role" value="{{ old('role') }}">
-                                                @error('role')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                            @error('nomor_rekening')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -108,9 +96,19 @@
                                             @error ('unit_id') is invalid
                                             @enderror"
                                                 placeholder="Kode Unit" name="unit_id" value="{{ old('unit_id') }}">
-                                                @error('unit')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                            @error('unit')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="">Role Pengguna</label>
+                                            <select class="choices form-select multiple-remove" name="roles[]" multiple>
+                                                    @foreach ($roles as $role)
+                                                    <option value="{{ $role }}">{{ $role }}</option>
+                                                    @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">

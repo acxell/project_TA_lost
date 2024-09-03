@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Role;
 
 use App\Models\pengguna;
 
@@ -15,7 +16,7 @@ class penggunaController extends Controller
      */
     public function index()
     {
-        $pengguna = DB::table('penggunas')->get();
+        $pengguna = pengguna::all();
 
         return view('pengguna.view',['penggunas' => $pengguna]);
 
@@ -27,9 +28,10 @@ class penggunaController extends Controller
      */
     public function create()
     {
-        $pengguna = DB::table('penggunas')->get();
+        //$pengguna = DB::table('penggunas')->get();
+        $roles = Role::pluck('name', 'name')->all();
 
-        return view('pengguna.create',['penggunas' => $pengguna]);
+        return view('pengguna.create',['roles' => $roles]);
     }
 
     /**
@@ -43,13 +45,15 @@ class penggunaController extends Controller
         'password' => 'string|required|min:10',
         'status' => 'integer|required',
         'nomor_rekening' => 'string|required',
-        'role' => 'string|required',
+        'roles' => 'required',
         'unit_id' => 'integer|required',
         ]);
 
         $validateData['password'] = Hash::make($validateData['password']);
 
         $pengguna = pengguna::create($validateData);
+
+        $pengguna->assignRole($request->input('roles'));
 
         if ($pengguna) {
             return to_route('pengguna.view')->with('success', 'Data Telah Ditambahkan');
@@ -75,8 +79,10 @@ class penggunaController extends Controller
     public function edit(Pengguna $pengguna)
     {
         //$pengguna = DB::table('penggunas')->get();
+        $roles = Role::pluck('name', 'name')->all();
+        $userRoles = $pengguna->roles->pluck('name','name')->all();
 
-        return view('pengguna.edit',['pengguna' => $pengguna]);
+        return view('pengguna.edit',['pengguna' => $pengguna, 'roles' => $roles, 'userRoles' => $userRoles]);
     }
 
     /**
@@ -91,13 +97,15 @@ class penggunaController extends Controller
             'password' => 'string|required|min:10',
             'status' => 'integer|required',
             'nomor_rekening' => 'string|required',
-            'role' => 'string|required',
+            'roles' => 'required',
             'unit_id' => 'integer|required',
             ]);
 
             $validateData['password'] = Hash::make($validateData['password']);
     
             $pengguna->update($validateData);
+
+            $pengguna->assignRole($request->input('roles'));
     
             if ($pengguna) {
                 return to_route('pengguna.view')->with('success', 'Data Berhasil Diubah');

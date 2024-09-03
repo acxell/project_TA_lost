@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="POST" action="{{ route('role.update', $role->id) }}">
+                            <form class="form" method="POST" action="{{ route('role.update', $role->uuid) }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">

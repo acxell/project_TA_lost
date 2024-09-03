@@ -7,3 +7,7 @@
 
 <link rel="stylesheet" href="{{ asset('template/assets/extensions/simple-datatables/style.css') }}">
 <link rel="stylesheet" href="{{ asset('template/assets/compiled/css/table-datatable.css') }}">
+
+{{-- Select Element Style --}}
+
+<link rel="stylesheet" href="{{ asset('template/assets/extensions/choices.js/public/assets/styles/choices.css') }}">
