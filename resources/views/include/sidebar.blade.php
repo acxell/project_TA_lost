@@ -45,7 +45,8 @@
 
                 </li>
 
-                <li class="sidebar-item  has-sub">
+                <li
+                    class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
                         <span>Pengajuan</span>
@@ -53,8 +54,22 @@
 
                     <ul class="submenu ">
 
-                        <li class="submenu-item  ">
-                            <a href="component-accordion.html" class="submenu-link">Anggaran Tahunan</a>
+                        <li class="submenu-item  has-sub">
+                            <a href="#" class="submenu-link">Anggaran Tahunan</a>
+
+                            <ul class="submenu submenu-level-2 ">
+
+
+                                <li class="submenu-item ">
+                                    <a href="ui-multi-level-menu.html" class="submenu-link">TOR</a>
+                                </li>
+
+                                <li class="submenu-item ">
+                                    <a href="#" class="submenu-link">RAB</a>
+                                </li>
+
+
+                            </ul>
 
                         </li>
 
@@ -72,6 +87,7 @@
 
 
                 </li>
+
 
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
@@ -175,7 +191,7 @@
 
 
                     </ul>
-                    
+
                 <li class="sidebar-item  ">
                     <a href="{{ route('unit.view') }}" class='sidebar-link'>
                         <i class="bi bi-file-earmark-medical-fill"></i>
@@ -184,13 +200,13 @@
 
 
                 </li>
-                    <br>
-                    @auth 
-                    <form method="post" action="{{ route('logout') }}">
-                        @csrf
-                        <button class="btn btn-danger">Log Out</button>
-                    </form>
-                    @endauth
+                <br>
+                @auth
+                <form method="post" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="btn btn-danger">Log Out</button>
+                </form>
+                @endauth
 
                 </li>
             </ul>

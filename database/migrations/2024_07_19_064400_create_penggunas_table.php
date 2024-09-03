@@ -16,10 +16,12 @@ return new class extends Migration
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('status');
+            $table->string('status');
             $table->string('nomor_rekening');
-            $table->bigInteger('unit_id');
+            $table->uuid('unit_id');
             $table->timestamps();
+
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
         });
     }
 

@@ -33,7 +33,7 @@
                             <th>Email</th>
                             <th>No Rekening</th>
                             <th>Role</th>
-                            <th>Unit Id</th>
+                            <th>Unit</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -51,10 +51,13 @@
                                 @endforeach
                                 @endif
                             </td>
-                            <td>{{ $pengguna->unit_id }}</td>
+                            <td>{{ $pengguna->unit->nama }}</td>
                             <td>
-                                <span class="badge bg-success">{{ $pengguna->status }}</span>
+                                <span class="badge {{ $pengguna->status == 'Aktif' ? 'bg-success' : 'bg-danger' }}">
+                                    {{ $pengguna->status }}
+                                </span>
                             </td>
+
                             <td><a href="{{ route('pengguna.detail', $pengguna->id) }}"><i class="badge-circle font-small-1"
                                         data-feather="eye"></i></a>
                                 <a href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $pengguna->id }}').submit();">

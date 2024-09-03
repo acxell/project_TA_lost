@@ -12,13 +12,17 @@ class Unit extends Model
 {
     use HasFactory, Notifiable, HasUuids, HasRoles;
 
-    protected $lable = "units";
+    protected $table = "units";
 
     protected $fillable = [
         'nama',
         'description',
         'status',
     ];
+
+    public function penggunas(){
+        return $this->hasMany(pengguna::class, 'unit_id', 'id');
+    }
 
     public function getIncrementing()
     {

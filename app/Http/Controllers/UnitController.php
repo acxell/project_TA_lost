@@ -38,7 +38,7 @@ class UnitController extends Controller
         $validateData = $request->validate([
             'nama' => 'string|required|unique:units',
             'description' => 'string|required',
-            'status' => 'integer|required',
+            'status' => 'string|required',
         ]);
 
         $unit = unit::create($validateData);
@@ -77,7 +77,7 @@ class UnitController extends Controller
         $validateData = $request->validate([
             'nama' => 'string|required',
             'description' => 'string|required',
-            'status' => 'integer|required',
+            'status' => 'string|required',
         ]);
 
         $unit->update($validateData);

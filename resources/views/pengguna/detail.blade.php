@@ -67,7 +67,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Status</label>
-                                            <input type="number" id="status" class="form-control 
+                                            <input type="text" id="status" class="form-control 
                                             @error ('status') is invalid
                                             @enderror"
                                                 placeholder="Status" name="status" value="{{ old('status') ?? $pengguna->status }}" disabled>
@@ -103,11 +103,9 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Unit</label>
-                                            <input type="number" id="unit_id" class="form-control 
-                                            @error ('unit_id') is invalid
-                                            @enderror"
-                                                placeholder="Kode Unit" name="unit_id" value="{{ old('unit_id') ?? $pengguna->unit_id }}" disabled>
-                                            @error('unit')
+                                            <input type="text" id="unit_id" class="form-control @error ('unit_id') is-invalid @enderror"
+                                                placeholder="Nama Unit" name="unit_id" value="{{ old('unit_id') ?? $pengguna->unit->nama }}" disabled>
+                                            @error('unit_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>

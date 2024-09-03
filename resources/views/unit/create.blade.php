@@ -44,13 +44,12 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Status</label>
-                                            <input type="number" id="status" class="form-control 
-                                            @error ('status') is invalid
-                                            @enderror"
-                                                placeholder="Status" name="status" value="{{ old('status') }}">
-                                                @error('status')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                            <fieldset class="form-group">
+                                                <select class="form-select" name="status" id="status" type="text" aria-placeholder="Status">
+                                                    <option value="Aktif">Aktif</option>
+                                                    <option value="Tidak Aktif">Tidak Aktif</option>
+                                                </select>
+                                            </fieldset>
                                         </div>
                                     </div>
                                     <div class="col-12">

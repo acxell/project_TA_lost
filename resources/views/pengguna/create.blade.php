@@ -68,13 +68,12 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Status</label>
-                                            <input type="number" id="status" class="form-control 
-                                            @error ('status') is invalid
-                                            @enderror"
-                                                placeholder="Status" name="status" value="{{ old('status') }}">
-                                            @error('status')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
+                                            <fieldset class="form-group">
+                                                <select class="form-select" name="status" id="status" type="text" aria-placeholder="Status">
+                                                    <option value="Aktif">Aktif</option>
+                                                    <option value="Tidak Aktif">Tidak Aktif</option>
+                                                </select>
+                                            </fieldset>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -92,22 +91,20 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Unit</label>
-                                            <input type="number" id="unit_id" class="form-control 
-                                            @error ('unit_id') is invalid
-                                            @enderror"
-                                                placeholder="Kode Unit" name="unit_id" value="{{ old('unit_id') }}">
-                                            @error('unit')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
+                                                <select class="choices form-select" name="unit_id" id="unit_id" type="text" aria-placeholder="Unit">
+                                                    @foreach ($units as $unit)
+                                                    <option value="{{ $unit->id }}">{{ $unit->nama }}</option>
+                                                    @endforeach
+                                                </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="">Role Pengguna</label>
                                             <select class="choices form-select multiple-remove" name="roles[]" multiple>
-                                                    @foreach ($roles as $role)
-                                                    <option value="{{ $role }}">{{ $role }}</option>
-                                                    @endforeach
+                                                @foreach ($roles as $role)
+                                                <option value="{{ $role }}">{{ $role }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>

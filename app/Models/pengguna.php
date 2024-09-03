@@ -14,7 +14,7 @@ class pengguna extends Authenticatable
 {
     use HasFactory, Notifiable, HasUuids, HasRoles;
 
-    protected $lable = "penggunas";
+    protected $table = "penggunas";
 
     protected $fillable = [
         'nama',
@@ -25,6 +25,9 @@ class pengguna extends Authenticatable
         'unit_id',
     ];
 
+    public function unit(){
+        return $this->belongsTo(Unit::class, 'unit_id', 'id');
+    }
 
     public function getIncrementing()
     {

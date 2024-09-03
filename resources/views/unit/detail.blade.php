@@ -43,7 +43,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Status</label>
-                                            <input type="number" id="status" class="form-control 
+                                            <input type="text" id="status" class="form-control 
                                             @error ('status') is invalid
                                             @enderror"
                                                 placeholder="Status" name="status" value="{{ old('status') ?? $unit->status }}" disabled>

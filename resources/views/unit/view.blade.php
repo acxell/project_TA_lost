@@ -39,7 +39,9 @@
                         <tr>
                             <td>{{ $unit->nama }}</td>
                             <td>
-                                <span class="badge bg-success">{{ $unit->status }}</span>
+                                <span class="badge {{ $unit->status == 'Aktif' ? 'bg-success' : 'bg-danger' }}">
+                                    {{ $unit->status }}
+                                </span>
                             </td>
                             <td><a href="{{ route('unit.detail', $unit->id) }}"><i class="badge-circle font-small-1"
                                         data-feather="eye"></i></a>

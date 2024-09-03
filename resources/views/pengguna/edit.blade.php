@@ -68,15 +68,18 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Status</label>
-                                            <input type="number" id="status" class="form-control 
-                                            @error ('status') is invalid
-                                            @enderror"
-                                                placeholder="Status" name="status" value="{{ old('status') ?? $pengguna->status }}">
-                                            @error('status')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
+                                            <fieldset class="form-group">
+                                                <select class="form-select @error('status') is-invalid @enderror" name="status" id="status">
+                                                    <option value="Aktif" {{ (old('status') ?? $pengguna->status) == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                                                    <option value="Tidak Aktif" {{ (old('status') ?? $pengguna->status) == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                                                </select>
+                                                @error('status')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </fieldset>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Nomor Rekening</label>
@@ -92,23 +95,26 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Unit</label>
-                                            <input type="number" id="unit_id" class="form-control 
-                                            @error ('unit_id') is invalid
-                                            @enderror"
-                                                placeholder="Kode Unit" name="unit_id" value="{{ old('unit_id') ?? $pengguna->unit_id }}">
-                                            @error('unit')
+                                            <select class="choices form-select @error('unit_id') is-invalid @enderror" name="unit_id" id="unit_id">
+                                                @foreach ($units as $unit)
+                                                <option value="{{ $unit->id }}" {{ (old('unit_id') ?? $pengguna->unit_id) == $unit->id ? 'selected' : '' }}>
+                                                    {{ $unit->nama }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            @error('unit_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="">Role Pengguna</label>
                                             <select class="choices form-select multiple-remove" name="roles[]" multiple>
                                                 @foreach ($roles as $role)
                                                 <option value="{{ $role }}"
-                                                {{ in_array($role, $userRoles) ? 'selected' : '' }}
-                                                >{{ $role }}</option>
+                                                    {{ in_array($role, $userRoles) ? 'selected' : '' }}>{{ $role }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

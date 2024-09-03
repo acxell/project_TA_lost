@@ -44,13 +44,15 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Status</label>
-                                            <input type="number" id="status" class="form-control 
-                                            @error ('status') is invalid
-                                            @enderror"
-                                                placeholder="Status" name="status" value="{{ old('status') ?? $unit->status }}">
+                                            <fieldset class="form-group">
+                                                <select class="form-select @error('status') is-invalid @enderror" name="status" id="status">
+                                                    <option value="Aktif" {{ (old('status') ?? $unit->status) == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                                                    <option value="Tidak Aktif" {{ (old('status') ?? $unit->status) == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                                                </select>
                                                 @error('status')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
+                                            </fieldset>
                                         </div>
                                     </div>
                                     <div class="col-12">
