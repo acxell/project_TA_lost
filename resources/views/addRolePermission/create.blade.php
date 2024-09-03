@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="POST" action="{{ route('addRolePermission.store', $role->id) }}">
+                            <form class="form" method="POST" action="{{ route('addRolePermission.store', $role->uuid) }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
@@ -40,7 +40,8 @@
                                             @foreach ($permissions as $permission)
                                             <div class="col-md-2">
                                                 <label>
-                                                    <input type="checkbox" name="permission[]" value="{{ $permission->name }}">
+                                                    <input type="checkbox" name="permission[]" value="{{ $permission->name }}"
+                                                    {{ in_array($permission->uuid, $rolePermissions) ? 'checked' : '' }}>
                                                     {{ $permission->name }}</label>
                                             </div>
                                             @endforeach

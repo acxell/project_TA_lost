@@ -99,8 +99,12 @@ class RoleController extends Controller
     public function addPermissionToRole(Role $role)
     {
         $permission = Permission::get();
+        $rolePermissions = DB::table('role_has_permissions')
+                        ->where('role_has_permissions.role_id', $role->uuid)
+                        ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+                        ->all();
 
-        return view('addRolePermission.create', ['role' => $role, 'permissions' => $permission]);
+        return view('addRolePermission.create', ['role' => $role, 'permissions' => $permission, 'rolePermissions' => $rolePermissions]);
     }
 
     public function storePermissionToRole(Request $request, Role $role)
@@ -114,7 +118,7 @@ class RoleController extends Controller
     
         $role->syncPermissions($request->permission);
     
-        return redirect()->route('addRolePermission.create', $role->id)
+        return redirect()->route('addRolePermission.create', $role->uuid)
                          ->with('success', 'Permissions successfully updated.');
     }
 }

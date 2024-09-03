@@ -8,35 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role as SpatieRole;
 
-class Role extends Model
+class Role extends SpatieRole
 {
-    use HasFactory, Notifiable, HasUuids, HasRoles;
-
-    protected $table = "roles";
-    protected $primaryKey = "id";
-
-    protected $fillable = [
-        'name',
-        'guard_name',
-    ];
-
-    public function getIncrementing()
-    {
-        return false;
-    }
-
-    public function getKeyType()
-    {
-        return 'string';
-    }
-    public static function bootUuidTrait()
-    {
-        static::creating(function ($model) {
-            $model->keyType = 'string';
-            $model->incrementing = false;
-
-            $model->{$model->getKeyName()} = $model->{$model->getKeyName()} ?: (string) Str::orderedUuid();
-        });
-    }
+    use HasFactory;
+    use HasUuids;
+    protected $primaryKey = 'uuid';
 }
