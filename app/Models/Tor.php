@@ -8,24 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class Unit extends Model
+class Tor extends Model
 {
     use HasFactory, Notifiable, HasUuids, HasRoles;
 
-    protected $table = "units";
+    protected $table = "tors";
 
     protected $fillable = [
-        'nama',
-        'description',
+        'nama_proker',
+        'satuan_kerja',
+        'unit_id',
+        'pic',
         'status',
     ];
 
-    public function penggunas(){
-        return $this->hasMany(pengguna::class, 'unit_id', 'id');
+   /*  public function rab(){
+        return $this->hasMany(rab::class, 'tor_id', 'id');
+    } */
+
+    public function unit(){
+        return $this->belongsTo(Unit::class, 'unit_id', 'id');
     }
 
-    public function tors(){
-        return $this->hasMany(tor::class, 'unit_id', 'id');
+    public function rab(){
+        return $this->hasMany(Rab::class, 'tor_id', 'id');
     }
 
     public function getIncrementing()

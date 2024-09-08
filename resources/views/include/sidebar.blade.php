@@ -61,11 +61,11 @@
 
 
                                 <li class="submenu-item ">
-                                    <a href="ui-multi-level-menu.html" class="submenu-link">TOR</a>
+                                    <a href="{{ route('anggaranTahunan.tor.view') }}" class="submenu-link">TOR</a>
                                 </li>
 
                                 <li class="submenu-item ">
-                                    <a href="#" class="submenu-link">RAB</a>
+                                    <a href="{{ route('anggaranTahunan.rab.view') }}" class="submenu-link">RAB</a>
                                 </li>
 
 
@@ -112,7 +112,13 @@
                         <span>Pencairan Dana</span>
                     </a>
 
+                </li>
 
+                <li class="sidebar-item  ">
+                    <a href="form-layout.html" class='sidebar-link'>
+                        <i class="bi bi-envelope-exclamation-fill"></i>
+                        <span>Pesan Perbaikan</span>
+                    </a>
                 </li>
 
                 <li class="sidebar-title">Validasi</li>

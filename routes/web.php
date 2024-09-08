@@ -4,7 +4,9 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\penggunaController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RabController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TorController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 
@@ -66,3 +68,21 @@ Route::post('/unit', [UnitController::class, 'store'])->name('unit.store');
 Route::get('/unit/{unit}/edit', [UnitController::class, 'edit'])->name('unit.edit');
 Route::post('/unit/{unit}/update', [UnitController::class, 'update'])->name('unit.update');
 Route::delete('/unit/{unit}', [UnitController::class, 'destroy'])->name('unit.destroy');
+
+//Actions Manajemen Data Tor
+Route::get('/data-tor', [TorController::class, 'index'])->name('anggaranTahunan.tor.view');
+Route::get('/create-data-tor', [TorController::class, 'create'])->name('anggaranTahunan.tor.create');
+Route::get('/tor/{tor}/detail', [TorController::class, 'show'])->name('anggaranTahunan.tor.detail');
+Route::post('/tor', [TorController::class, 'store'])->name('anggaranTahunan.tor.store');
+Route::get('/tor/{tor}/edit', [TorController::class, 'edit'])->name('anggaranTahunan.tor.edit');
+Route::post('/tor/{tor}/update', [TorController::class, 'update'])->name('anggaranTahunan.tor.update');
+Route::delete('/tor/{tor}', [TorController::class, 'destroy'])->name('anggaranTahunan.tor.destroy');
+
+//Actions Manajemen Data Rab
+Route::get('/data-rab', [RabController::class, 'index'])->name('anggaranTahunan.rab.view');
+Route::get('/create-data-rab', [RabController::class, 'create'])->name('anggaranTahunan.rab.create');
+Route::get('/rab/{rab}/detail', [RabController::class, 'show'])->name('anggaranTahunan.rab.detail');
+Route::post('/rab', [RabController::class, 'store'])->name('anggaranTahunan.rab.store');
+Route::get('/rab/{rab}/edit', [RabController::class, 'edit'])->name('anggaranTahunan.rab.edit');
+Route::post('/rab/{rab}/update', [RabController::class, 'update'])->name('anggaranTahunan.rab.update');
+Route::delete('/rab/{rab}', [RabController::class, 'destroy'])->name('anggaranTahunan.rab.destroy');
