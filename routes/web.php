@@ -4,6 +4,7 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\penggunaController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PesanPerbaikanController;
 use App\Http\Controllers\RabController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TorController;
@@ -86,3 +87,12 @@ Route::post('/rab', [RabController::class, 'store'])->name('anggaranTahunan.rab.
 Route::get('/rab/{rab}/edit', [RabController::class, 'edit'])->name('anggaranTahunan.rab.edit');
 Route::post('/rab/{rab}/update', [RabController::class, 'update'])->name('anggaranTahunan.rab.update');
 Route::delete('/rab/{rab}', [RabController::class, 'destroy'])->name('anggaranTahunan.rab.destroy');
+Route::post('/rab/{rab}/pengajuan', [RabController::class, 'pengajuan'])->name('anggaranTahunan.rab.pengajuan');
+
+//Actions Validasi Pengajuan Anggaran
+Route::get('/data-pengajuan-anggaran', [RabController::class, 'validasi_index'])->name('validasiAnggaran.view');
+Route::get('/rab/{rab}/validasi-pengajuan', [RabController::class, 'validasi_pengajuan_tahunan'])->name('validasiAnggaran.validasi');
+Route::post('/rab/{rab}/acc-validasi', [RabController::class, 'acc_validasi_pengajuan_tahunan'])->name('validasiAnggaran.acc');
+
+//Actions Pesan Perbaikan
+Route::get('/pesan-perbaikan', [PesanPerbaikanController::class, 'index'])->name('pesanPerbaikan.view');

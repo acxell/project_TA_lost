@@ -74,7 +74,7 @@
                         </li>
 
                         <li class="submenu-item  ">
-                            <a href="component-alert.html" class="submenu-link">Anggaran Bulanan</a>
+                            <a href="" class="submenu-link">Pengajuan Kegiatan</a>
 
                         </li>
 
@@ -88,23 +88,14 @@
 
                 </li>
 
-
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
+                <li class="sidebar-item  ">
+                    <a href="form-layout.html" class='sidebar-link'>
                         <i class="bi bi-collection-fill"></i>
-                        <span>Pelaporan</span>
+                        <span>Pelaporan Pertanggung Jawaban</span>
                     </a>
 
-                    <ul class="submenu ">
-
-                        <li class="submenu-item  ">
-                            <a href="extra-component-avatar.html" class="submenu-link">Pertanggung Jawaban</a>
-
-                        </li>
-                    </ul>
-
-
                 </li>
+
 
                 <li class="sidebar-item  ">
                     <a href="form-layout.html" class='sidebar-link'>
@@ -115,7 +106,7 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
+                    <a href="{{ route('pesanPerbaikan.view') }}" class='sidebar-link'>
                         <i class="bi bi-envelope-exclamation-fill"></i>
                         <span>Pesan Perbaikan</span>
                     </a>
@@ -132,12 +123,12 @@
                     <ul class="submenu ">
 
                         <li class="submenu-item  ">
-                            <a href="form-element-input.html" class="submenu-link">Anggaran Tahunan</a>
+                            <a href="{{ route('validasiAnggaran.view') }}" class="submenu-link">Anggaran Tahunan</a>
 
                         </li>
 
                         <li class="submenu-item  ">
-                            <a href="form-element-input-group.html" class="submenu-link">Anggaran Bulanan</a>
+                            <a href="form-element-input-group.html" class="submenu-link">Pengajuan Kegiatan</a>
 
                         </li>
 
@@ -151,21 +142,11 @@
 
                 </li>
 
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
+                <li class="sidebar-item  ">
+                    <a href="form-layout.html" class='sidebar-link'>
                         <i class="bi bi-journal-check"></i>
-                        <span>Pelaporan</span>
+                        <span>Pelaporan Pertanggung Jawaban</span>
                     </a>
-
-                    <ul class="submenu ">
-
-                        <li class="submenu-item  ">
-                            <a href="form-validation-parsley.html" class="submenu-link">Pertanggung Jawaban</a>
-
-                        </li>
-
-                    </ul>
-
 
                 </li>
 

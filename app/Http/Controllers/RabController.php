@@ -39,7 +39,6 @@ class RabController extends Controller
             'total_biaya' => 'integer|required',
             'biaya_terbilang' => 'string|required',
             'tor_id' => 'string|required|exists:tors,id',
-            'status' => 'string|required',
         ]);
 
         $rab = rab::create($validateData);
@@ -81,10 +80,10 @@ class RabController extends Controller
             'total_biaya' => 'integer|required',
             'biaya_terbilang' => 'string|required',
             'tor_id' => 'string|required|exists:tors,id',
-            'status' => 'string|required',
         ]);
 
         $rab->update($validateData);
+        $rab->update(['status' => 'Belum Diajukan']);
 
         if ($rab) {
             return to_route('anggaranTahunan.rab.view')->with('success', 'Data Telah Ditambahkan');
@@ -105,5 +104,33 @@ class RabController extends Controller
         } else {
             return to_route('anggaranTahunan.rab.view')->with('failed', 'Data Gagal Dihapus');
         }
+    }
+
+    public function pengajuan(rab $rab)
+    {
+        $rab->update(['status' => 'Telah Diajukan']);
+
+        return redirect()->route('anggaranTahunan.rab.view')->with('success', 'Status telah diubah menjadi "Telah Diajukan"');
+    }
+
+    public function validasi_index()
+    {
+        $rab = rab::whereIn('status', ['Telah Diajukan', 'Diterima'])->get();
+
+        return view('validasiAnggaran.view', ['rab' => $rab]);
+    }
+
+    public function validasi_pengajuan_tahunan(rab $rab)
+    {
+        $tor = Tor::all();
+
+        return view('validasiAnggaran.validasi', ['rab' => $rab, 'tor' => $tor]);
+    }
+
+    public function acc_validasi_pengajuan_tahunan(rab $rab)
+    {
+        $rab->update(['status' => 'Diterima']);
+
+        return redirect()->route('validasiAnggaran.view')->with('success', 'Status telah diubah menjadi "Telah Diajukan"');
     }
 }
