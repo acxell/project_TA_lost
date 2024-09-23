@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\penggunaController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PesanPerbaikanController;
+use App\Http\Controllers\ProgramKerjaController;
 use App\Http\Controllers\RabController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TorController;
@@ -22,10 +24,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
-Route::get('/', [loginController::class, 'getView'])->name('login')->middleware('guest');
+Route::get('/', [loginController::class, 'getView'])->name('login');
 Route::post('/login', [loginController::class, 'login'])->name('login.store');
+
+
+Route::group(['middleware' => 'auth'], function() {
+
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 
 //Route::get('/dashboard', [dashboardController::class, 'getView'])->name('dashboard')->middleware('auth');
@@ -70,6 +74,25 @@ Route::get('/unit/{unit}/edit', [UnitController::class, 'edit'])->name('unit.edi
 Route::post('/unit/{unit}/update', [UnitController::class, 'update'])->name('unit.update');
 Route::delete('/unit/{unit}', [UnitController::class, 'destroy'])->name('unit.destroy');
 
+//Actions Manajemen Data Program Kerja
+Route::get('/data-program-kerja', [ProgramKerjaController::class, 'index'])->name('penganggaran.programKerja.view');
+Route::get('/create-data-program-kerja', [ProgramKerjaController::class, 'create'])->name('penganggaran.programKerja.create');
+Route::get('/program-kerja/{programKerja}/detail', [ProgramKerjaController::class, 'show'])->name('penganggaran.programKerja.detail');
+Route::post('/program-kerja', [ProgramKerjaController::class, 'store'])->name('penganggaran.programKerja.store');
+Route::get('/program-kerja/{programKerja}/edit', [ProgramKerjaController::class, 'edit'])->name('penganggaran.programKerja.edit');
+Route::post('/program-kerja/{programKerja}/update', [ProgramKerjaController::class, 'update'])->name('penganggaran.programKerja.update');
+Route::delete('/program-kerja/{programKerja}', [ProgramKerjaController::class, 'destroy'])->name('penganggaran.programKerja.destroy');
+
+//Actions Manajemen Data Kegiatan
+Route::get('/data-kegiatan', [KegiatanController::class, 'index'])->name('penganggaran.kegiatan.view');
+Route::get('/create-data-kegiatan', [KegiatanController::class, 'create'])->name('penganggaran.kegiatan.create');
+Route::get('/kegiatan/{kegiatan}/detail', [KegiatanController::class, 'show'])->name('penganggaran.kegiatan.detail');
+Route::post('/kegiatan', [KegiatanController::class, 'store'])->name('penganggaran.kegiatan.store');
+Route::get('/kegiatan/{kegiatan}/edit', [KegiatanController::class, 'edit'])->name('penganggaran.kegiatan.edit');
+Route::post('/kegiatan/{kegiatan}/update', [KegiatanController::class, 'update'])->name('penganggaran.kegiatan.update');
+Route::delete('/kegiatan/{kegiatan}', [KegiatanController::class, 'destroy'])->name('penganggaran.kegiatan.destroy');
+Route::post('/kegiatan/{kegiatan}/pengajuan', [KegiatanController::class, 'pengajuan'])->name('penganggaran.kegiatan.pengajuan');
+
 //Actions Manajemen Data Tor
 Route::get('/data-tor', [TorController::class, 'index'])->name('anggaranTahunan.tor.view');
 Route::get('/create-data-tor', [TorController::class, 'create'])->name('anggaranTahunan.tor.create');
@@ -96,3 +119,5 @@ Route::post('/rab/{rab}/acc-validasi', [RabController::class, 'acc_validasi_peng
 
 //Actions Pesan Perbaikan
 Route::get('/pesan-perbaikan', [PesanPerbaikanController::class, 'index'])->name('pesanPerbaikan.view');
+
+});

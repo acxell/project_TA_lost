@@ -59,7 +59,7 @@
                                             <input type="password" id="password" class="form-control 
                                             @error ('password') is invalid
                                             @enderror"
-                                                placeholder="Password" name="password" value="{{ old('password') ?? $pengguna->password }}">
+                                                placeholder="Password" name="password" value="{{ old('password')}}">
                                             @error('password')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror

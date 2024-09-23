@@ -1,19 +1,19 @@
 @extends('master.master')
-@section('title', 'Edit Data Rencana Anggaran Biaya')
+@section('title', 'Masukkan Data Kegiatan Program Kerja')
 @section('content')
 
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <p class="text-subtitle text-muted">Lakukan Edit Data Rencana Anggaran Biaya</p>
+                <p class="text-subtitle text-muted">Input Detail Data Kegiatan Program Kerja</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('anggaranTahunan.rab.view') }}">Data RAB</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                        <li class="breadcrumb-item"><a href="{{ route('penganggaran.kegiatan.view') }}">Data Kegiatan</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Insert</li>
                     </ol>
                 </nav>
             </div>
@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="POST" action="{{ route('anggaranTahunan.rab.update', $rab->id) }}">
+                            <form class="form" method="POST" action=" {{ route('penganggaran.kegiatan.store') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
@@ -35,7 +35,7 @@
                                             <input type="text" id="nama_kegiatan" class="form-control 
                                             @error ('nama_kegiatan') is invalid
                                             @enderror"
-                                                placeholder="Nama Kegiatan" name="nama_kegiatan" value="{{ old('nama_kegiatan') ?? $rab->nama_kegiatan }}">
+                                                placeholder="Nama Kegiatan" name="nama_kegiatan" value="{{ old('nama_kegiatan') }}">
                                                 @error('nama_kegiatan')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
@@ -43,17 +43,12 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label>Term Of Reference</label>
-                                            <select class="choices form-select @error('tor_id') is-invalid @enderror" name="tor_id" id="tor_id">
-                                                @foreach ($tor as $tors)
-                                                <option value="{{ $tors->id }}" {{ (old('tor_id') ?? $rab->tor_id) == $tors->id ? 'selected' : '' }}>
-                                                    {{ $tors->nama_proker }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                            @error('tor_id')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
+                                            <label>Program Kerja</label>
+                                                <select class="choices form-select" name="proker_id" id="proker_id" type="text" aria-placeholder="Program Kerja">
+                                                    @foreach ($proker as $prokers)
+                                                    <option value="{{ $prokers->id }}">{{ $prokers->nama }}</option>
+                                                    @endforeach
+                                                </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -62,7 +57,7 @@
                                             <input type="number" id="total_biaya" class="form-control 
                                             @error ('total_biaya') is invalid
                                             @enderror"
-                                                placeholder="Total Biaya" name="total_biaya" value="{{ old('total_biaya') ?? $rab->total_biaya }}">
+                                                placeholder="Total Biaya" name="total_biaya" value="{{ old('total_biaya') }}">
                                                 @error('total_biaya')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
@@ -74,24 +69,10 @@
                                             <input type="text" id="biaya_terbilang" class="form-control 
                                             @error ('biaya_terbilang') is invalid
                                             @enderror"
-                                                placeholder="Biaya Terbilang" name="biaya_terbilang" value="{{ old('biaya_terbilang') ?? $rab->biaya_terbilang}}">
+                                                placeholder="Biaya Terbilang" name="biaya_terbilang" value="{{ old('biaya_terbilang') }}">
                                                 @error('biaya_terbilang')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <fieldset class="form-group">
-                                                <select class="form-select @error('status') is-invalid @enderror" name="status" id="status">
-                                                    <option value="Aktif" {{ (old('status') ?? $tors->status) == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                                                    <option value="Tidak Aktif" {{ (old('status') ?? $tors->status) == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
-                                                </select>
-                                                @error('status')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </fieldset>
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">

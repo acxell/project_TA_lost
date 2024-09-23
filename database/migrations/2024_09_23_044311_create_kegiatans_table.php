@@ -11,17 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tors', function (Blueprint $table) {
+        Schema::create('kegiatans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('nama_proker')->unique();
-            $table->string('satuan_kerja');
+            $table->uuid('proker_id');
+            $table->string('nama_kegiatan')->unique();
+            $table->bigInteger('total_biaya');
+            $table->string('biaya_terbilang');
             $table->string('status');
-            $table->string('pic');
-            $table->uuid('unit_id');
             $table->uuid('user_id');
+            $table->uuid('unit_id');
             $table->timestamps();
 
-            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
+            $table->foreign('proker_id')->references('id')->on('program_kerjas')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('penggunas')->onDelete('cascade');
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tors');
+        Schema::dropIfExists('kegiatans');
     }
 };

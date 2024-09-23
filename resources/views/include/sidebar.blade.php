@@ -49,32 +49,42 @@
                     class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
+                        <span>Penganggaran</span>
+                    </a>
+
+                    <ul class="submenu ">
+
+                        <li class="submenu-item  ">
+                            <a href="{{ route('penganggaran.programKerja.view') }}" class="submenu-link">Program Kerja</a>
+
+                        </li>
+
+                        <li class="submenu-item  ">
+                            <a href="{{ route('penganggaran.kegiatan.view') }}" class="submenu-link">Kegiatan (TOR & RAB)</a>
+
+                        </li>
+
+                    </ul>
+
+
+                </li>
+
+                <li
+                    class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-stack"></i>
                         <span>Pengajuan</span>
                     </a>
 
                     <ul class="submenu ">
 
-                        <li class="submenu-item  has-sub">
+                        <li class="submenu-item  ">
                             <a href="#" class="submenu-link">Anggaran Tahunan</a>
-
-                            <ul class="submenu submenu-level-2 ">
-
-
-                                <li class="submenu-item ">
-                                    <a href="{{ route('anggaranTahunan.tor.view') }}" class="submenu-link">TOR</a>
-                                </li>
-
-                                <li class="submenu-item ">
-                                    <a href="{{ route('anggaranTahunan.rab.view') }}" class="submenu-link">RAB</a>
-                                </li>
-
-
-                            </ul>
 
                         </li>
 
                         <li class="submenu-item  ">
-                            <a href="" class="submenu-link">Pengajuan Kegiatan</a>
+                            <a href="" class="submenu-link">Kegiatan</a>
 
                         </li>
 
@@ -90,17 +100,16 @@
 
                 <li class="sidebar-item  ">
                     <a href="form-layout.html" class='sidebar-link'>
-                        <i class="bi bi-collection-fill"></i>
-                        <span>Pelaporan Pertanggung Jawaban</span>
+                        <i class="bi bi-file-earmark-medical-fill"></i>
+                        <span>Pencairan Dana</span>
                     </a>
 
                 </li>
 
-
                 <li class="sidebar-item  ">
                     <a href="form-layout.html" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Pencairan Dana</span>
+                        <i class="bi bi-collection-fill"></i>
+                        <span>Pelaporan Pertanggung Jawaban</span>
                     </a>
 
                 </li>
@@ -128,7 +137,7 @@
                         </li>
 
                         <li class="submenu-item  ">
-                            <a href="form-element-input-group.html" class="submenu-link">Pengajuan Kegiatan</a>
+                            <a href="form-element-input-group.html" class="submenu-link">Kegiatan</a>
 
                         </li>
 

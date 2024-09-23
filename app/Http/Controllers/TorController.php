@@ -7,6 +7,7 @@ use App\Models\Tor as ModelsTor;
 use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class TorController extends Controller
 {
@@ -43,6 +44,8 @@ class TorController extends Controller
             'unit_id' => 'string|required|exists:units,id',
             'status' => 'string|required',
         ]);
+
+        $validateData['user_id'] = Auth::id();
 
         $tor = tor::create($validateData);
 
@@ -85,6 +88,8 @@ class TorController extends Controller
             'unit_id' => 'string|required|exists:units,id',
             'status' => 'string|required',
         ]);
+
+        $validateData['user_id'] = Auth::id();
 
         $tor->update($validateData);
 
