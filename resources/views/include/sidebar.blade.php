@@ -79,7 +79,7 @@
                     <ul class="submenu ">
 
                         <li class="submenu-item  ">
-                            <a href="#" class="submenu-link">Anggaran Tahunan</a>
+                            <a href="{{ route('pengajuan.anggaranTahunan.view') }}" class="submenu-link">Anggaran Tahunan</a>
 
                         </li>
 

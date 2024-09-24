@@ -11,6 +11,7 @@ use App\Http\Controllers\RabController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TorController;
 use App\Http\Controllers\UnitController;
+use App\Models\Kegiatan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -91,7 +92,6 @@ Route::post('/kegiatan', [KegiatanController::class, 'store'])->name('penganggar
 Route::get('/kegiatan/{kegiatan}/edit', [KegiatanController::class, 'edit'])->name('penganggaran.kegiatan.edit');
 Route::post('/kegiatan/{kegiatan}/update', [KegiatanController::class, 'update'])->name('penganggaran.kegiatan.update');
 Route::delete('/kegiatan/{kegiatan}', [KegiatanController::class, 'destroy'])->name('penganggaran.kegiatan.destroy');
-Route::post('/kegiatan/{kegiatan}/pengajuan', [KegiatanController::class, 'pengajuan'])->name('penganggaran.kegiatan.pengajuan');
 
 //Actions Manajemen Data Tor
 Route::get('/data-tor', [TorController::class, 'index'])->name('anggaranTahunan.tor.view');
@@ -112,10 +112,14 @@ Route::post('/rab/{rab}/update', [RabController::class, 'update'])->name('anggar
 Route::delete('/rab/{rab}', [RabController::class, 'destroy'])->name('anggaranTahunan.rab.destroy');
 Route::post('/rab/{rab}/pengajuan', [RabController::class, 'pengajuan'])->name('anggaranTahunan.rab.pengajuan');
 
-//Actions Validasi Pengajuan Anggaran
-Route::get('/data-pengajuan-anggaran', [RabController::class, 'validasi_index'])->name('validasiAnggaran.view');
-Route::get('/rab/{rab}/validasi-pengajuan', [RabController::class, 'validasi_pengajuan_tahunan'])->name('validasiAnggaran.validasi');
-Route::post('/rab/{rab}/acc-validasi', [RabController::class, 'acc_validasi_pengajuan_tahunan'])->name('validasiAnggaran.acc');
+//Actions Validasi Pengajuan Anggaran Tahunan
+Route::get('/data-pengajuan-kegiatan', [KegiatanController::class, 'pengajuanIndex'])->name('pengajuan.anggaranTahunan.view');
+Route::get('/data-pengajuan/{kegiatan}/detail', [KegiatanController::class, 'konfirmasiPengajuan'])->name('pengajuan.anggaranTahunan.detail');
+Route::post('/data-pengajuan/{kegiatan}/ajukan', [KegiatanController::class, 'ajukan'])->name('pengajuan.anggaranTahunan.ajukan');
+
+Route::get('/data-pengajuan-anggaran-tahunan', [KegiatanController::class, 'validasi_index'])->name('validasiAnggaran.view');
+Route::get('/pengajuan-anggaran-tahunan/{kegiatan}/validasi-pengajuan', [KegiatanController::class, 'validasi_pengajuan_tahunan'])->name('validasiAnggaran.validasi');
+Route::post('/pengajuan-anggaran-tahunan/{kegiatan}/acc-validasi', [KegiatanController::class, 'acc_validasi_pengajuan_tahunan'])->name('validasiAnggaran.acc');
 
 //Actions Pesan Perbaikan
 Route::get('/pesan-perbaikan', [PesanPerbaikanController::class, 'index'])->name('pesanPerbaikan.view');

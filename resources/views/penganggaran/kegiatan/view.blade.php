@@ -32,7 +32,6 @@
                             <th>Nama Kegiatan</th>
                             <th>Nama Program Kerja</th>
                             <th>Total Biaya</th>
-                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -42,11 +41,6 @@
                             <td>{{ $item->nama_kegiatan }}</td>
                             <td>{{ $item->proker->nama }}</td>
                             <td>@currency($item->total_biaya)</td>
-                            <td>
-                                <span class="badge {{ $item->status == 'Aktif' ? 'bg-success' : 'bg-danger' }}">
-                                    {{ $item->status }}
-                                </span>
-                            </td>
                             <td><a href="{{ route('penganggaran.kegiatan.detail', $item->id) }}"><i class="badge-circle font-small-1"
                                         data-feather="eye"></i></a>
                                 <a href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">

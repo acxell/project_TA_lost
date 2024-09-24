@@ -20,6 +20,15 @@ class KegiatanController extends Controller
         return view('penganggaran.kegiatan.view', ['kegiatan' => $kegiatan]);
     }
 
+    public function pengajuanIndex()
+    {
+        $kegiatan = Kegiatan::all();
+
+        //$kegiatan = Kegiatan::whereIn('status', ['Belum Diajukan'])->get();
+
+        return view('pengajuan.anggaranTahunan.view', ['kegiatan' => $kegiatan]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -28,7 +37,7 @@ class KegiatanController extends Controller
         $kegiatan = Kegiatan::all();
         $proker = ProgramKerja::all();
 
-        return view ('penganggaran.kegiatan.create', ['kegiatan' => $kegiatan, 'proker' => $proker]);
+        return view('penganggaran.kegiatan.create', ['kegiatan' => $kegiatan, 'proker' => $proker]);
     }
 
     /**
@@ -122,6 +131,49 @@ class KegiatanController extends Controller
             return to_route('penganggaran.kegiatan.view')->with('success', 'Data Telah Dihapus');
         } else {
             return to_route('penganggaran.kegiatan.view')->with('failed', 'Data Gagal Dihapus');
+        }
+    }
+
+    public function konfirmasiPengajuan(Kegiatan $kegiatan)
+    {
+        $proker = ProgramKerja::all();
+
+        $kegiatan->load('unit');
+
+        return view('pengajuan.anggaranTahunan.detail', ['kegiatan' => $kegiatan, 'proker' => $proker]);
+    }
+
+    public function ajukan(Kegiatan $kegiatan)
+    {
+        $kegiatan->update(['status' => 'Telah Diajukan']);
+
+        return redirect()->route('pengajuan.anggaranTahunan.view')->with('success', 'Status telah diubah menjadi "Telah Diajukan"');
+    }
+
+    public function validasi_index()
+    {
+        $kegiatan = Kegiatan::whereIn('status', ['Telah Diajukan', 'Diterima'])->get();
+
+        return view('validasiAnggaran.view', ['kegiatan' => $kegiatan]);
+    }
+
+    public function validasi_pengajuan_tahunan(Kegiatan $kegiatan)
+    {
+        $proker = ProgramKerja::all();
+
+        $kegiatan->load('unit');
+
+        return view('validasiAnggaran.validasi', ['kegiatan' => $kegiatan, 'proker' => $proker]);
+    }
+
+    public function acc_validasi_pengajuan_tahunan(Request $request, Kegiatan $kegiatan)
+    {
+        if ($request->input('action') == 'reject') {
+            $kegiatan->update(['status' => 'Ditolak']);
+            return redirect()->route('validasiAnggaran.view')->with('success', 'Pengajuan telah ditolak.');
+        } elseif ($request->input('action') == 'accept') {
+            $kegiatan->update(['status' => 'Diterima']);
+            return redirect()->route('validasiAnggaran.view')->with('success', 'Pengajuan telah diterima.');
         }
     }
 }

@@ -26,7 +26,8 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" action="" method="POST">
+                            <form class="form" action="{{ route('pengajuan.anggaranTahunan.ajukan', $kegiatan->id) }}" method="POST">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
@@ -84,8 +85,21 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <input type="text" id="status" class="form-control 
+                                            @error ('status') is invalid
+                                            @enderror"
+                                                placeholder="Status" name="status" value="{{ old('status')  ?? $kegiatan->status }}" disabled>
+                                            @error('status')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="button" class="btn btn-primary me-1 mb-1" onclick="window.history.back();">Go Back</button>
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Ajukan</button>
                                     </div>
                                 </div>
                             </form>
