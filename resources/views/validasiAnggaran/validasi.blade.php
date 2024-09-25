@@ -89,7 +89,9 @@
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="button" class="btn btn-primary me-1 mb-1" onclick="window.history.back();">Go Back</button>
-                                        <button type="submit" name="action" value="reject" class="btn btn-danger me-1 mb-1">Tolak Pengajuan</button>
+                                        <a href="{{ route('pesanPerbaikan.create', ['kegiatan_id' => $kegiatan->id]) }}" class="btn btn-primary me-1 mb-1">
+                                            Buat Pesan Perbaikan
+                                        </a>
                                         <button type="submit" name="action" value="accept" class="btn btn-primary me-1 mb-1">Terima Pengajuan</button>
                                     </div>
                                 </div>

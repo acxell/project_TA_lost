@@ -41,8 +41,6 @@
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
-
-
                 </li>
 
                 <li
@@ -115,7 +113,7 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="{{ route('pesanPerbaikan.view') }}" class='sidebar-link'>
+                    <a href="#" class='sidebar-link'>
                         <i class="bi bi-envelope-exclamation-fill"></i>
                         <span>Pesan Perbaikan</span>
                     </a>

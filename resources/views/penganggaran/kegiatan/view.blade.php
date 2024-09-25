@@ -52,6 +52,7 @@
                                 </form>
                                 <a href="{{ route('penganggaran.kegiatan.edit', $item->id) }}"><i class="badge-circle font-medium-1"
                                         data-feather="edit"></i></a>
+
                             </td>
                         </tr>
                         @endforeach

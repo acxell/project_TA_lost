@@ -111,6 +111,8 @@ class KegiatanController extends Controller
 
         $validateData['unit_id'] = $user->unit_id;
 
+        $kegiatan->update(['status' => 'Belum Diajukan']);
+
         $kegiatan->update($validateData);
 
         if ($kegiatan) {
@@ -154,7 +156,9 @@ class KegiatanController extends Controller
     {
         $kegiatan = Kegiatan::whereIn('status', ['Telah Diajukan', 'Diterima'])->get();
 
-        return view('validasiAnggaran.view', ['kegiatan' => $kegiatan]);
+        $proker = ProgramKerja::all();
+
+        return view('validasiAnggaran.view', ['kegiatan' => $kegiatan, 'proker' => $proker]);
     }
 
     public function validasi_pengajuan_tahunan(Kegiatan $kegiatan)
@@ -169,8 +173,7 @@ class KegiatanController extends Controller
     public function acc_validasi_pengajuan_tahunan(Request $request, Kegiatan $kegiatan)
     {
         if ($request->input('action') == 'reject') {
-            $kegiatan->update(['status' => 'Ditolak']);
-            return redirect()->route('validasiAnggaran.view')->with('success', 'Pengajuan telah ditolak.');
+            return redirect()->route('pesanPerbaikan.create')->with('success', 'Pengajuan telah ditolak.');
         } elseif ($request->input('action') == 'accept') {
             $kegiatan->update(['status' => 'Diterima']);
             return redirect()->route('validasiAnggaran.view')->with('success', 'Pengajuan telah diterima.');

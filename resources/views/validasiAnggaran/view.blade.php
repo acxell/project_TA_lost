@@ -37,7 +37,7 @@
                         @foreach ($kegiatan as $item)
                         <tr>
                             <td>{{ $item->nama_kegiatan }}</td>
-                            <td>{{ $item->proker->nama_proker }}</td>
+                            <td>{{ $item->proker->nama }}</td>
                             <td>@currency($item->total_biaya)</td>
                             <td>
                                 <span class="badge {{ $item->status == 'Aktif' ? 'bg-success' : 'bg-danger' }}">

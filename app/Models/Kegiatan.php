@@ -36,7 +36,7 @@ class Kegiatan extends Model
 
     public function pesan_perbaikan()
     {
-        return $this->hasMany(PesanPerbaikan::class, 'pesanPerbaikan_id', 'id');
+        return $this->hasMany(PesanPerbaikan::class, 'kegiatan_id', 'id');
     }
 
     public function unit()

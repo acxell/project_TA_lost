@@ -15,17 +15,21 @@ class PesanPerbaikan extends Model
     protected $table = "pesan_perbaikans";
 
     protected $fillable = [
-        'pesan'
-    ];
-
-    protected $attributes = [
-        'status' => 'Belum Diajukan',
+        'pesan',
+        'kegiatan_id', // Add this line
+        'user_id',
+        'unit_id',
     ];
 
 
     //Relational
-    public function rab(){
-        return $this->belongsTo(Rab::class, 'rab_id', 'id');
+    public function kegiatan(){
+        return $this->belongsTo(Kegiatan::class, 'kegiatan_id', 'id');
+    }
+
+    public function unit()
+    {
+        return $this->hasOneThrough(Unit::class, Pengguna::class, 'id', 'id', 'user_id', 'unit_id');
     }
 
     public function getIncrementing()

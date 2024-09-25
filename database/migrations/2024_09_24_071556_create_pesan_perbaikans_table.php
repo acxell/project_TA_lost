@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('pesan_perbaikans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('rab_id');
+            $table->uuid('kegiatan_id');
             $table->string('pesan');
+            $table->uuid('user_id');
+            $table->uuid('unit_id');
             $table->timestamps();
 
-            $table->foreign('rab_id')->references('id')->on('rabs')->onDelete('cascade');
+            $table->foreign('kegiatan_id')->references('id')->on('kegiatans')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('penggunas')->onDelete('cascade');
         });
     }
 

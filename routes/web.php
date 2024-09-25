@@ -93,25 +93,6 @@ Route::get('/kegiatan/{kegiatan}/edit', [KegiatanController::class, 'edit'])->na
 Route::post('/kegiatan/{kegiatan}/update', [KegiatanController::class, 'update'])->name('penganggaran.kegiatan.update');
 Route::delete('/kegiatan/{kegiatan}', [KegiatanController::class, 'destroy'])->name('penganggaran.kegiatan.destroy');
 
-//Actions Manajemen Data Tor
-Route::get('/data-tor', [TorController::class, 'index'])->name('anggaranTahunan.tor.view');
-Route::get('/create-data-tor', [TorController::class, 'create'])->name('anggaranTahunan.tor.create');
-Route::get('/tor/{tor}/detail', [TorController::class, 'show'])->name('anggaranTahunan.tor.detail');
-Route::post('/tor', [TorController::class, 'store'])->name('anggaranTahunan.tor.store');
-Route::get('/tor/{tor}/edit', [TorController::class, 'edit'])->name('anggaranTahunan.tor.edit');
-Route::post('/tor/{tor}/update', [TorController::class, 'update'])->name('anggaranTahunan.tor.update');
-Route::delete('/tor/{tor}', [TorController::class, 'destroy'])->name('anggaranTahunan.tor.destroy');
-
-//Actions Manajemen Data Rab
-Route::get('/data-rab', [RabController::class, 'index'])->name('anggaranTahunan.rab.view');
-Route::get('/create-data-rab', [RabController::class, 'create'])->name('anggaranTahunan.rab.create');
-Route::get('/rab/{rab}/detail', [RabController::class, 'show'])->name('anggaranTahunan.rab.detail');
-Route::post('/rab', [RabController::class, 'store'])->name('anggaranTahunan.rab.store');
-Route::get('/rab/{rab}/edit', [RabController::class, 'edit'])->name('anggaranTahunan.rab.edit');
-Route::post('/rab/{rab}/update', [RabController::class, 'update'])->name('anggaranTahunan.rab.update');
-Route::delete('/rab/{rab}', [RabController::class, 'destroy'])->name('anggaranTahunan.rab.destroy');
-Route::post('/rab/{rab}/pengajuan', [RabController::class, 'pengajuan'])->name('anggaranTahunan.rab.pengajuan');
-
 //Actions Validasi Pengajuan Anggaran Tahunan
 Route::get('/data-pengajuan-kegiatan', [KegiatanController::class, 'pengajuanIndex'])->name('pengajuan.anggaranTahunan.view');
 Route::get('/data-pengajuan/{kegiatan}/detail', [KegiatanController::class, 'konfirmasiPengajuan'])->name('pengajuan.anggaranTahunan.detail');
@@ -122,6 +103,9 @@ Route::get('/pengajuan-anggaran-tahunan/{kegiatan}/validasi-pengajuan', [Kegiata
 Route::post('/pengajuan-anggaran-tahunan/{kegiatan}/acc-validasi', [KegiatanController::class, 'acc_validasi_pengajuan_tahunan'])->name('validasiAnggaran.acc');
 
 //Actions Pesan Perbaikan
-Route::get('/pesan-perbaikan', [PesanPerbaikanController::class, 'index'])->name('pesanPerbaikan.view');
+Route::get('/buat-pesan-perbaikan/{kegiatan_id}', [PesanPerbaikanController::class, 'create'])->name('pesanPerbaikan.create');
+Route::post('/pesan-perbaikan', [PesanPerbaikanController::class, 'store'])->name('pesanPerbaikan.store');
+Route::get('/pesan-perbaikan/{kegiatan_id}', [PesanPerbaikanController::class, 'show'])->name('pesanPerbaikan.view');
+
 
 });

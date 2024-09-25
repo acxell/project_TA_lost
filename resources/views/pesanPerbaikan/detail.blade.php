@@ -1,19 +1,19 @@
 @extends('master.master')
-@section('title', 'Detail Data Unit')
+@section('title', 'Detail Pesan Perbaikan')
 @section('content')
 
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <p class="text-subtitle text-muted">Detail Data Unit</p>
+                <p class="text-subtitle text-muted">Pesan Perbaikan</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('unit.view') }}">Data Unit</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Detail</li>
+                        <li class="breadcrumb-item"><a href="{{ route('validasiAnggaran.view') }}">Data Pengajuan Anggaran Tahunan</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Pesan Perbaikan</li>
                     </ol>
                 </nav>
             </div>
@@ -26,46 +26,20 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" action="{{ route('unit.view') }}">
+                            <form class="form">
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label>Nama</label>
-                                            <input type="text" id="nama" class="form-control 
-                                            @error ('nama') is invalid
-                                            @enderror"
-                                                placeholder="Nama" name="nama" value="{{ old('nama') ?? $unit->nama }}" disabled>
-                                            @error('nama')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <input type="text" id="status" class="form-control 
-                                            @error ('status') is invalid
-                                            @enderror"
-                                                placeholder="Status" name="status" value="{{ old('status') ?? $unit->status }}" disabled>
-                                            @error('status')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Deskripsi</label>
-                                            <input type="textbox" id="description" class="form-control 
-                                            @error ('description') is invalid
-                                            @enderror"
-                                                placeholder="Deskripsi" name="description" value="{{ old('description') ?? $unit->description }}" disabled>
-                                            @error('description')
+                                            <label>Pesan Perbaikan</label>
+                                            <input type="text" id="pesan" class="form-control @error('pesan') is-invalid @enderror"
+                                                name="pesan" value="{{ $pesanPerbaikan->pesan }}" disabled>
+                                            @error('pesan')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button class="btn btn-light-secondary me-1 mb-1">Done</button>
+                                        <a href="{{ route('pengajuan.anggaranTahunan.view') }}" class="btn btn-light-secondary me-1 mb-1">Done</a>
                                     </div>
                                 </div>
                             </form>
@@ -77,4 +51,5 @@
     </section>
     <!-- // Basic multiple Column Form section end -->
 </div>
+
 @endsection

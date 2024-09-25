@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kegiatan;
 use App\Models\PesanPerbaikan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PesanPerbaikanController extends Controller
 {
@@ -12,17 +14,17 @@ class PesanPerbaikanController extends Controller
      */
     public function index()
     {
-        $pesanPerbaikan = PesanPerbaikan::all();
-
-        return view('pesanPerbaikan.view', ['pesanPerbaikan' => $pesanPerbaikan]);
+        //
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($kegiatan_id)
     {
-        //
+        $kegiatan = Kegiatan::findOrFail($kegiatan_id);
+
+        return view('pesanPerbaikan.create', ['kegiatan' => $kegiatan]);
     }
 
     /**
@@ -30,15 +32,40 @@ class PesanPerbaikanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'pesan' => 'string|required',
+            'kegiatan_id' => 'string|required|exists:kegiatans,id',
+        ]);
+
+        $validateData['user_id'] = Auth::id();
+        $validateData['unit_id'] = Auth::user()->unit_id;
+
+        $pesanPerbaikan = PesanPerbaikan::create($validateData);
+
+        if ($pesanPerbaikan) {
+            $kegiatan = Kegiatan::find($validateData['kegiatan_id']);
+
+            $kegiatan->status = 'Ditolak';
+            $kegiatan->save();
+
+            return to_route('validasiAnggaran.view')->with('success', 'Pesan Perbaikan Telah Ditambahkan dan Kegiatan Ditolak');
+        } else {
+            return to_route('validasiAnggaran.view')->with('failed', 'Pesan Perbaikan Gagal Ditambahkan');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(PesanPerbaikan $pesanPerbaikan)
+    public function show($kegiatan_id)
     {
-        //
+        $pesanPerbaikan = PesanPerbaikan::where('kegiatan_id', $kegiatan_id)->latest()->first();
+
+        if (!$pesanPerbaikan) {
+            return redirect()->route('validasiAnggaran.view')->with('error', 'Pesan Perbaikan tidak ditemukan.');
+        }
+
+        return view('pesanPerbaikan.detail', ['pesanPerbaikan' => $pesanPerbaikan]);
     }
 
     /**

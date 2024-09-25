@@ -1,19 +1,19 @@
 @extends('master.master')
-@section('title', 'Masukkan Data Unit')
+@section('title', 'Masukkan Data Pesan Perbaikan')
 @section('content')
 
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <p class="text-subtitle text-muted">Input Detail Data Unit</p>
+                <p class="text-subtitle text-muted">Input Pesan Perbaikan</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('unit.view') }}">Data Unit</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Insert</li>
+                        <li class="breadcrumb-item"><a href="{{ route('validasiAnggaran.view') }}">Data Pengajuan Anggaran Tahunan</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Buat Pesan Perbaikan</li>
                     </ol>
                 </nav>
             </div>
@@ -26,40 +26,19 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="POST" action=" {{ route('unit.store') }}">
+                            <form class="form" method="POST" action=" {{ route('pesanPerbaikan.store') }}">
                                 @csrf
+
+                                <input type="hidden" name="kegiatan_id" value="{{ $kegiatan->id }}">
                                 <div class="row">
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Nama</label>
-                                            <input type="text" id="nama" class="form-control 
-                                            @error ('nama') is invalid
+                                            <label>Pesan Perbaikan</label>
+                                            <input type="text" id="pesan" class="form-control 
+                                            @error ('pesan') is invalid
                                             @enderror"
-                                                placeholder="Nama" name="nama" value="{{ old('nama') }}">
-                                                @error('nama')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <fieldset class="form-group">
-                                                <select class="form-select" name="status" id="status" type="text" aria-placeholder="Status">
-                                                    <option value="Aktif">Aktif</option>
-                                                    <option value="Tidak Aktif">Tidak Aktif</option>
-                                                </select>
-                                            </fieldset>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Deskripsi</label>
-                                            <input type="textbox" id="description" class="form-control 
-                                            @error ('description') is invalid
-                                            @enderror"
-                                                placeholder="Deskripsi Unit" name="description" value="{{ old('description') }}">
-                                                @error('description')
+                                                placeholder="Pesan Perbaikan" name="pesan" value="{{ old('pesan') }}">
+                                                @error('pesan')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                         </div>

@@ -44,6 +44,9 @@
                             </td>
                             <td><a href="{{ route('pengajuan.anggaranTahunan.detail', $item->id) }}"><i class="badge-circle font-small-1"
                                         data-feather="folder-plus"></i></a>
+                                @if($item->status == 'Ditolak')
+                                <a href="{{ route('pesanPerbaikan.view', $item->id) }}"><i class="badge-circle font-medium-1" data-feather="mail"></i></a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
