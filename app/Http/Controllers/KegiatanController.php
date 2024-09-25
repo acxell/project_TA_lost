@@ -20,15 +20,6 @@ class KegiatanController extends Controller
         return view('penganggaran.kegiatan.view', ['kegiatan' => $kegiatan]);
     }
 
-    public function pengajuanIndex()
-    {
-        $kegiatan = Kegiatan::all();
-
-        //$kegiatan = Kegiatan::whereIn('status', ['Belum Diajukan'])->get();
-
-        return view('pengajuan.anggaranTahunan.view', ['kegiatan' => $kegiatan]);
-    }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -136,6 +127,24 @@ class KegiatanController extends Controller
         }
     }
 
+    // Pengajuan Anggaran Tahunan
+
+    public function pengajuanIndex()
+    {
+        $kegiatan = Kegiatan::all();
+
+        //$kegiatan = Kegiatan::whereIn('status', ['Belum Diajukan'])->get();
+
+        return view('pengajuan.anggaranTahunan.view', ['kegiatan' => $kegiatan]);
+    }
+
+    public function ajukan(Kegiatan $kegiatan)
+    {
+        $kegiatan->update(['status' => 'Telah Diajukan']);
+
+        return redirect()->route('pengajuan.anggaranTahunan.view')->with('success', 'Status telah diubah menjadi "Telah Diajukan"');
+    }
+
     public function konfirmasiPengajuan(Kegiatan $kegiatan)
     {
         $proker = ProgramKerja::all();
@@ -145,12 +154,8 @@ class KegiatanController extends Controller
         return view('pengajuan.anggaranTahunan.detail', ['kegiatan' => $kegiatan, 'proker' => $proker]);
     }
 
-    public function ajukan(Kegiatan $kegiatan)
-    {
-        $kegiatan->update(['status' => 'Telah Diajukan']);
 
-        return redirect()->route('pengajuan.anggaranTahunan.view')->with('success', 'Status telah diubah menjadi "Telah Diajukan"');
-    }
+    // Validasi Pengajuan by Atasan
 
     public function validasi_index()
     {
@@ -178,5 +183,51 @@ class KegiatanController extends Controller
             $kegiatan->update(['status' => 'Diterima']);
             return redirect()->route('validasiAnggaran.view')->with('success', 'Pengajuan telah diterima.');
         }
+    }
+
+    // Pengajuan Pendanaan Kegiatan
+
+    public function pendanaan_kegiatan_index()
+    {
+        $kegiatan = Kegiatan::whereIn('status', ['Diterima', 'Proses Pendanaan'])->get();
+
+        $proker = ProgramKerja::all();
+
+        return view('pengajuan.pendanaanKegiatan.view', ['kegiatan' => $kegiatan, 'proker' => $proker]);
+    }
+
+    public function konfirmasiPendanaan(Kegiatan $kegiatan)
+    {
+        $proker = ProgramKerja::all();
+
+        $kegiatan->load('unit');
+
+        return view('pengajuan.pendanaanKegiatan.detail', ['kegiatan' => $kegiatan, 'proker' => $proker]);
+    }
+
+    public function pendanaan(Kegiatan $kegiatan)
+    {
+        $kegiatan->update(['status' => 'Proses Pendanaan']);
+
+        return redirect()->route('pengajuan.pendanaanKegiatan.view')->with('success', 'Status telah diubah menjadi "Telah Diajukan"');
+    }
+
+    // Proses Pendanaan
+    public function give_pendanaan_index()
+    {
+        $kegiatan = Kegiatan::whereIn('status', ['Proses Pendanaan', 'Telah Didanai'])->get();
+
+        $proker = ProgramKerja::all();
+
+        return view('pendanaan.givePendanaan.view', ['kegiatan' => $kegiatan, 'proker' => $proker]);
+    }
+
+    public function give_konfirmasi_Pendanaan(Kegiatan $kegiatan)
+    {
+        $proker = ProgramKerja::all();
+
+        $kegiatan->load('unit');
+
+        return view('pendanaan.givePendanaan.detail', ['kegiatan' => $kegiatan, 'proker' => $proker]);
     }
 }

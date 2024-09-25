@@ -39,6 +39,11 @@ class Kegiatan extends Model
         return $this->hasMany(PesanPerbaikan::class, 'kegiatan_id', 'id');
     }
 
+    public function pendanaan()
+    {
+        return $this->hasMany(Pendanaan::class, 'kegiatan_id', 'id');
+    }
+
     public function unit()
     {
         return $this->hasOneThrough(Unit::class, Pengguna::class, 'id', 'id', 'user_id', 'unit_id');

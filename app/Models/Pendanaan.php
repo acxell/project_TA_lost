@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class PesanPerbaikan extends Model
+class Pendanaan extends Model
 {
     use HasFactory, Notifiable, HasUuids, HasRoles;
 
-    protected $table = "pesan_perbaikans";
+    protected $table = "pendanaans";
 
     protected $fillable = [
-        'pesan',
+        'bukti_transfer',
+        'besaran_transfer',
         'kegiatan_id',
         'user_id',
         'unit_id',

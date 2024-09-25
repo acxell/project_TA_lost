@@ -3,6 +3,7 @@
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\PendanaanController;
 use App\Http\Controllers\penggunaController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PesanPerbaikanController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TorController;
 use App\Http\Controllers\UnitController;
 use App\Models\Kegiatan;
+use App\Models\Pendanaan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -107,5 +109,20 @@ Route::get('/buat-pesan-perbaikan/{kegiatan_id}', [PesanPerbaikanController::cla
 Route::post('/pesan-perbaikan', [PesanPerbaikanController::class, 'store'])->name('pesanPerbaikan.store');
 Route::get('/pesan-perbaikan/{kegiatan_id}', [PesanPerbaikanController::class, 'show'])->name('pesanPerbaikan.view');
 
+//Actions Pendanaan
+Route::get('/data-pengajuan-pendanaan-kegiatan', [KegiatanController::class, 'pendanaan_kegiatan_index'])->name('pengajuan.pendanaanKegiatan.view');
+Route::get('/data-pengajuan/{kegiatan}/pendanaan-kegiatan', [KegiatanController::class, 'konfirmasiPendanaan'])->name('pengajuan.pendanaanKegiatan.detail');
+Route::post('/data-pengajuan/{kegiatan}/ajukan-pendanaan-kegiatan', [KegiatanController::class, 'pendanaan'])->name('pengajuan.pendanaanKegiatan.ajukan');
+
+//Actions Didanai
+Route::get('/data-pendanaan-kegiatan', [KegiatanController::class, 'give_pendanaan_index'])->name('pendanaan.givePendanaan.view');
+Route::get('/data/{kegiatan}/pendanaan-kegiatan', [KegiatanController::class, 'give_konfirmasi_pendanaan'])->name('pendanaan.givePendanaan.detail');
+Route::post('/data/{kegiatan}/berikan-pendanaan-kegiatan', [KegiatanController::class, 'give_pendanaan'])->name('pendanaan.givePendanaan.berikan');
+
+//Actions Data Pendanaan
+Route::get('/data-pendanaan', [PendanaanController::class, 'index'])->name('pendanaan.dataPendanaan.view');
+Route::get('/create-data-pendanaan/{kegiatan_id}', [PendanaanController::class, 'create'])->name('pendanaan.dataPendanaan.create');
+Route::post('/store-data-pendanaan', [PendanaanController::class, 'store'])->name('pendanaan.dataPendanaan.store');
+Route::get('/data-pendanaan/{pendanaan}/detail', [PendanaanController::class, 'show'])->name('pendanaan.dataPendanaan.detail');
 
 });

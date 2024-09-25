@@ -82,7 +82,7 @@
                         </li>
 
                         <li class="submenu-item  ">
-                            <a href="" class="submenu-link">Kegiatan</a>
+                            <a href="{{ route('pengajuan.pendanaanKegiatan.view') }}" class="submenu-link">Kegiatan</a>
 
                         </li>
 
@@ -98,25 +98,35 @@
 
                 <li class="sidebar-item  ">
                     <a href="form-layout.html" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Pencairan Dana</span>
-                    </a>
-
-                </li>
-
-                <li class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
                         <i class="bi bi-collection-fill"></i>
                         <span>Pelaporan Pertanggung Jawaban</span>
                     </a>
 
                 </li>
 
-                <li class="sidebar-item  ">
+                <li class="sidebar-title">Pendanaan
+
+                <li
+                    class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-envelope-exclamation-fill"></i>
-                        <span>Pesan Perbaikan</span>
+                        <i class="bi bi-stack"></i>
+                        <span>Pendanaan</span>
                     </a>
+                    <ul class="submenu ">
+
+                        <li class="submenu-item  ">
+                            <a href="{{ route('pendanaan.dataPendanaan.view') }}" class="submenu-link">Data Pencairan Dana Kegiatan</a>
+
+                        </li>
+
+                        <li class="submenu-item  ">
+                            <a href="{{ route('pendanaan.givePendanaan.view') }}" class="submenu-link">Pencairan Dana Kegiatan</a>
+
+                        </li>
+
+                    </ul>
+                </li>
+
                 </li>
 
                 <li class="sidebar-title">Validasi</li>
@@ -131,11 +141,6 @@
 
                         <li class="submenu-item  ">
                             <a href="{{ route('validasiAnggaran.view') }}" class="submenu-link">Anggaran Tahunan</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="form-element-input-group.html" class="submenu-link">Kegiatan</a>
 
                         </li>
 
@@ -195,12 +200,14 @@
 
                 </li>
                 <br>
+                <li class="sidebar-item  ">
                 @auth
                 <form method="post" action="{{ route('logout') }}">
                     @csrf
                     <button class="btn btn-danger">Log Out</button>
                 </form>
                 @endauth
+                </li>
 
                 </li>
             </ul>
