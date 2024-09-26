@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" action="{{ route('pendanaan.givePendanaan.berikan', $kegiatan->id) }}" method="POST">
+                            <form class="form" action="{{ route('pendanaan.dataPendanaan.create', $kegiatan->id) }}" method="GET">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
@@ -99,12 +99,101 @@
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="button" class="btn btn-primary me-1 mb-1" onclick="window.history.back();">Go Back</button>
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Ajukan</button>
+                                        <button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal"
+                                            data-bs-target="#inlineForm">
+                                            Info
+                                        </button>
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Berikan</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!--login form Modal -->
+        <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel33" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel33">Informasi Transfer </h4>
+                        <button type="button" class="close" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                    <form action="#">
+                        <div class="modal-body">
+                            <div class="col-md-12 col-12">
+                                <div class="form-group">
+                                    <label>Nama Kegiatan</label>
+                                    <input type="text" id="nama_kegiatan" class="form-control 
+                                            @error ('nama_kegiatan') is invalid
+                                            @enderror"
+                                        placeholder="Nama Kegiatan" name="nama_kegiatan" value="{{ old('nama_kegiatan') ?? $kegiatan->nama_kegiatan }}" disabled>
+                                    @error('nama_kegiatan')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-12">
+                                <div class="form-group">
+                                    <label>Nama Program Kerja</label>
+                                    <input type="text" id="nama" class="form-control @error ('nama') is-invalid @enderror"
+                                        placeholder="Nama Program Kerja" name="nama" value="{{ old('nama') ?? $kegiatan->proker->nama }}" disabled>
+                                    @error('nama')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-12">
+                                <div class="form-group">
+                                    <label>Pengguna</label>
+                                    <input type="text" id="nama" class="form-control 
+                                            @error ('nama') is invalid
+                                            @enderror"
+                                        placeholder="Nama Pengguna" name="nama" value="{{ old('nama') ?? $kegiatan->user->nama }}" disabled>
+                                    @error('nama')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-12">
+                                <div class="form-group">
+                                    <label>Nomor Rekening Tujuan</label>
+                                    <input type="text" id="nomor_rekening" class="form-control 
+                                            @error ('nomor_rekening') is invalid
+                                            @enderror"
+                                        placeholder="Nomor Rekening" name="nomor_rekening" value="{{ old('nomor_rekening') ?? $kegiatan->user->nomor_rekening }}" disabled>
+                                    @error('nomor_rekening')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-12">
+                                <div class="form-group">
+                                    <label>Total Biaya</label>
+                                    <input type="text" id="total_biaya" class="form-control 
+            @error ('total_biaya') is-invalid @enderror"
+                                        placeholder="Total Biaya" name="total_biaya"
+                                        value="Rp {{ old('total_biaya') ?? $kegiatan->total_biaya }}" disabled>
+                                    @error('total_biaya')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-secondary"
+                                data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Close</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

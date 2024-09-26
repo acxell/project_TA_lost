@@ -28,12 +28,12 @@
                         <div class="card-body">
                             <form class="form">
                                 <div class="row">
-                                    <div class="col-md-6 col-12">
+                                <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label>Bukti Transfer</label>
-                                            <input type="text" id="bukti_transfer" class="form-control @error('bukti_transfer') is-invalid @enderror"
-                                                name="bukti_transfer" value="{{ old('bukti_transfer')  ?? $pendanaan->bukti_transfer }}" disabled>
-                                            @error('bukti_transfer')
+                                            <label>Nama Kegiatan</label>
+                                            <input type="text" id="nama_kegiatan" class="form-control @error('nama_kegiatan') is-invalid @enderror"
+                                                name="nama_kegiatan" value="{{ old('nama_kegiatan')  ?? $pendanaan->kegiatan->nama_kegiatan }}" disabled>
+                                            @error('nama_kegiatan')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -48,6 +48,16 @@
                                                 @error('besaran_transfer')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Bukti Transfer</label>
+                                            <input type="text" id="bukti_transfer" class="form-control @error('bukti_transfer') is-invalid @enderror"
+                                                name="bukti_transfer" value="{{ old('bukti_transfer')  ?? $pendanaan->bukti_transfer }}" disabled>
+                                            @error('bukti_transfer')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">
