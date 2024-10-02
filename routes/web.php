@@ -3,6 +3,7 @@
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\LpjController;
 use App\Http\Controllers\PendanaanController;
 use App\Http\Controllers\penggunaController;
 use App\Http\Controllers\PermissionController;
@@ -124,5 +125,14 @@ Route::get('/data-pendanaan', [PendanaanController::class, 'index'])->name('pend
 Route::get('/create-data-pendanaan/{kegiatan_id}', [PendanaanController::class, 'create'])->name('pendanaan.dataPendanaan.create');
 Route::post('/store-data-pendanaan', [PendanaanController::class, 'store'])->name('pendanaan.dataPendanaan.store');
 Route::get('/data-pendanaan/{pendanaan}/detail', [PendanaanController::class, 'show'])->name('pendanaan.dataPendanaan.detail');
+
+//Actions Data LPJ
+Route::get('/data-lpj', [LpjController::class, 'index'])->name('lpjKegiatan.view');
+Route::get('/create-data-lpj', [LpjController::class, 'create'])->name('lpjKegiatan.create');
+Route::get('/lpj/{lpj}/detail', [LpjController::class, 'show'])->name('lpjKegiatan.detail');
+Route::post('/lpj', [LpjController::class, 'store'])->name('lpjKegiatan.store');
+Route::get('/lpj/{lpj}/edit', [LpjController::class, 'edit'])->name('lpjKegiatan.edit');
+Route::post('/lpj/{lpj}/update', [LpjController::class, 'update'])->name('lpjKegiatan.update');
+Route::delete('/lpj/{lpj}', [LpjController::class, 'destroy'])->name('lpjKegiatan.destroy');
 
 });

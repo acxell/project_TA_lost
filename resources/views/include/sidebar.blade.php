@@ -97,7 +97,7 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
+                    <a href="{{ route('lpjKegiatan.view') }}" class='sidebar-link'>
                         <i class="bi bi-collection-fill"></i>
                         <span>Pelaporan Pertanggung Jawaban</span>
                     </a>
