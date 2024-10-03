@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kegiatan;
+use App\Models\Lpj;
 use App\Models\PesanPerbaikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,11 +21,13 @@ class PesanPerbaikanController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    
+     //Pesan Perbaikan Anggaran Tahunan
     public function create($kegiatan_id)
     {
         $kegiatan = Kegiatan::findOrFail($kegiatan_id);
 
-        return view('pesanPerbaikan.create', ['kegiatan' => $kegiatan]);
+        return view('pesanPerbaikan.anggaranTahunan.create', ['kegiatan' => $kegiatan]);
     }
 
     /**
@@ -48,9 +51,9 @@ class PesanPerbaikanController extends Controller
             $kegiatan->status = 'Ditolak';
             $kegiatan->save();
 
-            return to_route('validasiAnggaran.view')->with('success', 'Pesan Perbaikan Telah Ditambahkan dan Kegiatan Ditolak');
+            return to_route('validasi.validasiAnggaran.view')->with('success', 'Pesan Perbaikan Telah Ditambahkan dan Kegiatan Ditolak');
         } else {
-            return to_route('validasiAnggaran.view')->with('failed', 'Pesan Perbaikan Gagal Ditambahkan');
+            return to_route('validasi.validasiAnggaran.view')->with('failed', 'Pesan Perbaikan Gagal Ditambahkan');
         }
     }
 
@@ -62,33 +65,59 @@ class PesanPerbaikanController extends Controller
         $pesanPerbaikan = PesanPerbaikan::where('kegiatan_id', $kegiatan_id)->latest()->first();
 
         if (!$pesanPerbaikan) {
-            return redirect()->route('validasiAnggaran.view')->with('error', 'Pesan Perbaikan tidak ditemukan.');
+            return redirect()->route('validasi.validasiAnggaran.view')->with('error', 'Pesan Perbaikan tidak ditemukan.');
         }
 
-        return view('pesanPerbaikan.detail', ['pesanPerbaikan' => $pesanPerbaikan]);
+        return view('pesanPerbaikan.anggaranTahunan.detail', ['pesanPerbaikan' => $pesanPerbaikan]);
+    }
+
+    //Pesan Perbaikan LPJ
+    public function create_lpj($lpj_id)
+    {
+        $lpj = Lpj::findOrFail($lpj_id);
+
+        return view('pesanPerbaikan.lpj.create', ['lpj' => $lpj]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Store a newly created resource in storage.
      */
-    public function edit(PesanPerbaikan $pesanPerbaikan)
+    public function store_lpj(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'pesan' => 'string|required',
+            'lpj_id' => 'string|required|exists:lpjs,id',
+        ]);
+
+        $validateData['user_id'] = Auth::id();
+        $validateData['unit_id'] = Auth::user()->unit_id;
+
+        $pesanPerbaikan = PesanPerbaikan::create($validateData);
+
+        if ($pesanPerbaikan) {
+            $lpj = Lpj::find($validateData['lpj_id']);
+
+            $lpj->status = 'Ditolak';
+            $lpj->save();
+
+            return to_route('validasi.validasiLpj.view')->with('success', 'Pesan Perbaikan Telah Ditambahkan dan Kegiatan Ditolak');
+        } else {
+            return to_route('validasi.validasiLpj.view')->with('failed', 'Pesan Perbaikan Gagal Ditambahkan');
+        }
     }
 
     /**
-     * Update the specified resource in storage.
+     * Display the specified resource.
      */
-    public function update(Request $request, PesanPerbaikan $pesanPerbaikan)
+    public function show_lpj($lpj_id)
     {
-        //
+        $pesanPerbaikan = PesanPerbaikan::where('lpj_id', $lpj_id)->latest()->first();
+
+        if (!$pesanPerbaikan) {
+            return redirect()->route('validasi.validasiLpj.view')->with('error', 'Pesan Perbaikan tidak ditemukan.');
+        }
+
+        return view('pesanPerbaikan.lpj.detail', ['pesanPerbaikan' => $pesanPerbaikan]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(PesanPerbaikan $pesanPerbaikan)
-    {
-        //
-    }
 }

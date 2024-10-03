@@ -1,19 +1,19 @@
 @extends('master.master')
-@section('title', 'Detail Data Kegiatan Program Kerja')
+@section('title', 'Validasi Pengajuan Anggaran Tahunan')
 @section('content')
 
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <p class="text-subtitle text-muted">Detail Data Kegiatan Program Kerja</p>
+                <p class="text-subtitle text-muted">Validasi Pengajuan Anggaran Tahunan</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('pengajuan.anggaranTahunan.view') }}">Data Kegiatan</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Detail</li>
+                        <li class="breadcrumb-item"><a href="{{ route('validasi.validasiAnggaran.view') }}">Data Pengajuan Anggaran Tahunan</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">validasi</li>
                     </ol>
                 </nav>
             </div>
@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" action="{{ route('pengajuan.anggaranTahunan.ajukan', $kegiatan->id) }}" method="POST">
+                            <form class="form" action="{{ route('validasi.validasiAnggaran.acc', $kegiatan->id) }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
@@ -46,16 +46,6 @@
                                             <label>Nama Program Kerja</label>
                                             <input type="text" id="nama" class="form-control @error ('nama') is-invalid @enderror"
                                                 placeholder="Nama Program Kerja" name="nama" value="{{ old('nama') ?? $kegiatan->proker->nama }}" disabled>
-                                            @error('nama')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label>Nama Unit</label>
-                                            <input type="text" id="nama" class="form-control @error ('nama') is-invalid @enderror"
-                                                placeholder="Nama Unit" name="nama" value="{{ old('nama') ?? $kegiatan->unit->nama }}" disabled>
                                             @error('nama')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
@@ -99,7 +89,10 @@
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="button" class="btn btn-primary me-1 mb-1" onclick="window.history.back();">Go Back</button>
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Ajukan</button>
+                                        <a href="{{ route('pesanPerbaikan.anggaranTahunan.create', ['kegiatan_id' => $kegiatan->id]) }}" class="btn btn-primary me-1 mb-1">
+                                            Buat Pesan Perbaikan
+                                        </a>
+                                        <button type="submit" name="action" value="accept" class="btn btn-primary me-1 mb-1">Terima Pengajuan</button>
                                     </div>
                                 </div>
                             </form>

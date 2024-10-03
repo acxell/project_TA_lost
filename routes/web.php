@@ -79,36 +79,36 @@ Route::post('/unit/{unit}/update', [UnitController::class, 'update'])->name('uni
 Route::delete('/unit/{unit}', [UnitController::class, 'destroy'])->name('unit.destroy');
 
 //Actions Manajemen Data Program Kerja
-Route::get('/data-program-kerja', [ProgramKerjaController::class, 'index'])->name('penganggaran.programKerja.view');
-Route::get('/create-data-program-kerja', [ProgramKerjaController::class, 'create'])->name('penganggaran.programKerja.create');
-Route::get('/program-kerja/{programKerja}/detail', [ProgramKerjaController::class, 'show'])->name('penganggaran.programKerja.detail');
-Route::post('/program-kerja', [ProgramKerjaController::class, 'store'])->name('penganggaran.programKerja.store');
-Route::get('/program-kerja/{programKerja}/edit', [ProgramKerjaController::class, 'edit'])->name('penganggaran.programKerja.edit');
-Route::post('/program-kerja/{programKerja}/update', [ProgramKerjaController::class, 'update'])->name('penganggaran.programKerja.update');
-Route::delete('/program-kerja/{programKerja}', [ProgramKerjaController::class, 'destroy'])->name('penganggaran.programKerja.destroy');
+Route::get('/data-program-kerja', [ProgramKerjaController::class, 'index'])->name('penyusunan.programKerja.view');
+Route::get('/create-data-program-kerja', [ProgramKerjaController::class, 'create'])->name('penyusunan.programKerja.create');
+Route::get('/program-kerja/{programKerja}/detail', [ProgramKerjaController::class, 'show'])->name('penyusunan.programKerja.detail');
+Route::post('/program-kerja', [ProgramKerjaController::class, 'store'])->name('penyusunan.programKerja.store');
+Route::get('/program-kerja/{programKerja}/edit', [ProgramKerjaController::class, 'edit'])->name('penyusunan.programKerja.edit');
+Route::post('/program-kerja/{programKerja}/update', [ProgramKerjaController::class, 'update'])->name('penyusunan.programKerja.update');
+Route::delete('/program-kerja/{programKerja}', [ProgramKerjaController::class, 'destroy'])->name('penyusunan.programKerja.destroy');
 
 //Actions Manajemen Data Kegiatan
-Route::get('/data-kegiatan', [KegiatanController::class, 'index'])->name('penganggaran.kegiatan.view');
-Route::get('/create-data-kegiatan', [KegiatanController::class, 'create'])->name('penganggaran.kegiatan.create');
-Route::get('/kegiatan/{kegiatan}/detail', [KegiatanController::class, 'show'])->name('penganggaran.kegiatan.detail');
-Route::post('/kegiatan', [KegiatanController::class, 'store'])->name('penganggaran.kegiatan.store');
-Route::get('/kegiatan/{kegiatan}/edit', [KegiatanController::class, 'edit'])->name('penganggaran.kegiatan.edit');
-Route::post('/kegiatan/{kegiatan}/update', [KegiatanController::class, 'update'])->name('penganggaran.kegiatan.update');
-Route::delete('/kegiatan/{kegiatan}', [KegiatanController::class, 'destroy'])->name('penganggaran.kegiatan.destroy');
+Route::get('/data-kegiatan', [KegiatanController::class, 'index'])->name('penyusunan.kegiatan.view');
+Route::get('/create-data-kegiatan', [KegiatanController::class, 'create'])->name('penyusunan.kegiatan.create');
+Route::get('/kegiatan/{kegiatan}/detail', [KegiatanController::class, 'show'])->name('penyusunan.kegiatan.detail');
+Route::post('/kegiatan', [KegiatanController::class, 'store'])->name('penyusunan.kegiatan.store');
+Route::get('/kegiatan/{kegiatan}/edit', [KegiatanController::class, 'edit'])->name('penyusunan.kegiatan.edit');
+Route::post('/kegiatan/{kegiatan}/update', [KegiatanController::class, 'update'])->name('penyusunan.kegiatan.update');
+Route::delete('/kegiatan/{kegiatan}', [KegiatanController::class, 'destroy'])->name('penyusunan.kegiatan.destroy');
 
 //Actions Validasi Pengajuan Anggaran Tahunan
 Route::get('/data-pengajuan-kegiatan', [KegiatanController::class, 'pengajuanIndex'])->name('pengajuan.anggaranTahunan.view');
 Route::get('/data-pengajuan/{kegiatan}/detail', [KegiatanController::class, 'konfirmasiPengajuan'])->name('pengajuan.anggaranTahunan.detail');
 Route::post('/data-pengajuan/{kegiatan}/ajukan', [KegiatanController::class, 'ajukan'])->name('pengajuan.anggaranTahunan.ajukan');
 
-Route::get('/data-pengajuan-anggaran-tahunan', [KegiatanController::class, 'validasi_index'])->name('validasiAnggaran.view');
-Route::get('/pengajuan-anggaran-tahunan/{kegiatan}/validasi-pengajuan', [KegiatanController::class, 'validasi_pengajuan_tahunan'])->name('validasiAnggaran.validasi');
-Route::post('/pengajuan-anggaran-tahunan/{kegiatan}/acc-validasi', [KegiatanController::class, 'acc_validasi_pengajuan_tahunan'])->name('validasiAnggaran.acc');
+Route::get('/data-pengajuan-anggaran-tahunan', [KegiatanController::class, 'validasi_index'])->name('validasi.validasiAnggaran.view');
+Route::get('/pengajuan-anggaran-tahunan/{kegiatan}/validasi-pengajuan', [KegiatanController::class, 'validasi_pengajuan_tahunan'])->name('validasi.validasiAnggaran.validasi');
+Route::post('/pengajuan-anggaran-tahunan/{kegiatan}/acc-validasi', [KegiatanController::class, 'acc_validasi_pengajuan_tahunan'])->name('validasi.validasiAnggaran.acc');
 
-//Actions Pesan Perbaikan
-Route::get('/buat-pesan-perbaikan/{kegiatan_id}', [PesanPerbaikanController::class, 'create'])->name('pesanPerbaikan.create');
-Route::post('/pesan-perbaikan', [PesanPerbaikanController::class, 'store'])->name('pesanPerbaikan.store');
-Route::get('/pesan-perbaikan/{kegiatan_id}', [PesanPerbaikanController::class, 'show'])->name('pesanPerbaikan.view');
+//Actions Pesan Perbaikan Anggaran Tahunan
+Route::get('/buat-pesan-perbaikan/{kegiatan_id}', [PesanPerbaikanController::class, 'create'])->name('pesanPerbaikan.anggaranTahunan.create');
+Route::post('/pesan-perbaikan', [PesanPerbaikanController::class, 'store'])->name('pesanPerbaikan.anggaranTahunan.store');
+Route::get('/pesan-perbaikan/{kegiatan_id}', [PesanPerbaikanController::class, 'show'])->name('pesanPerbaikan.anggaranTahunan.view');
 
 //Actions Pendanaan
 Route::get('/data-pengajuan-pendanaan-kegiatan', [KegiatanController::class, 'pendanaan_kegiatan_index'])->name('pengajuan.pendanaanKegiatan.view');
@@ -127,12 +127,27 @@ Route::post('/store-data-pendanaan', [PendanaanController::class, 'store'])->nam
 Route::get('/data-pendanaan/{pendanaan}/detail', [PendanaanController::class, 'show'])->name('pendanaan.dataPendanaan.detail');
 
 //Actions Data LPJ
-Route::get('/data-lpj', [LpjController::class, 'index'])->name('lpjKegiatan.view');
-Route::get('/create-data-lpj', [LpjController::class, 'create'])->name('lpjKegiatan.create');
-Route::get('/lpj/{lpj}/detail', [LpjController::class, 'show'])->name('lpjKegiatan.detail');
-Route::post('/lpj', [LpjController::class, 'store'])->name('lpjKegiatan.store');
-Route::get('/lpj/{lpj}/edit', [LpjController::class, 'edit'])->name('lpjKegiatan.edit');
-Route::post('/lpj/{lpj}/update', [LpjController::class, 'update'])->name('lpjKegiatan.update');
-Route::delete('/lpj/{lpj}', [LpjController::class, 'destroy'])->name('lpjKegiatan.destroy');
+Route::get('/data-lpj', [LpjController::class, 'index'])->name('penyusunan.lpjKegiatan.view');
+Route::get('/create-data-lpj', [LpjController::class, 'create'])->name('penyusunan.lpjKegiatan.create');
+Route::get('/lpj/{lpj}/detail', [LpjController::class, 'show'])->name('penyusunan.lpjKegiatan.detail');
+Route::post('/lpj', [LpjController::class, 'store'])->name('penyusunan.lpjKegiatan.store');
+Route::get('/lpj/{lpj}/edit', [LpjController::class, 'edit'])->name('penyusunan.lpjKegiatan.edit');
+Route::post('/lpj/{lpj}/update', [LpjController::class, 'update'])->name('penyusunan.lpjKegiatan.update');
+Route::delete('/lpj/{lpj}', [LpjController::class, 'destroy'])->name('penyusunan.lpjKegiatan.destroy');
+
+//Pelaporan LPJ
+Route::get('/data-laporan/lpj', [LpjController::class, 'pengajuanLpjIndex'])->name('pengajuan.lpj.view');
+Route::get('/data-laporan/lpj/{lpj}/pengajuan', [LpjController::class, 'konfirmasiPengajuanLPJ'])->name('pengajuan.lpj.detail');
+Route::post('/data-laporan/lpj/{lpj}/ajukan', [LpjController::class, 'ajukanLpj'])->name('pengajuan.lpj.laporkan');
+
+//Validasi LPJ
+Route::get('/data-pelaporan-pertanggung-jawaban', [LpjController::class, 'validasi_lpj_index'])->name('validasi.validasiLpj.view');
+Route::get('/lpj/{lpj}/validasi-pelaporan', [LpjController::class, 'validasi_pelaporan_lpj'])->name('validasi.validasiLpj.validasi');
+Route::post('/lpj/{lpj}/acc-validasi', [LpjController::class, 'acc_validasi_pelaporan_lpj'])->name('validasi.validasiLpj.acc');
+
+//Pesan perbaikan LPJ
+Route::get('/buat-pesan-perbaikan/lpj/{lpj_id}', [PesanPerbaikanController::class, 'create_lpj'])->name('pesanPerbaikan.lpj.create');
+Route::post('/pesan-perbaikan/lpj', [PesanPerbaikanController::class, 'store_lpj'])->name('pesanPerbaikan.lpj.store');
+Route::get('/pesan-perbaikan/lpj/{lpj_id}', [PesanPerbaikanController::class, 'show_lpj'])->name('pesanPerbaikan.lpj.view');
 
 });

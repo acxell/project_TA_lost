@@ -18,7 +18,7 @@ class ProgramKerjaController extends Controller
     {
         $programKerja = ProgramKerja::all();
 
-        return view('penganggaran.programKerja.view', ['programKerja' => $programKerja]);
+        return view('penyusunan.programKerja.view', ['programKerja' => $programKerja]);
     }
 
     /**
@@ -28,7 +28,7 @@ class ProgramKerjaController extends Controller
     {
         $programKerja = ProgramKerja::all();
 
-        return view('penganggaran.programKerja.create', ['programKerja' => $programKerja]);
+        return view('penyusunan.programKerja.create', ['programKerja' => $programKerja]);
     }
 
     /**
@@ -46,9 +46,9 @@ class ProgramKerjaController extends Controller
         $programKerja = ProgramKerja::create($validateData);
 
         if ($programKerja) {
-            return to_route('penganggaran.programKerja.view')->with('success', 'Data Telah Ditambahkan');
+            return to_route('penyusunan.programKerja.view')->with('success', 'Data Telah Ditambahkan');
         } else {
-            return to_route('penganggaran.programKerja.view')->with('failed', 'Data Gagal Ditambahkan');
+            return to_route('penyusunan.programKerja.view')->with('failed', 'Data Gagal Ditambahkan');
         }
     }
 
@@ -57,7 +57,7 @@ class ProgramKerjaController extends Controller
      */
     public function show(ProgramKerja $programKerja)
     {
-        return view('penganggaran.programKerja.detail', ['programKerja' => $programKerja]);
+        return view('penyusunan.programKerja.detail', ['programKerja' => $programKerja]);
     }
 
     /**
@@ -65,7 +65,7 @@ class ProgramKerjaController extends Controller
      */
     public function edit(ProgramKerja $programKerja)
     {
-        return view('penganggaran.programKerja.edit', ['programKerja' => $programKerja]);
+        return view('penyusunan.programKerja.edit', ['programKerja' => $programKerja]);
     }
 
     /**
@@ -87,9 +87,9 @@ class ProgramKerjaController extends Controller
         $programKerja->update($validateData);
     
         if ($programKerja) {
-            return to_route('penganggaran.programKerja.view')->with('success', 'Data Telah Diperbarui');
+            return to_route('penyusunan.programKerja.view')->with('success', 'Data Telah Diperbarui');
         } else {
-            return to_route('penganggaran.programKerja.view')->with('failed', 'Data Gagal Diperbarui');
+            return to_route('penyusunan.programKerja.view')->with('failed', 'Data Gagal Diperbarui');
         }
     }
 
@@ -101,9 +101,9 @@ class ProgramKerjaController extends Controller
         $programKerja->delete();
 
         if ($programKerja) {
-            return to_route('penganggaran.programKerja.view')->with('success', 'Data Telah Dihapus');
+            return to_route('penyusunan.programKerja.view')->with('success', 'Data Telah Dihapus');
         } else {
-            return to_route('penganggaran.programKerja.view')->with('failed', 'Data Gagal Dihapus');
+            return to_route('penyusunan.programKerja.view')->with('failed', 'Data Gagal Dihapus');
         }
     }
 }

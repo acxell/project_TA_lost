@@ -12,7 +12,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('penganggaran.kegiatan.view') }}">Data Kegiatan</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('penyusunan.kegiatan.view') }}">Data Kegiatan</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Edit</li>
                     </ol>
                 </nav>
@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="POST" action="{{ route('penganggaran.kegiatan.update', $kegiatan->id) }}">
+                            <form class="form" method="POST" action="{{ route('penyusunan.kegiatan.update', $kegiatan->id) }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">

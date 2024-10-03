@@ -1,19 +1,19 @@
 @extends('master.master')
-@section('title', 'Masukkan Data Pesan Perbaikan')
+@section('title', 'Masukkan Data Program Kerja')
 @section('content')
 
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <p class="text-subtitle text-muted">Input Pesan Perbaikan</p>
+                <p class="text-subtitle text-muted">Input Detail Data Program Kerja</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('validasiAnggaran.view') }}">Data Pengajuan Anggaran Tahunan</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Buat Pesan Perbaikan</li>
+                        <li class="breadcrumb-item"><a href="{{ route('penyusunan.programKerja.view') }}">Data TOR</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Insert</li>
                     </ol>
                 </nav>
             </div>
@@ -26,21 +26,30 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="POST" action=" {{ route('pesanPerbaikan.store') }}">
+                            <form class="form" method="POST" action=" {{ route('penyusunan.programKerja.store') }}">
                                 @csrf
-
-                                <input type="hidden" name="kegiatan_id" value="{{ $kegiatan->id }}">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label>Pesan Perbaikan</label>
-                                            <input type="text" id="pesan" class="form-control 
-                                            @error ('pesan') is invalid
+                                            <label>Nama Program Kerja</label>
+                                            <input type="text" id="nama" class="form-control 
+                                            @error ('nama') is invalid
                                             @enderror"
-                                                placeholder="Pesan Perbaikan" name="pesan" value="{{ old('pesan') }}">
-                                                @error('pesan')
+                                                placeholder="Nama Program Kerja" name="nama" value="{{ old('nama') }}">
+                                                @error('nama')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <fieldset class="form-group">
+                                                <select class="form-select" name="status" id="status" type="text" aria-placeholder="Status">
+                                                    <option value="Aktif">Aktif</option>
+                                                    <option value="Tidak Aktif">Tidak Aktif</option>
+                                                </select>
+                                            </fieldset>
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">

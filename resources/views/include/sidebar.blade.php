@@ -53,12 +53,12 @@
                     <ul class="submenu ">
 
                         <li class="submenu-item  ">
-                            <a href="{{ route('penganggaran.programKerja.view') }}" class="submenu-link">Program Kerja</a>
+                            <a href="{{ route('penyusunan.programKerja.view') }}" class="submenu-link">Program Kerja</a>
 
                         </li>
 
                         <li class="submenu-item  ">
-                            <a href="{{ route('penganggaran.kegiatan.view') }}" class="submenu-link">Kegiatan (TOR & RAB)</a>
+                            <a href="{{ route('penyusunan.kegiatan.view') }}" class="submenu-link">Kegiatan (TOR & RAB)</a>
 
                         </li>
 
@@ -96,11 +96,26 @@
 
                 </li>
 
-                <li class="sidebar-item  ">
-                    <a href="{{ route('lpjKegiatan.view') }}" class='sidebar-link'>
-                        <i class="bi bi-collection-fill"></i>
-                        <span>Pelaporan Pertanggung Jawaban</span>
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-journal-check"></i>
+                        <span>laporan Pertanggung Jawabann</span>
                     </a>
+
+                    <ul class="submenu ">
+
+                        <li class="submenu-item  ">
+                            <a href="{{ route('penyusunan.lpjKegiatan.view') }}" class="submenu-link">Form Pelaporan</a>
+
+                        </li>
+
+                        <li class="submenu-item  ">
+                            <a href="{{ route('pengajuan.lpj.view') }}" class="submenu-link">Pelaporan Pertanggung Jawaban</a>
+
+                        </li>
+
+                    </ul>
+
 
                 </li>
 
@@ -140,12 +155,12 @@
                     <ul class="submenu ">
 
                         <li class="submenu-item  ">
-                            <a href="{{ route('validasiAnggaran.view') }}" class="submenu-link">Anggaran Tahunan</a>
+                            <a href="{{ route('validasi.validasiAnggaran.view') }}" class="submenu-link">Anggaran Tahunan</a>
 
                         </li>
 
                         <li class="submenu-item  ">
-                            <a href="form-element-select.html" class="submenu-link">Retur</a>
+                            <a href="#" class="submenu-link">Retur</a>
 
                         </li>
 
@@ -155,7 +170,7 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
+                    <a href="{{ route('validasi.validasiLpj.view') }}" class='sidebar-link'>
                         <i class="bi bi-journal-check"></i>
                         <span>Pelaporan Pertanggung Jawaban</span>
                     </a>

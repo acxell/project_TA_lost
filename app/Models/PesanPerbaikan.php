@@ -17,6 +17,7 @@ class PesanPerbaikan extends Model
     protected $fillable = [
         'pesan',
         'kegiatan_id',
+        'lpj_id',
         'user_id',
         'unit_id',
     ];
@@ -25,6 +26,10 @@ class PesanPerbaikan extends Model
     //Relational
     public function kegiatan(){
         return $this->belongsTo(Kegiatan::class, 'kegiatan_id', 'id');
+    }
+
+    public function lpj(){
+        return $this->belongsTo(Lpj::class, 'lpj_id', 'id');
     }
 
     public function unit()

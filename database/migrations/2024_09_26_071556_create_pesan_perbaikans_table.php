@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('pesan_perbaikans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('kegiatan_id');
+            $table->uuid('kegiatan_id')->nullable();
+            $table->uuid('lpj_id')->nullable();
             $table->string('pesan');
             $table->uuid('user_id');
             $table->uuid('unit_id');
             $table->timestamps();
 
             $table->foreign('kegiatan_id')->references('id')->on('kegiatans')->onDelete('cascade');
+            $table->foreign('lpj_id')->references('id')->on('lpjs')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('penggunas')->onDelete('cascade');
         });
     }

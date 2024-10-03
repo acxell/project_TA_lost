@@ -18,7 +18,7 @@ class KegiatanController extends Controller
     {
         $kegiatan = Kegiatan::all();
 
-        return view('penganggaran.kegiatan.view', ['kegiatan' => $kegiatan]);
+        return view('penyusunan.kegiatan.view', ['kegiatan' => $kegiatan]);
     }
 
     /**
@@ -29,7 +29,7 @@ class KegiatanController extends Controller
         $kegiatan = Kegiatan::all();
         $proker = ProgramKerja::all();
 
-        return view('penganggaran.kegiatan.create', ['kegiatan' => $kegiatan, 'proker' => $proker]);
+        return view('penyusunan.kegiatan.create', ['kegiatan' => $kegiatan, 'proker' => $proker]);
     }
 
     /**
@@ -53,9 +53,9 @@ class KegiatanController extends Controller
         $kegiatan = Kegiatan::create($validateData);
 
         if ($kegiatan) {
-            return to_route('penganggaran.kegiatan.view')->with('success', 'Data Telah Ditambahkan');
+            return to_route('penyusunan.kegiatan.view')->with('success', 'Data Telah Ditambahkan');
         } else {
-            return to_route('penganggaran.kegiatan.view')->with('failed', 'Data Gagal Ditambahkan');
+            return to_route('penyusunan.kegiatan.view')->with('failed', 'Data Gagal Ditambahkan');
         }
     }
 
@@ -68,7 +68,7 @@ class KegiatanController extends Controller
 
         $kegiatan->load('unit');
 
-        return view('penganggaran.kegiatan.detail', ['kegiatan' => $kegiatan, 'proker' => $proker]);
+        return view('penyusunan.kegiatan.detail', ['kegiatan' => $kegiatan, 'proker' => $proker]);
     }
 
     /**
@@ -78,7 +78,7 @@ class KegiatanController extends Controller
     {
         $proker = ProgramKerja::all();
 
-        return view('penganggaran.kegiatan.edit', ['kegiatan' => $kegiatan, 'proker' => $proker]);
+        return view('penyusunan.kegiatan.edit', ['kegiatan' => $kegiatan, 'proker' => $proker]);
     }
 
     /**
@@ -108,9 +108,9 @@ class KegiatanController extends Controller
         $kegiatan->update($validateData);
 
         if ($kegiatan) {
-            return to_route('penganggaran.kegiatan.view')->with('success', 'Data Telah Ditambahkan');
+            return to_route('penyusunan.kegiatan.view')->with('success', 'Data Telah Ditambahkan');
         } else {
-            return to_route('penganggaran.kegiatan.view')->with('failed', 'Data Gagal Ditambahkan');
+            return to_route('penyusunan.kegiatan.view')->with('failed', 'Data Gagal Ditambahkan');
         }
     }
 
@@ -122,9 +122,9 @@ class KegiatanController extends Controller
         $kegiatan->delete();
 
         if ($kegiatan) {
-            return to_route('penganggaran.kegiatan.view')->with('success', 'Data Telah Dihapus');
+            return to_route('penyusunan.kegiatan.view')->with('success', 'Data Telah Dihapus');
         } else {
-            return to_route('penganggaran.kegiatan.view')->with('failed', 'Data Gagal Dihapus');
+            return to_route('penyusunan.kegiatan.view')->with('failed', 'Data Gagal Dihapus');
         }
     }
 
@@ -164,7 +164,7 @@ class KegiatanController extends Controller
 
         $proker = ProgramKerja::all();
 
-        return view('validasiAnggaran.view', ['kegiatan' => $kegiatan, 'proker' => $proker]);
+        return view('validasi.validasiAnggaran.view', ['kegiatan' => $kegiatan, 'proker' => $proker]);
     }
 
     public function validasi_pengajuan_tahunan(Kegiatan $kegiatan)
@@ -173,16 +173,16 @@ class KegiatanController extends Controller
 
         $kegiatan->load('unit');
 
-        return view('validasiAnggaran.validasi', ['kegiatan' => $kegiatan, 'proker' => $proker]);
+        return view('validasi.validasiAnggaran.validasi', ['kegiatan' => $kegiatan, 'proker' => $proker]);
     }
 
     public function acc_validasi_pengajuan_tahunan(Request $request, Kegiatan $kegiatan)
     {
         if ($request->input('action') == 'reject') {
-            return redirect()->route('pesanPerbaikan.create')->with('success', 'Pengajuan telah ditolak.');
+            return redirect()->route('pesanPerbaikan.anggaranTahunan.create')->with('success', 'Pengajuan telah ditolak.');
         } elseif ($request->input('action') == 'accept') {
             $kegiatan->update(['status' => 'Diterima']);
-            return redirect()->route('validasiAnggaran.view')->with('success', 'Pengajuan telah diterima.');
+            return redirect()->route('validasi.validasiAnggaran.view')->with('success', 'Pengajuan telah diterima.');
         }
     }
 

@@ -19,6 +19,7 @@ class Lpj extends Model
         'jumlah_peserta_undangan',
         'jumlah_peserta_hadir',
         'proker_id',
+        'lpj_id',
         'kegiatan_id',
         'status',
         'user_id',
@@ -26,7 +27,7 @@ class Lpj extends Model
     ];
 
     protected $attributes = [
-        'status' => 'Belum Diajukan',
+        'status' => 'Belum Dilaporkan',
     ];
 
 
@@ -38,6 +39,11 @@ class Lpj extends Model
     public function proker()
     {
         return $this->hasOneThrough(ProgramKerja::class, kegiatan::class, 'id', 'id', 'kegiatan_id', 'proker_id');
+    }
+
+    public function pesan_perbaikan()
+    {
+        return $this->hasMany(PesanPerbaikan::class, 'lpj_id', 'id');
     }
 
     public function user()

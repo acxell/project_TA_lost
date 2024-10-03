@@ -1,19 +1,19 @@
 @extends('master.master')
-@section('title', 'Masukkan Data Program Kerja')
+@section('title', 'Detail Data Program Kerja')
 @section('content')
 
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <p class="text-subtitle text-muted">Input Detail Data Program Kerja</p>
+                <p class="text-subtitle text-muted">Detail Data Program Kerja</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('penganggaran.programKerja.view') }}">Data TOR</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Insert</li>
+                        <li class="breadcrumb-item"><a href="{{ route('penyusunan.programKerja.view') }}">Data Unit</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Detail</li>
                     </ol>
                 </nav>
             </div>
@@ -26,16 +26,15 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="POST" action=" {{ route('penganggaran.programKerja.store') }}">
-                                @csrf
-                                <div class="row">
+                            <form class="form" action="{{ route('penyusunan.programKerja.view') }}">
+                            <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Nama Program Kerja</label>
                                             <input type="text" id="nama" class="form-control 
                                             @error ('nama') is invalid
                                             @enderror"
-                                                placeholder="Nama Program Kerja" name="nama" value="{{ old('nama') }}">
+                                                placeholder="Nama Program Kerja" name="nama" value="{{ old('nama') ?? $programKerja->nama }}" disabled>
                                                 @error('nama')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
@@ -45,16 +44,18 @@
                                         <div class="form-group">
                                             <label>Status</label>
                                             <fieldset class="form-group">
-                                                <select class="form-select" name="status" id="status" type="text" aria-placeholder="Status">
-                                                    <option value="Aktif">Aktif</option>
-                                                    <option value="Tidak Aktif">Tidak Aktif</option>
+                                                <select class="form-select @error('status') is-invalid @enderror" name="status" id="status" disabled>
+                                                    <option value="Aktif" {{ (old('status') ?? $programKerja->status) == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                                                    <option value="Tidak Aktif" {{ (old('status') ?? $programKerja->status) == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
                                                 </select>
+                                                @error('status')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </fieldset>
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                        <button class="btn btn-light-secondary me-1 mb-1">Done</button>
                                     </div>
                                 </div>
                             </form>
