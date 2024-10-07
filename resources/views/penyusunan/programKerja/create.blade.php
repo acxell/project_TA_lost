@@ -36,9 +36,9 @@
                                             @error ('nama') is invalid
                                             @enderror"
                                                 placeholder="Nama Program Kerja" name="nama" value="{{ old('nama') }}">
-                                                @error('nama')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                            @error('nama')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">

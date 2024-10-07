@@ -43,3 +43,18 @@
         });
     });
 </script>
+
+{{-- script Addmore Buttons Program Kerja --}}
+<script>
+    document.getElementById('add-more').addEventListener('click', function() {
+        // Clone the row of input fields
+        const dynamicForm = document.getElementById('dynamic-form');
+        const newRow = document.querySelector('.program-kerja-row').cloneNode(true);
+
+        // Clear input values in the cloned row
+        newRow.querySelectorAll('input').forEach(input => input.value = '');
+
+        // Append the cloned row
+        dynamicForm.appendChild(newRow);
+    });
+</script>

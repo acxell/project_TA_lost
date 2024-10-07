@@ -8,20 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class Unit extends Model
+class kategoriAktivitas extends Model
 {
     use HasFactory, Notifiable, HasUuids, HasRoles;
 
-    protected $table = "units";
+    protected $table = "kategori_aktivitas";
 
     protected $fillable = [
-        'nama',
-        'description',
-        'status',
+        'tahapan',
     ];
 
-    public function penggunas(){
-        return $this->hasMany(pengguna::class, 'unit_id', 'id');
+    public function aktivitas()
+    {
+        return $this->hasMany(Aktivitas::class, 'kategori_id', 'id');
     }
 
     public function getIncrementing()

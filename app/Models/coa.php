@@ -6,22 +6,24 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use PhpParser\Node\Expr\FuncCall;
 use Spatie\Permission\Traits\HasRoles;
 
-class Unit extends Model
+class coa extends Model
 {
     use HasFactory, Notifiable, HasUuids, HasRoles;
 
-    protected $table = "units";
+    protected $table = "coas";
 
     protected $fillable = [
+        'kode',
         'nama',
-        'description',
         'status',
     ];
 
-    public function penggunas(){
-        return $this->hasMany(pengguna::class, 'unit_id', 'id');
+    public function kegiatan ()
+    {
+        return $this->hasMany(Kegiatan::class, 'coa_id', 'id');
     }
 
     public function getIncrementing()

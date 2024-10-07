@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('status');
             $table->uuid('user_id');
             $table->uuid('unit_id');
+            $table->uuid('coa_id');
+            $table->uuid('iku_id');
             $table->timestamps();
 
             $table->foreign('proker_id')->references('id')->on('program_kerjas')->onDelete('cascade');

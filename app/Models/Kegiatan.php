@@ -22,6 +22,8 @@ class Kegiatan extends Model
         'status',
         'user_id',
         'unit_id',
+        'coa_id',
+        'iku_id',
     ];
 
     protected $attributes = [
@@ -57,6 +59,36 @@ class Kegiatan extends Model
     public function lpj()
     {
         return $this->hasOne(Lpj::class, 'kegiatan_id', 'id');
+    }
+
+    public function aktivitas()
+    {
+        return $this->hasMany(Aktivitas::class, 'kegiatan_id', 'id');
+    }
+
+    public function kategoriAktivitas()
+    {
+        return $this->hasManyThrough(kategoriAktivitas::class, Aktivitas::class, 'id', 'id', 'kategori_id', 'aktivitas_id');
+    }
+
+    public function indikatorKegiatan()
+    {
+        return $this->hasMany(indikatorKegiatan::class, 'kegiatan_id', 'id');
+    }
+
+    public function outcomeKegiatan()
+    {
+        return $this->hasMany(outcomeKegiatan::class, 'kegiatan_id', 'id');
+    }
+
+    public function coa()
+    {
+        return $this->belongsTo(coa::class, 'coa_id', 'id');
+    }
+
+    public function standarAkreditasi()
+    {
+        return $this->belongsTo(standarAkreditasi::class, 'iku_id', 'id');
     }
 
     public function getIncrementing()
