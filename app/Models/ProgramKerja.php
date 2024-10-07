@@ -16,8 +16,9 @@ class ProgramKerja extends Model
 
     protected $fillable = [
         'nama',
-        'user_id',
+        'deskripsi',
         'status',
+        'user_id',
     ];
 
     public function user()

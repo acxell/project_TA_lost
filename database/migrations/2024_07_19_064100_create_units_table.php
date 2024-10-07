@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('nama')->unique();
             $table->text('description');
             $table->string('status');
+            $table->uuid('satuan_id');
             $table->timestamps();
+
+            $table->foreign('satuan_id')->references('id')->on('satuan_kerjas')->onDelete('cascade');
         });
     }
 

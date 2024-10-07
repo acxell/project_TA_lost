@@ -2,33 +2,28 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\SatuanController;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use PhpParser\Node\Expr\FuncCall;
 use Spatie\Permission\Traits\HasRoles;
 
-class Unit extends Model
+class satuanKerja extends Model
 {
     use HasFactory, Notifiable, HasUuids, HasRoles;
 
-    protected $table = "units";
+    protected $table = "satuan_kerjas";
 
     protected $fillable = [
+        'kode',
         'nama',
-        'description',
         'status',
-        'satuan_id',
     ];
 
-    public function penggunas(){
-        return $this->hasMany(pengguna::class, 'unit_id', 'id');
-    }
-
-    public function satuan()
+    public function unit ()
     {
-        return $this->belongsTo(satuanKerja::class, 'satuan_id', 'id');
+        return $this->hasMany(Unit::class, 'satuan_id', 'id');
     }
 
     public function getIncrementing()

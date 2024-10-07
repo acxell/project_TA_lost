@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\satuanKerja;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Unit;
@@ -13,7 +14,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $unit = DB::table('units')->get();
+        $unit = Unit::all();
 
         return view('unit.view', ['units' => $unit]);
 
@@ -26,8 +27,9 @@ class UnitController extends Controller
     public function create()
     {
         $unit = DB::table('units')->get();
+        $satuan = satuanKerja::all();
 
-        return view('unit.create', ['units' => $unit]);
+        return view('unit.create', ['units' => $unit, 'satuan' => $satuan]);
     }
 
     /**
@@ -39,6 +41,7 @@ class UnitController extends Controller
             'nama' => 'string|required|unique:units',
             'description' => 'string|required',
             'status' => 'string|required',
+            'satuan_id' => 'string|required|exists:satuan_kerjas,id',
         ]);
 
         $unit = unit::create($validateData);
@@ -65,8 +68,9 @@ class UnitController extends Controller
     public function edit(unit $unit)
     {
         //$unit = DB::table('units')->get();
+        $satuan = satuanKerja::all();
 
-        return view('unit.edit', ['unit' => $unit]);
+        return view('unit.edit', ['unit' => $unit, 'satuan' => $satuan]);
     }
 
     /**
@@ -78,6 +82,7 @@ class UnitController extends Controller
             'nama' => 'string|required',
             'description' => 'string|required',
             'status' => 'string|required',
+            'satuan_id' => 'string|required|exists:satuan_kerjas,id',
         ]);
 
         $unit->update($validateData);

@@ -212,6 +212,12 @@
                         <span>Unit</span>
                     </a>
 
+                    <li class="sidebar-item  ">
+                    <a href="{{ route('satuan_kerja.view') }}" class='sidebar-link'>
+                        <i class="bi bi-building-fill"></i>
+                        <span>Satuan Kerja</span>
+                    </a>
+
 
                 </li>
                 <br>

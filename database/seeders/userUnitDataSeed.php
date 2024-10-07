@@ -17,12 +17,27 @@ class userUnitDataSeed extends Seeder
         // Insert into the units table and capture the ID
         $unitId = Str::uuid()->toString();  // Generate a UUID for the unit
         $roleId = Str::uuid()->toString();
+        $satkerId = Str::uuid()->toString();
         
+        DB::table('satuan_kerjas')->insert([
+            'id' => $satkerId,
+            'kode' => '112',
+            'nama' => 'UNTAG Surabaya',
+            'status' => 'Aktif',
+        ]);
+
         DB::table('units')->insert([
             'id' => $unitId,
             'nama' => 'BKA',
             'description' => Str::random(10),
             'status' => 'Aktif',
+            'satuan_id' => $satkerId,
+        ]);
+
+        DB::table('roles')->insert([
+            'uuid' => $roleId,
+            'name' => 'Super Admin',
+            'guard_name' => 'web',
         ]);
 
         // Insert into the penggunas table using the same unit_id
@@ -36,10 +51,5 @@ class userUnitDataSeed extends Seeder
             'unit_id' => $unitId,  // Use the ID from the previous insert
         ]);
 
-        DB::table('roles')->insert([
-            'uuid' => Str::uuid()->toString(),
-            'name' => 'Super Admin',
-            'guard_name' => 'web',
-        ]);
     }
 }

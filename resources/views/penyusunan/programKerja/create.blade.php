@@ -12,7 +12,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('penyusunan.programKerja.view') }}">Data TOR</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('penyusunan.programKerja.view') }}">Data Program Kerja</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Insert</li>
                     </ol>
                 </nav>
@@ -50,6 +50,18 @@
                                                     <option value="Tidak Aktif">Tidak Aktif</option>
                                                 </select>
                                             </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group mb-3">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Deskripsi Program Kerja</label>
+                                            <textarea type="text" id="deskripsi" class="form-control
+                                            @error ('deskripsi') is invalid
+                                            @enderror"
+                                                placeholder="Deskripsi Program Kerja" rows="3" name="deskripsi" value="{{ old('deskripsi') }}"></textarea>
+                                            @error('deskripsi')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">

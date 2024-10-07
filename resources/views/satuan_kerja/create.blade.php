@@ -1,18 +1,18 @@
 @extends('master.master')
-@section('title', 'Masukkan Data Unit')
+@section('title', 'Masukkan Data Satuan Kerja dan Pendidikan')
 @section('content')
 
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <p class="text-subtitle text-muted">Input Detail Data Unit</p>
+                <p class="text-subtitle text-muted">Input Detail Data Satuan Kerja dan Pendidikan</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('unit.view') }}">Data Unit</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('satuan_kerja.view') }}">Data Satuan</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Insert</li>
                     </ol>
                 </nav>
@@ -26,9 +26,21 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="POST" action=" {{ route('unit.store') }}">
+                            <form class="form" method="POST" action=" {{ route('satuan_kerja.store') }}">
                                 @csrf
                                 <div class="row">
+                                <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label>Kode Satuan</label>
+                                            <input type="text" id="kode" class="form-control 
+                                            @error ('kode') is invalid
+                                            @enderror"
+                                                placeholder="Kode Satuan" name="kode" value="{{ old('kode') }}">
+                                                @error('kode')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                        </div>
+                                    </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Nama</label>
@@ -50,28 +62,6 @@
                                                     <option value="Tidak Aktif">Tidak Aktif</option>
                                                 </select>
                                             </fieldset>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label>Satuan Kerja / Pendidikan</label>
-                                                <select class="choices form-select" name="satuan_id" id="satuan_id" type="text" aria-placeholder="Satker">
-                                                    @foreach ($satuan as $satuans)
-                                                    <option value="{{ $satuans->id }}">{{ $satuans->nama }}</option>
-                                                    @endforeach
-                                                </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Deskripsi</label>
-                                            <input type="textbox" id="description" class="form-control 
-                                            @error ('description') is invalid
-                                            @enderror"
-                                                placeholder="Deskripsi Unit" name="description" value="{{ old('description') }}">
-                                                @error('description')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">

@@ -1,18 +1,18 @@
 @extends('master.master')
-@section('title', 'Data Unit')
+@section('title', 'Data Satuan Kerja dan Pendidikan')
 @section('content')
 
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <p class="text-subtitle text-muted">Seluruh Data Unit Serta Aktivitas Unit</p>
+                <p class="text-subtitle text-muted">Seluruh Data Satuan Kerja dan Pendidikan</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data Unit</li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Satuan</li>
                     </ol>
                 </nav>
             </div>
@@ -23,38 +23,38 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-md-12 order-md-2 order-last">
-                        <a class="btn btn-primary" href="{{ route('unit.create') }}">Create</a>
+                        <a class="btn btn-primary" href="{{ route('satuan_kerja.create') }}">Create</a>
                     </div>
                 </div>
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
+                            <th>Kode</th>
                             <th>Nama</th>
-                            <th>Satuan Kerja</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($units as $unit)
+                        @foreach ($satuan as $satuans)
                         <tr>
-                            <td>{{ $unit->nama }}</td>
-                            <td>{{ $unit->satuan->nama }}</td>
+                            <td>{{ $satuans->kode }}</td>
+                            <td>{{ $satuans->nama }}</td>
                             <td>
-                                <span class="badge {{ $unit->status == 'Aktif' ? 'bg-success' : 'bg-danger' }}">
-                                    {{ $unit->status }}
+                                <span class="badge {{ $satuans->status == 'Aktif' ? 'bg-success' : 'bg-danger' }}">
+                                    {{ $satuans->status }}
                                 </span>
                             </td>
-                            <td><a href="{{ route('unit.detail', $unit->id) }}"><i class="badge-circle font-small-1"
+                            <td><a href="{{ route('satuan_kerja.detail', $satuans->id) }}"><i class="badge-circle font-small-1"
                                         data-feather="eye"></i></a>
-                                <a href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $unit->id }}').submit();">
+                                <a href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $satuans->id }}').submit();">
                                     <i class="badge-circle font-medium-1" data-feather="trash"></i>
                                 </a>
-                                <form id="delete-form-{{ $unit->id }}" action="{{ route('unit.destroy', $unit->id) }}" method="POST" style="display:none;">
+                                <form id="delete-form-{{ $satuans->id }}" action="{{ route('satuan_kerja.destroy', $satuans->id) }}" method="POST" style="display:none;">
                                     @csrf
                                     @method('DELETE')
                                 </form>
-                                <a href="{{ route('unit.edit', $unit->id) }}"><i class="badge-circle font-medium-1"
+                                <a href="{{ route('satuan_kerja.edit', $satuans->id) }}"><i class="badge-circle font-medium-1"
                                         data-feather="edit"></i></a>
                             </td>
                         </tr>

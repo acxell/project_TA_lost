@@ -11,6 +11,7 @@ use App\Http\Controllers\PesanPerbaikanController;
 use App\Http\Controllers\ProgramKerjaController;
 use App\Http\Controllers\RabController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SatuanKerjaController;
 use App\Http\Controllers\TorController;
 use App\Http\Controllers\UnitController;
 use App\Models\Kegiatan;
@@ -77,6 +78,15 @@ Route::post('/unit', [UnitController::class, 'store'])->name('unit.store');
 Route::get('/unit/{unit}/edit', [UnitController::class, 'edit'])->name('unit.edit');
 Route::post('/unit/{unit}/update', [UnitController::class, 'update'])->name('unit.update');
 Route::delete('/unit/{unit}', [UnitController::class, 'destroy'])->name('unit.destroy');
+
+//Actions Manajemen Data Satuan Kerja
+Route::get('/data-satuan-kerja', [SatuanKerjaController::class, 'index'])->name('satuan_kerja.view');
+Route::get('/create-data-satuan-kerja', [SatuanKerjaController::class, 'create'])->name('satuan_kerja.create');
+Route::get('/satuan-kerja/{satuan}/detail', [SatuanKerjaController::class, 'show'])->name('satuan_kerja.detail');
+Route::post('/satuan-kerja', [SatuanKerjaController::class, 'store'])->name('satuan_kerja.store');
+Route::get('/satuan-kerja/{satuan}/edit', [SatuanKerjaController::class, 'edit'])->name('satuan_kerja.edit');
+Route::post('/satuan-kerja/{satuan}/update', [SatuanKerjaController::class, 'update'])->name('satuan_kerja.update');
+Route::delete('/satuan-kerja/{satuan}', [SatuanKerjaController::class, 'destroy'])->name('satuan_kerja.destroy');
 
 //Actions Manajemen Data Program Kerja
 Route::get('/data-program-kerja', [ProgramKerjaController::class, 'index'])->name('penyusunan.programKerja.view');
