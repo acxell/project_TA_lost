@@ -85,12 +85,7 @@ class Kegiatan extends Model
     {
         return $this->belongsTo(coa::class, 'coa_id', 'id');
     }
-
-    public function standarAkreditasi()
-    {
-        return $this->belongsTo(standarAkreditasi::class, 'iku_id', 'id');
-    }
-
+    
     public function getIncrementing()
     {
         return false;
