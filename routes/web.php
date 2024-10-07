@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CoaController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\loginController;
@@ -87,6 +88,15 @@ Route::post('/satuan-kerja', [SatuanKerjaController::class, 'store'])->name('sat
 Route::get('/satuan-kerja/{satuan}/edit', [SatuanKerjaController::class, 'edit'])->name('satuan_kerja.edit');
 Route::post('/satuan-kerja/{satuan}/update', [SatuanKerjaController::class, 'update'])->name('satuan_kerja.update');
 Route::delete('/satuan-kerja/{satuan}', [SatuanKerjaController::class, 'destroy'])->name('satuan_kerja.destroy');
+
+//Actions Manajemen Data COA
+Route::get('/data-coa', [CoaController::class, 'index'])->name('coa.view');
+Route::get('/create-data-coa', [CoaController::class, 'create'])->name('coa.create');
+Route::get('/coa/{coa}/detail', [CoaController::class, 'show'])->name('coa.detail');
+Route::post('/coa', [CoaController::class, 'store'])->name('coa.store');
+Route::get('/coa/{coa}/edit', [CoaController::class, 'edit'])->name('coa.edit');
+Route::post('/coa/{coa}/update', [CoaController::class, 'update'])->name('coa.update');
+Route::delete('/coa/{coa}', [CoaController::class, 'destroy'])->name('coa.destroy');
 
 //Actions Manajemen Data Program Kerja
 Route::get('/data-program-kerja', [ProgramKerjaController::class, 'index'])->name('penyusunan.programKerja.view');

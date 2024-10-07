@@ -15,12 +15,23 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('proker_id');
             $table->string('nama_kegiatan')->unique();
-            $table->bigInteger('total_biaya');
-            $table->string('biaya_terbilang');
+            $table->string('pic');
+            $table->string('kepesertaan');
+            $table->string('nomor_standar_akreditasi');
+            $table->string('penjelasan_standar_akreditasi');
+            $table->uuid('coa_id');
+            $table->string('latar_belakang');
+            $table->string('tujuan');
+            $table->string('manfaat_internal');
+            $table->string('manfaat_eksternal');
+            $table->string('metode_pelaksanaan');
+            $table->bigInteger('biaya_keperluan');
+            $table->bigInteger('persen_dana');
+            $table->bigInteger('dana_bulan_berjalan');
             $table->string('status');
             $table->uuid('user_id');
             $table->uuid('unit_id');
-            $table->uuid('coa_id');
+            $table->uuid('satuan_id');
             $table->timestamps();
 
             $table->foreign('proker_id')->references('id')->on('program_kerjas')->onDelete('cascade');

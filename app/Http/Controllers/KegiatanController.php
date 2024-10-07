@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\coa;
 use App\Models\Kegiatan;
 use App\Models\pengguna;
 use App\Models\ProgramKerja;
@@ -28,8 +29,9 @@ class KegiatanController extends Controller
     {
         $kegiatan = Kegiatan::all();
         $proker = ProgramKerja::all();
+        $coa = coa::all();
 
-        return view('penyusunan.kegiatan.create', ['kegiatan' => $kegiatan, 'proker' => $proker]);
+        return view('penyusunan.kegiatan.create', ['kegiatan' => $kegiatan, 'proker' => $proker, 'coa' => $coa]);
     }
 
     /**
@@ -38,10 +40,21 @@ class KegiatanController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'nama_kegiatan' => 'string|required|unique:kegiatans',
-            'total_biaya' => 'integer|required',
-            'biaya_terbilang' => 'string|required',
             'proker_id' => 'string|required|exists:program_kerjas,id',
+            'nama_kegiatan' => 'string|required|unique:kegiatans',
+            'pic' => 'string|required',
+            'kepesertaan' => 'string|required',
+            'nomor_standar_akreditasi' => 'string|required',
+            'penjelasan_standar_akreditasi' => 'string|required',
+            'coa_id' => 'string|required|exists:coas,id',
+            'latar_belakang' => 'string|required',
+            'tujuan' => 'string|required',
+            'manfaat_internal' => 'string|required',
+            'manfaat_eksternal' => 'string|required',
+            'metode_pelaksanaan' => 'string|required',
+            'biaya_keperluan' => 'numeric|required',
+            'persen_dana' => 'numeric|required',
+            'dana_bulan_berjalan' => 'numeric|required',
         ]);
 
         $validateData['user_id'] = Auth::id();
@@ -49,6 +62,8 @@ class KegiatanController extends Controller
         $user = Auth::user();
 
         $validateData['unit_id'] = $user->unit_id;
+
+        $validateData['satuan_id'] = $user->unit->satuan_id;
 
         $kegiatan = Kegiatan::create($validateData);
 
@@ -93,7 +108,6 @@ class KegiatanController extends Controller
                 Rule::unique('kegiatans')->ignore($kegiatan->id),
             ],
             'total_biaya' => 'integer|required',
-            'biaya_terbilang' => 'string|required',
             'proker_id' => 'string|required|exists:program_kerjas,id',
         ]);
 
@@ -102,6 +116,8 @@ class KegiatanController extends Controller
         $user = Auth::user();
 
         $validateData['unit_id'] = $user->unit_id;
+
+        $validateData['satuan_id'] = $user->unit->satuan_id;
 
         $kegiatan->update(['status' => 'Belum Diajukan']);
 

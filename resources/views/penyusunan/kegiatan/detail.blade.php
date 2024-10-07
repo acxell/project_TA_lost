@@ -72,18 +72,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label>Biaya Terbilang</label>
-                                            <input type="text" id="biaya_terbilang" class="form-control 
-                                            @error ('biaya_terbilang') is invalid
-                                            @enderror"
-                                                placeholder="Biaya Terbilang" name="biaya_terbilang" value="{{ old('biaya_terbilang')  ?? $kegiatan->biaya_terbilang }}" disabled>
-                                            @error('biaya_terbilang')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="button" class="btn btn-primary me-1 mb-1" onclick="window.history.back();">Go Back</button>
                                     </div>

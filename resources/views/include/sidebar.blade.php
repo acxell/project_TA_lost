@@ -220,6 +220,14 @@
 
 
                 </li>
+                <li class="sidebar-item  ">
+                    <a href="{{ route('coa.view') }}" class='sidebar-link'>
+                        <i class="bi bi-file-binary-fill"></i>
+                        <span>COA</span>
+                    </a>
+
+
+                </li>
                 <br>
                 <li class="sidebar-item  ">
                 @auth

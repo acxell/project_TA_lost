@@ -1,18 +1,18 @@
 @extends('master.master')
-@section('title', 'Edit Data Kegiatan Program Kerja')
+@section('title', 'Edit Data COA')
 @section('content')
 
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <p class="text-subtitle text-muted">Lakukan Edit Data Kegiatan Program Kerja</p>
+                <p class="text-subtitle text-muted">Lakukan Edit Data COA</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('penyusunan.kegiatan.view') }}">Data Kegiatan</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('coa.view') }}">Data COA</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Edit</li>
                     </ol>
                 </nav>
@@ -26,45 +26,45 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="POST" action="{{ route('penyusunan.kegiatan.update', $kegiatan->id) }}">
+                            <form class="form" method="POST" action="{{ route('coa.update', $coa->id) }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label>Nama Kegiatan</label>
-                                            <input type="text" id="nama_kegiatan" class="form-control @error('nama_kegiatan') is-invalid @enderror"
-                                                placeholder="Nama Kegiatan" name="nama_kegiatan"
-                                                value="{{ old('nama_kegiatan') ?? $kegiatan->nama_kegiatan }}">
-                                            @error('nama_kegiatan')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label>Program Kerja</label>
-                                            <select class="choices form-select @error('proker_id') is-invalid @enderror" name="proker_id" id="proker_id">
-                                                @foreach ($proker as $prokers)
-                                                <option value="{{ $prokers->id }}" {{ (old('prokers_id') ?? $kegiatan->proker_id) == $prokers->id ? 'selected' : '' }}>
-                                                    {{ $prokers->nama }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                            @error('prokers_id')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label>Total Biaya</label>
-                                            <input type="number" id="total_biaya" class="form-control 
-                                            @error ('total_biaya') is invalid
+                                            <label>Kode Satuan</label>
+                                            <input type="text" id="kode" class="form-control 
+                                            @error ('kode') is invalid
                                             @enderror"
-                                                placeholder="Total Biaya" name="total_biaya" value="{{ old('total_biaya') ?? $kegiatan->total_biaya }}">
-                                            @error('total_biaya')
+                                                placeholder="Kode Satuan" name="kode" value="{{ old('kode') ?? $coa->kode }}">
+                                            @error('kode')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label>Nama</label>
+                                            <input type="text" id="nama" class="form-control 
+                                            @error ('nama') is invalid
+                                            @enderror"
+                                                placeholder="Nama" name="nama" value="{{ old('nama') ?? $coa->nama }}">
+                                            @error('nama')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <fieldset class="form-group">
+                                                <select class="form-select @error('status') is-invalid @enderror" name="status" id="status">
+                                                    <option value="Aktif" {{ (old('status') ?? $coa->status) == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                                                    <option value="Tidak Aktif" {{ (old('status') ?? $coa->status) == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                                                </select>
+                                                @error('status')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </fieldset>
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">

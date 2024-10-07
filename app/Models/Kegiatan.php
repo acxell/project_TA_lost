@@ -15,15 +15,24 @@ class Kegiatan extends Model
     protected $table = "kegiatans";
 
     protected $fillable = [
-        'nama_kegiatan',
-        'total_biaya',
-        'biaya_terbilang',
         'proker_id',
+        'nama_kegiatan',
+        'pic',
+        'kepesertaan',
+        'nomor_standar_akreditasi',
+        'penjelasan_standar_akreditasi',
+        'coa_id',
+        'latar_belakang',
+        'tujuan',
+        'manfaat_internal',
+        'manfaat_eksternal',
+        'metode_pelaksanaan',
+        'biaya_keperluan',
+        'dana_bulan_berjalan',
         'status',
         'user_id',
         'unit_id',
-        'coa_id',
-        'iku_id',
+        'satuan_id',
     ];
 
     protected $attributes = [
@@ -53,7 +62,7 @@ class Kegiatan extends Model
 
     public function unit()
     {
-        return $this->hasOneThrough(Unit::class, Pengguna::class, 'id', 'id', 'user_id', 'unit_id');
+        return $this->hasOneThrough(satuanKerja::class, Unit::class, Pengguna::class, 'id', 'id', 'id', 'user_id', 'unit_id', 'satuan_id');
     }
 
     public function lpj()
@@ -85,7 +94,7 @@ class Kegiatan extends Model
     {
         return $this->belongsTo(coa::class, 'coa_id', 'id');
     }
-    
+
     public function getIncrementing()
     {
         return false;

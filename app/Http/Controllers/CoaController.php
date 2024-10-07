@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\coa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CoaController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $coa = coa::all();
+
+        return view('coa.view', ['coa' => $coa]);
+
+        //return view('unit.viewunit');
     }
 
     /**
@@ -20,7 +25,9 @@ class CoaController extends Controller
      */
     public function create()
     {
-        //
+        $coa = DB::table('coas')->get();
+
+        return view('coa.create', ['coa' => $coa]);
     }
 
     /**
@@ -28,7 +35,19 @@ class CoaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'kode' => 'string|required|unique:coas',
+            'nama' => 'string|required|unique:coas',
+            'status' => 'string|required',
+        ]);
+
+        $coa = coa::create($validateData);
+
+        if ($coa) {
+            return to_route('coa.view')->with('success', 'Data Telah Ditambahkan');
+        } else {
+            return to_route('coa.view')->with('failed', 'Data Gagal Ditambahkan');
+        }
     }
 
     /**
@@ -37,6 +56,7 @@ class CoaController extends Controller
     public function show(coa $coa)
     {
         //
+        return view('coa.detail', ['coa' => $coa]);
     }
 
     /**
@@ -44,7 +64,8 @@ class CoaController extends Controller
      */
     public function edit(coa $coa)
     {
-        //
+
+        return view('coa.edit', ['coa' => $coa]);
     }
 
     /**
@@ -52,7 +73,19 @@ class CoaController extends Controller
      */
     public function update(Request $request, coa $coa)
     {
-        //
+        $validateData = $request->validate([
+            'kode' => 'string|required|unique:coas',
+            'nama' => 'string|required|unique:coas',
+            'status' => 'string|required',
+        ]);
+
+        $coa->update($validateData);
+
+        if ($coa) {
+            return to_route('coa.view')->with('success', 'Data Berhasil Diubah');
+        } else {
+            return to_route('coa.view')->with('failed', 'Data Gagal Diubah');
+        }
     }
 
     /**
@@ -60,6 +93,12 @@ class CoaController extends Controller
      */
     public function destroy(coa $coa)
     {
-        //
+        $coa->delete();
+
+        if ($coa) {
+            return to_route('coa.view')->with('success', 'Data Telah Dihapus');
+        } else {
+            return to_route('coa.view')->with('failed', 'Data Gagal Dihapus');
+        }
     }
 }
