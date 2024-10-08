@@ -19,7 +19,7 @@ class Aktivitas extends Model
         'kegiatan_id',
         'waktu',
         'penjelasan',
-        'kategori_id',
+        'kategori',
     ];
 
     public function kegiatan()
@@ -27,9 +27,9 @@ class Aktivitas extends Model
         return $this->belongsTo(Kegiatan::class, 'kegiatan_id', 'id');
     }
 
-    public function kategori()
+    public function kebutuhanAnggaran()
     {
-        return $this->belongsTo(kategoriAktivitas::class, 'kategori_id', 'id');
+        return $this->hasMany(kebutuhanAnggaran::class, 'aktivitas_id', 'id');
     }
 
     public function getIncrementing()

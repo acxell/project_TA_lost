@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aktivitas;
 use App\Models\coa;
 use App\Models\indikatorKegiatan;
 use App\Models\Kegiatan;
@@ -10,6 +11,7 @@ use App\Models\pengguna;
 use App\Models\ProgramKerja;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class KegiatanController extends Controller
@@ -61,38 +63,85 @@ class KegiatanController extends Controller
             'outcomes.*' => 'string|required',
             'indikators' => 'array|required',
             'indikators.*' => 'string|required',
+
+            // Validasi waktu dan penjelasan dari setiap kategori
+            'waktu_persiapan' => 'array|required',
+            'waktu_persiapan.*' => 'date|required',
+            'penjelasan_persiapan' => 'array|required',
+            'penjelasan_persiapan.*' => 'string|required',
+
+            'waktu_pelaksanaan' => 'array|required',
+            'waktu_pelaksanaan.*' => 'date|required',
+            'penjelasan_pelaksanaan' => 'array|required',
+            'penjelasan_pelaksanaan.*' => 'string|required',
+
+            'waktu_pelaporan' => 'array|required',
+            'waktu_pelaporan.*' => 'date|required',
+            'penjelasan_pelaporan' => 'array|required',
+            'penjelasan_pelaporan.*' => 'string|required',
         ]);
 
         $validateData['user_id'] = Auth::id();
-
         $user = Auth::user();
         $validateData['unit_id'] = $user->unit_id;
         $validateData['satuan_id'] = $user->unit->satuan_id;
 
+        // Create the Kegiatan record
         $kegiatan = Kegiatan::create($validateData);
 
         if ($kegiatan) {
-            // Store outcomes
+            // Store outcomes and indicators
             foreach ($request->outcomes as $outcome) {
-                outcomeKegiatan::create([
+                OutcomeKegiatan::create([
                     'kegiatan_id' => $kegiatan->id,
                     'outcome' => $outcome,
                 ]);
             }
 
-            // Store indicators
             foreach ($request->indikators as $indikator) {
-                indikatorKegiatan::create([
+                IndikatorKegiatan::create([
                     'kegiatan_id' => $kegiatan->id,
                     'indikator' => $indikator,
                 ]);
+
+                // Store aktivitas for 'Persiapan'
+                foreach ($request->waktu_persiapan as $index => $waktu) {
+                    Aktivitas::create([
+                        'kegiatan_id' => $kegiatan->id,
+                        'kategori' => 'Persiapan',  // Assign kategori directly
+                        'waktu' => $waktu,
+                        'penjelasan' => $request->penjelasan_persiapan[$index],
+                    ]);
+                }
+
+                // Store aktivitas for 'Pelaksanaan'
+                foreach ($request->waktu_pelaksanaan as $index => $waktu) {
+                    Aktivitas::create([
+                        'kegiatan_id' => $kegiatan->id,
+                        'kategori' => 'Pelaksanaan',  // Assign kategori directly
+                        'waktu' => $waktu,
+                        'penjelasan' => $request->penjelasan_pelaksanaan[$index],
+                    ]);
+                }
+
+                // Store aktivitas for 'Pelaporan'
+                foreach ($request->waktu_pelaporan as $index => $waktu) {
+                    Aktivitas::create([
+                        'kegiatan_id' => $kegiatan->id,
+                        'kategori' => 'Pelaporan',  // Assign kategori directly
+                        'waktu' => $waktu,
+                        'penjelasan' => $request->penjelasan_pelaporan[$index],
+                    ]);
+                }
             }
 
-            return to_route('penyusunan.kegiatan.view')->with('success', 'Data Telah Ditambahkan');
+            return to_route('penyusunan.kegiatan.view')->with('success', 'Data telah ditambahkan.');
         } else {
-            return to_route('penyusunan.kegiatan.view')->with('failed', 'Data Gagal Ditambahkan');
+            return to_route('penyusunan.kegiatan.view')->with('failed', 'Data gagal ditambahkan.');
         }
     }
+
+
 
     /**
      * Display the specified resource.

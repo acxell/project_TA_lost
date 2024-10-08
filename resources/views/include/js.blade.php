@@ -68,4 +68,21 @@
         newIndikatorGroup.innerHTML = `<input type="text" name="indikators[]" class="form-control" placeholder="Indikator">`;
         indikatorWrapper.appendChild(newIndikatorGroup);
     });
+
+    const categories = ['persiapan', 'pelaksanaan', 'pelaporan'];
+
+    categories.forEach(function(category) {
+        let count = 1;
+        document.getElementById('add-' + category).addEventListener('click', function() {
+            count++;
+            const wrapper = document.getElementById(category + '-wrapper');
+            const newGroup = document.createElement('div');
+            newGroup.classList.add('form-group');
+            newGroup.id = category + '-group-' + count;
+            newGroup.innerHTML = `
+            <input type="date" name="waktu_${category}[]" class="form-control mt-2" placeholder="Waktu ${category}">
+            <textarea name="penjelasan_${category}[]" class="form-control mt-2" placeholder="Penjelasan ${category}"></textarea>`;
+            wrapper.appendChild(newGroup);
+        });
+    });
 </script>

@@ -27,6 +27,7 @@ class Kegiatan extends Model
         'manfaat_internal',
         'manfaat_eksternal',
         'metode_pelaksanaan',
+        'persen_dana',
         'biaya_keperluan',
         'dana_bulan_berjalan',
         'status',
@@ -75,9 +76,9 @@ class Kegiatan extends Model
         return $this->hasMany(Aktivitas::class, 'kegiatan_id', 'id');
     }
 
-    public function kategoriAktivitas()
+    public function kebutuhanAnggaran()
     {
-        return $this->hasManyThrough(kategoriAktivitas::class, Aktivitas::class, 'id', 'id', 'kategori_id', 'aktivitas_id');
+        return $this->hasManyThrough(kebutuhanAnggaran::class, Aktivitas::class, 'id', 'id', 'kebutuhanAnggaran_id', 'aktivitas_id');
     }
 
     public function indikatorKegiatan()

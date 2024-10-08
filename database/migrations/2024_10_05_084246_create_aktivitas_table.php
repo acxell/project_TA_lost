@@ -16,11 +16,10 @@ return new class extends Migration
             $table->uuid('kegiatan_id');
             $table->date('waktu');
             $table->string('penjelasan');
-            $table->uuid('kategori_id');
+            $table->string('kategori');
             $table->timestamps();
 
             $table->foreign('kegiatan_id')->references('id')->on('kegiatans')->onDelete('cascade');
-            $table->foreign('kategori_id')->references('id')->on('kategori_aktivitas')->onDelete('cascade');
         });
     }
 

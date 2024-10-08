@@ -200,26 +200,35 @@
                                             @enderror
                                         </div>
                                     </div>
-<!--
+
+                                    @php
+                                    $categories = ['Persiapan', 'Pelaksanaan', 'Pelaporan'];
+                                    @endphp
+
                                     <div class="card">
                                         <div class="card-content">
                                             <div class="card-body">
-                                                <div class="row">
-                                                    Form for Aktivitase
+                                                @foreach($categories as $category)
+                                                <!-- Dynamic Section for Each Category -->
+                                                <div class="row mt-3">
                                                     <div class="col-md-12">
-                                                        <label for="aktivitas">Aktivitas</label>
-                                                        <div id="outcome-wrapper">
-                                                            <div class="form-group" id="aktivitas-group-1">
-                                                                <input type="text" name="aktivitas[]" class="form-control" placeholder="Aktivitas">
+                                                        <label for="aktivitas_{{ strtolower($category) }}">Aktivitas - {{ $category }}</label>
+                                                        <div id="{{ strtolower($category) }}-wrapper">
+                                                            <div class="form-group" id="{{ strtolower($category) }}-group-1">
+                                                                <input type="date" name="waktu_{{ strtolower($category) }}[]" class="form-control" placeholder="Waktu {{ $category }}">
+                                                                <textarea name="penjelasan_{{ strtolower($category) }}[]" class="form-control mt-2" placeholder="Penjelasan {{ $category }}"></textarea>
                                                             </div>
                                                         </div>
-                                                        <button type="button" class="btn btn-primary me-1 mb-1" id="add-aktivitas">Add More Aktivitas</button>
+                                                        <button type="button" class="btn btn-primary me-1 mb-1" id="add-{{ strtolower($category) }}">Add More {{ $category }}</button>
                                                     </div>
                                                 </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
--->
+
+
+
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Biaya Keperluan</label>
