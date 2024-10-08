@@ -59,8 +59,9 @@
                                                     <div class="col-md-12">
                                                         <label for="outcome">Outcome</label>
                                                         <div id="outcome-wrapper">
-                                                            <div class="form-group" id="outcome-group-1">
+                                                            <div class="form-group d-flex" id="outcome-group-1">
                                                                 <input type="text" name="outcomes[]" class="form-control" placeholder="Outcome">
+                                                                <button type="button" class="btn btn-danger ms-2 remove-outcome">Delete</button>
                                                             </div>
                                                         </div>
                                                         <button type="button" class="btn btn-primary me-1 mb-1" id="add-outcome">Add More Outcome</button>
@@ -72,8 +73,9 @@
                                                     <div class="col-md-12">
                                                         <label for="indikator">Indikator</label>
                                                         <div id="indikator-wrapper">
-                                                            <div class="form-group" id="indikator-group-1">
+                                                            <div class="form-group d-flex" id="indikator-group-1">
                                                                 <input type="text" name="indikators[]" class="form-control" placeholder="Indikator">
+                                                                <button type="button" class="btn btn-danger ms-2 remove-indikator">Delete</button>
                                                             </div>
                                                         </div>
                                                         <button type="button" class="btn btn-primary me-1 mb-1" id="add-indikator">Add More Indikator</button>
@@ -82,6 +84,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Orang yang Bertanggung Jawab (PIC)</label>
@@ -205,49 +208,32 @@
                                     $categories = ['Persiapan', 'Pelaksanaan', 'Pelaporan'];
                                     @endphp
 
+                                    @php
+                                    $categories = ['Persiapan', 'Pelaksanaan', 'Pelaporan'];
+                                    @endphp
+
                                     <div class="card">
                                         <div class="card-content">
                                             <div class="card-body">
-                                               @foreach($categories as $category)
-                                <div class="row mt-3">
-                                    <div class="col-md-12">
-                                        <label for="aktivitas_{{ strtolower($category) }}">Aktivitas - {{ $category }}</label>
-                                        <div id="{{ strtolower($category) }}-wrapper">
-                                            <div class="form-group" id="{{ strtolower($category) }}-group-1">
-                                                <input type="date" name="waktu_{{ strtolower($category) }}[]" class="form-control" placeholder="Waktu {{ $category }}">
-                                                <textarea name="penjelasan_{{ strtolower($category) }}[]" class="form-control mt-2" placeholder="Penjelasan {{ $category }}"></textarea>
-
-                                                <!-- Dynamic Kebutuhan Anggaran Section -->
-                                                <div id="{{ strtolower($category) }}-budget-wrapper-1">
-                                                    <div class="form-group">
-                                                        <label>Uraian Aktivitas</label>
-                                                        <input type="text" name="uraian_{{ strtolower($category) }}_1[]" class="form-control" placeholder="Uraian Aktivitas">
-
-                                                        <label>Frekuensi</label>
-                                                        <input type="number" name="frekwensi_{{ strtolower($category) }}_1[]" class="form-control" placeholder="Frekuensi">
-
-                                                        <label>Nominal Volume</label>
-                                                        <input type="number" name="nominal_volume_{{ strtolower($category) }}_1[]" class="form-control" placeholder="Nominal Volume">
-
-                                                        <label>Satuan Volume</label>
-                                                        <input type="text" name="satuan_volume_{{ strtolower($category) }}_1[]" class="form-control" placeholder="Satuan Volume">
-
-                                                        <label>Jumlah</label>
-                                                        <input type="number" name="jumlah_{{ strtolower($category) }}_1[]" class="form-control" placeholder="Jumlah">
+                                                @foreach($categories as $category)
+                                                <!-- Cleaned Dynamic Section for Each Category -->
+                                                <div class="row mt-3">
+                                                    <div class="col-md-12">
+                                                        <label for="aktivitas_{{ strtolower($category) }}">Aktivitas - {{ $category }}</label>
+                                                        <div id="{{ strtolower($category) }}-wrapper">
+                                                            <div class="form-group d-flex align-items-center mb-2" id="{{ strtolower($category) }}-group-1">
+                                                                <input type="date" name="waktu_{{ strtolower($category) }}[]" class="form-control me-2" placeholder="Waktu {{ $category }}">
+                                                                <textarea name="penjelasan_{{ strtolower($category) }}[]" class="form-control me-2" placeholder="Penjelasan {{ $category }}" rows="1"></textarea>
+                                                                <button type="button" class="btn btn-danger remove-{{ strtolower($category) }}">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" class="btn btn-primary me-1 mb-1" id="add-{{ strtolower($category) }}">Add More {{ $category }}</button>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn btn-primary me-1 mb-1" id="add-budget-{{ strtolower($category) }}-1">Add More Budget</button>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn btn-primary me-1 mb-1" id="add-{{ strtolower($category) }}">Add More {{ $category }}</button>
-                                    </div>
-                                </div>
-                                @endforeach
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
-
-
 
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">

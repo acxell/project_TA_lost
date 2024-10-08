@@ -45,49 +45,6 @@
 </script>
 
 <script>
-    // Adding dynamic Outcome input fields
-    let outcomeCount = 1;
-    document.getElementById('add-outcome').addEventListener('click', function() {
-        outcomeCount++;
-        const outcomeWrapper = document.getElementById('outcome-wrapper');
-        const newOutcomeGroup = document.createElement('div');
-        newOutcomeGroup.classList.add('form-group');
-        newOutcomeGroup.id = 'outcome-group-' + outcomeCount;
-        newOutcomeGroup.innerHTML = `<input type="text" name="outcomes[]" class="form-control" placeholder="Outcome">`;
-        outcomeWrapper.appendChild(newOutcomeGroup);
-    });
-
-    // Adding dynamic Indikator input fields
-    let indikatorCount = 1;
-    document.getElementById('add-indikator').addEventListener('click', function() {
-        indikatorCount++;
-        const indikatorWrapper = document.getElementById('indikator-wrapper');
-        const newIndikatorGroup = document.createElement('div');
-        newIndikatorGroup.classList.add('form-group');
-        newIndikatorGroup.id = 'indikator-group-' + indikatorCount;
-        newIndikatorGroup.innerHTML = `<input type="text" name="indikators[]" class="form-control" placeholder="Indikator">`;
-        indikatorWrapper.appendChild(newIndikatorGroup);
-    });
-
-    const categories = ['persiapan', 'pelaksanaan', 'pelaporan'];
-
-    categories.forEach(function(category) {
-        let count = 1;
-        document.getElementById('add-' + category).addEventListener('click', function() {
-            count++;
-            const wrapper = document.getElementById(category + '-wrapper');
-            const newGroup = document.createElement('div');
-            newGroup.classList.add('form-group');
-            newGroup.id = category + '-group-' + count;
-            newGroup.innerHTML = `
-            <input type="date" name="waktu_${category}[]" class="form-control mt-2" placeholder="Waktu ${category}">
-            <textarea name="penjelasan_${category}[]" class="form-control mt-2" placeholder="Penjelasan ${category}"></textarea>`;
-            wrapper.appendChild(newGroup);
-        });
-    });
-</script>
-
-<script>
     //paging Form
     /*
 document.addEventListener('DOMContentLoaded', function() {
@@ -126,7 +83,35 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+    // Adding dynamic Outcome input fields
+    let outcomeCount = 1;
+    document.getElementById('add-outcome').addEventListener('click', function() {
+        outcomeCount++;
+        const outcomeWrapper = document.getElementById('outcome-wrapper');
+        const newOutcomeGroup = document.createElement('div');
+        newOutcomeGroup.classList.add('form-group', 'd-flex');
+        newOutcomeGroup.id = 'outcome-group-' + outcomeCount;
+        newOutcomeGroup.innerHTML = `
+        <input type="text" name="outcomes[]" class="form-control" placeholder="Outcome">
+        <button type="button" class="btn btn-danger ms-2 remove-outcome">Delete</button>`;
+        outcomeWrapper.appendChild(newOutcomeGroup);
+    });
+
+    // Adding dynamic Indikator input fields
+    let indikatorCount = 1;
+    document.getElementById('add-indikator').addEventListener('click', function() {
+        indikatorCount++;
+        const indikatorWrapper = document.getElementById('indikator-wrapper');
+        const newIndikatorGroup = document.createElement('div');
+        newIndikatorGroup.classList.add('form-group', 'd-flex');
+        newIndikatorGroup.id = 'indikator-group-' + indikatorCount;
+        newIndikatorGroup.innerHTML = `
+        <input type="text" name="indikators[]" class="form-control" placeholder="Indikator">
+        <button type="button" class="btn btn-danger ms-2 remove-indikator">Delete</button>`;
+        indikatorWrapper.appendChild(newIndikatorGroup);
+    });
+
+    // Adding dynamic Aktivitas input fields for each category with cleaner form structure
     const categories = ['persiapan', 'pelaksanaan', 'pelaporan'];
 
     categories.forEach(function(category) {
@@ -135,58 +120,33 @@ document.addEventListener('DOMContentLoaded', function() {
             count++;
             const wrapper = document.getElementById(category + '-wrapper');
             const newGroup = document.createElement('div');
-            newGroup.classList.add('form-group');
+            newGroup.classList.add('form-group', 'd-flex', 'align-items-center', 'mb-2');
             newGroup.id = category + '-group-' + count;
             newGroup.innerHTML = `
-            <input type="date" name="waktu_${category}[]" class="form-control mt-2" placeholder="Waktu ${category}">
-            <textarea name="penjelasan_${category}[]" class="form-control mt-2" placeholder="Penjelasan ${category}"></textarea>
-
-            <!-- Dynamic Budget Section -->
-            <div id="${category}-budget-wrapper-${count}">
-                <div class="form-group">
-                    <label>Uraian Aktivitas</label>
-                    <input type="text" name="uraian_${category}_${count}[]" class="form-control" placeholder="Uraian Aktivitas">
-
-                    <label>Frekuensi</label>
-                    <input type="number" name="frekwensi_${category}_${count}[]" class="form-control" placeholder="Frekuensi">
-
-                    <label>Nominal Volume</label>
-                    <input type="number" name="nominal_volume_${category}_${count}[]" class="form-control" placeholder="Nominal Volume">
-
-                    <label>Satuan Volume</label>
-                    <input type="text" name="satuan_volume_${category}_${count}[]" class="form-control" placeholder="Satuan Volume">
-
-                    <label>Jumlah</label>
-                    <input type="number" name="jumlah_${category}_${count}[]" class="form-control" placeholder="Jumlah">
-                </div>
-            </div>
-            <button type="button" class="btn btn-primary me-1 mb-1" id="add-budget-${category}-${count}">Add More Budget</button>
-            `;
+            <input type="date" name="waktu_${category}[]" class="form-control me-2" placeholder="Waktu ${category}">
+            <textarea name="penjelasan_${category}[]" class="form-control me-2" placeholder="Penjelasan ${category}" rows="1"></textarea>
+            <button type="button" class="btn btn-danger remove-${category}">Delete</button>`;
             wrapper.appendChild(newGroup);
-
-            document.getElementById(`add-budget-${category}-${count}`).addEventListener('click', function() {
-                const budgetWrapper = document.getElementById(`${category}-budget-wrapper-${count}`);
-                const newBudgetGroup = document.createElement('div');
-                newBudgetGroup.classList.add('form-group');
-                newBudgetGroup.innerHTML = `
-                <label>Uraian Aktivitas</label>
-                <input type="text" name="uraian_${category}_${count}[]" class="form-control mt-2" placeholder="Uraian Aktivitas">
-
-                <label>Frekuensi</label>
-                <input type="number" name="frekwensi_${category}_${count}[]" class="form-control mt-2" placeholder="Frekuensi">
-
-                <label>Nominal Volume</label>
-                <input type="number" name="nominal_volume_${category}_${count}[]" class="form-control mt-2" placeholder="Nominal Volume">
-
-                <label>Satuan Volume</label>
-                <input type="text" name="satuan_volume_${category}_${count}[]" class="form-control mt-2" placeholder="Satuan Volume">
-
-                <label>Jumlah</label>
-                <input type="number" name="jumlah_${category}_${count}[]" class="form-control mt-2" placeholder="Jumlah">
-                `;
-                budgetWrapper.appendChild(newBudgetGroup);
-            });
         });
     });
-});
+
+    // Event delegation to remove dynamic aktivitas forms
+    document.addEventListener('click', function(event) {
+        categories.forEach(function(category) {
+            if (event.target.classList.contains('remove-' + category)) {
+                event.target.parentElement.remove();
+            }
+        });
+    });
+
+
+    // Event delegation to remove outcome/indikator/aktivitas
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove-outcome')) {
+            event.target.parentElement.remove();
+        }
+        if (event.target.classList.contains('remove-indikator')) {
+            event.target.parentElement.remove();
+        }
+    });
 </script>
