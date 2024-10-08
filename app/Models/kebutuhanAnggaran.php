@@ -12,7 +12,7 @@ class kebutuhanAnggaran extends Model
 {
     use HasFactory, Notifiable, HasUuids, HasRoles;
 
-    protected $table = "aktivitas";
+    protected $table = "kebutuhan_anggarans";
 
     protected $fillable = [
         'aktivitas_id',

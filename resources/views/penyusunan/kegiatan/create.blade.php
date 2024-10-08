@@ -208,21 +208,41 @@
                                     <div class="card">
                                         <div class="card-content">
                                             <div class="card-body">
-                                                @foreach($categories as $category)
-                                                <!-- Dynamic Section for Each Category -->
-                                                <div class="row mt-3">
-                                                    <div class="col-md-12">
-                                                        <label for="aktivitas_{{ strtolower($category) }}">Aktivitas - {{ $category }}</label>
-                                                        <div id="{{ strtolower($category) }}-wrapper">
-                                                            <div class="form-group" id="{{ strtolower($category) }}-group-1">
-                                                                <input type="date" name="waktu_{{ strtolower($category) }}[]" class="form-control" placeholder="Waktu {{ $category }}">
-                                                                <textarea name="penjelasan_{{ strtolower($category) }}[]" class="form-control mt-2" placeholder="Penjelasan {{ $category }}"></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <button type="button" class="btn btn-primary me-1 mb-1" id="add-{{ strtolower($category) }}">Add More {{ $category }}</button>
+                                               @foreach($categories as $category)
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <label for="aktivitas_{{ strtolower($category) }}">Aktivitas - {{ $category }}</label>
+                                        <div id="{{ strtolower($category) }}-wrapper">
+                                            <div class="form-group" id="{{ strtolower($category) }}-group-1">
+                                                <input type="date" name="waktu_{{ strtolower($category) }}[]" class="form-control" placeholder="Waktu {{ $category }}">
+                                                <textarea name="penjelasan_{{ strtolower($category) }}[]" class="form-control mt-2" placeholder="Penjelasan {{ $category }}"></textarea>
+
+                                                <!-- Dynamic Kebutuhan Anggaran Section -->
+                                                <div id="{{ strtolower($category) }}-budget-wrapper-1">
+                                                    <div class="form-group">
+                                                        <label>Uraian Aktivitas</label>
+                                                        <input type="text" name="uraian_{{ strtolower($category) }}_1[]" class="form-control" placeholder="Uraian Aktivitas">
+
+                                                        <label>Frekuensi</label>
+                                                        <input type="number" name="frekwensi_{{ strtolower($category) }}_1[]" class="form-control" placeholder="Frekuensi">
+
+                                                        <label>Nominal Volume</label>
+                                                        <input type="number" name="nominal_volume_{{ strtolower($category) }}_1[]" class="form-control" placeholder="Nominal Volume">
+
+                                                        <label>Satuan Volume</label>
+                                                        <input type="text" name="satuan_volume_{{ strtolower($category) }}_1[]" class="form-control" placeholder="Satuan Volume">
+
+                                                        <label>Jumlah</label>
+                                                        <input type="number" name="jumlah_{{ strtolower($category) }}_1[]" class="form-control" placeholder="Jumlah">
                                                     </div>
                                                 </div>
-                                                @endforeach
+                                                <button type="button" class="btn btn-primary me-1 mb-1" id="add-budget-{{ strtolower($category) }}-1">Add More Budget</button>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary me-1 mb-1" id="add-{{ strtolower($category) }}">Add More {{ $category }}</button>
+                                    </div>
+                                </div>
+                                @endforeach
                                             </div>
                                         </div>
                                     </div>

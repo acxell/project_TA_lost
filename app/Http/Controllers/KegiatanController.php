@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Aktivitas;
 use App\Models\coa;
 use App\Models\indikatorKegiatan;
+use App\Models\kebutuhanAnggaran;
 use App\Models\Kegiatan;
 use App\Models\outcomeKegiatan;
 use App\Models\pengguna;
@@ -79,6 +80,24 @@ class KegiatanController extends Controller
             'waktu_pelaporan.*' => 'date|required',
             'penjelasan_pelaporan' => 'array|required',
             'penjelasan_pelaporan.*' => 'string|required',
+
+            'uraian_persiapan_1.*' => 'string|nullable',
+            'frekwensi_persiapan_1.*' => 'numeric|nullable',
+            'nominal_volume_persiapan_1.*' => 'numeric|nullable',
+            'satuan_volume_persiapan_1.*' => 'string|nullable',
+            'jumlah_persiapan_1.*' => 'numeric|nullable',
+
+            'uraian_pelaksanaan_1.*' => 'string|nullable',
+            'frekwensi_pelaksanaan_1.*' => 'numeric|nullable',
+            'nominal_volume_pelaksanaan_1.*' => 'numeric|nullable',
+            'satuan_volume_pelaksanaan_1.*' => 'string|nullable',
+            'jumlah_pelaksanaan_1.*' => 'numeric|nullable',
+
+            'uraian_pelaporan_1.*' => 'string|nullable',
+            'frekwensi_pelaporan_1.*' => 'numeric|nullable',
+            'nominal_volume_pelaporan_1.*' => 'numeric|nullable',
+            'satuan_volume_pelaporan_1.*' => 'string|nullable',
+            'jumlah_pelaporan_1.*' => 'numeric|nullable',
         ]);
 
         $validateData['user_id'] = Auth::id();
@@ -86,11 +105,9 @@ class KegiatanController extends Controller
         $validateData['unit_id'] = $user->unit_id;
         $validateData['satuan_id'] = $user->unit->satuan_id;
 
-        // Create the Kegiatan record
         $kegiatan = Kegiatan::create($validateData);
 
         if ($kegiatan) {
-            // Store outcomes and indicators
             foreach ($request->outcomes as $outcome) {
                 OutcomeKegiatan::create([
                     'kegiatan_id' => $kegiatan->id,
@@ -103,41 +120,40 @@ class KegiatanController extends Controller
                     'kegiatan_id' => $kegiatan->id,
                     'indikator' => $indikator,
                 ]);
+            }
 
-                // Store aktivitas for 'Persiapan'
-                foreach ($request->waktu_persiapan as $index => $waktu) {
-                    Aktivitas::create([
+            // Store aktivitas and budget needs for each category
+            foreach (['persiapan', 'pelaksanaan', 'pelaporan'] as $category) {
+                // Ensure 'waktu_*' is an array before iterating
+                $waktuArray = is_array($request->{'waktu_' . $category}) ? $request->{'waktu_' . $category} : [$request->{'waktu_' . $category}];
+            
+                foreach ($waktuArray as $index => $waktu) {
+                    $aktivitas = Aktivitas::create([
                         'kegiatan_id' => $kegiatan->id,
-                        'kategori' => 'Persiapan',  // Assign kategori directly
+                        'kategori' => ucfirst($category),
                         'waktu' => $waktu,
-                        'penjelasan' => $request->penjelasan_persiapan[$index],
+                        'penjelasan' => $request->{'penjelasan_' . $category}[$index],
                     ]);
-                }
-
-                // Store aktivitas for 'Pelaksanaan'
-                foreach ($request->waktu_pelaksanaan as $index => $waktu) {
-                    Aktivitas::create([
-                        'kegiatan_id' => $kegiatan->id,
-                        'kategori' => 'Pelaksanaan',  // Assign kategori directly
-                        'waktu' => $waktu,
-                        'penjelasan' => $request->penjelasan_pelaksanaan[$index],
-                    ]);
-                }
-
-                // Store aktivitas for 'Pelaporan'
-                foreach ($request->waktu_pelaporan as $index => $waktu) {
-                    Aktivitas::create([
-                        'kegiatan_id' => $kegiatan->id,
-                        'kategori' => 'Pelaporan',  // Assign kategori directly
-                        'waktu' => $waktu,
-                        'penjelasan' => $request->penjelasan_pelaporan[$index],
-                    ]);
+            
+                    // Ensure the budget-related fields are arrays
+                    $uraianArray = is_array($request->{'uraian_' . $category . '_1'}[$index]) ? $request->{'uraian_' . $category . '_1'}[$index] : [$request->{'uraian_' . $category . '_1'}[$index]];
+            
+                    foreach ($uraianArray as $i => $uraian) {
+                        kebutuhanAnggaran::create([
+                            'aktivitas_id' => $aktivitas->id,
+                            'uraian_aktivitas' => $uraian,
+                            'frekwensi' => $request->{'frekwensi_' . $category . '_1'}[$index][$i],
+                            'nominal_volume' => $request->{'nominal_volume_' . $category . '_1'}[$index][$i],
+                            'satuan_volume' => $request->{'satuan_volume_' . $category . '_1'}[$index][$i],
+                            'jumlah' => $request->{'jumlah_' . $category . '_1'}[$index][$i],
+                        ]);
+                    }
                 }
             }
 
-            return to_route('penyusunan.kegiatan.view')->with('success', 'Data telah ditambahkan.');
+            return redirect()->route('penyusunan.kegiatan.view')->with('success', 'Data telah ditambahkan.');
         } else {
-            return to_route('penyusunan.kegiatan.view')->with('failed', 'Data gagal ditambahkan.');
+            return redirect()->route('penyusunan.kegiatan.view')->with('failed', 'Data gagal ditambahkan.');
         }
     }
 

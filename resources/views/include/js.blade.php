@@ -86,3 +86,107 @@
         });
     });
 </script>
+
+<script>
+    //paging Form
+    /*
+document.addEventListener('DOMContentLoaded', function() {
+    let currentStep = 1;
+    const totalSteps = 3;
+
+    function showStep(step) {
+        for (let i = 1; i <= totalSteps; i++) {
+            document.getElementById(`step-${i}`).style.display = (i === step) ? 'block' : 'none';
+        }
+    }
+
+    document.getElementById('next-step-1').addEventListener('click', function() {
+        currentStep++;
+        showStep(currentStep);
+    });
+
+    document.getElementById('prev-step-2').addEventListener('click', function() {
+        currentStep--;
+        showStep(currentStep);
+    });
+
+    document.getElementById('next-step-2').addEventListener('click', function() {
+        currentStep++;
+        showStep(currentStep);
+    });
+
+    document.getElementById('prev-step-3').addEventListener('click', function() {
+        currentStep--;
+        showStep(currentStep);
+    });
+
+    showStep(currentStep);
+});
+*/
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const categories = ['persiapan', 'pelaksanaan', 'pelaporan'];
+
+    categories.forEach(function(category) {
+        let count = 1;
+        document.getElementById('add-' + category).addEventListener('click', function() {
+            count++;
+            const wrapper = document.getElementById(category + '-wrapper');
+            const newGroup = document.createElement('div');
+            newGroup.classList.add('form-group');
+            newGroup.id = category + '-group-' + count;
+            newGroup.innerHTML = `
+            <input type="date" name="waktu_${category}[]" class="form-control mt-2" placeholder="Waktu ${category}">
+            <textarea name="penjelasan_${category}[]" class="form-control mt-2" placeholder="Penjelasan ${category}"></textarea>
+
+            <!-- Dynamic Budget Section -->
+            <div id="${category}-budget-wrapper-${count}">
+                <div class="form-group">
+                    <label>Uraian Aktivitas</label>
+                    <input type="text" name="uraian_${category}_${count}[]" class="form-control" placeholder="Uraian Aktivitas">
+
+                    <label>Frekuensi</label>
+                    <input type="number" name="frekwensi_${category}_${count}[]" class="form-control" placeholder="Frekuensi">
+
+                    <label>Nominal Volume</label>
+                    <input type="number" name="nominal_volume_${category}_${count}[]" class="form-control" placeholder="Nominal Volume">
+
+                    <label>Satuan Volume</label>
+                    <input type="text" name="satuan_volume_${category}_${count}[]" class="form-control" placeholder="Satuan Volume">
+
+                    <label>Jumlah</label>
+                    <input type="number" name="jumlah_${category}_${count}[]" class="form-control" placeholder="Jumlah">
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary me-1 mb-1" id="add-budget-${category}-${count}">Add More Budget</button>
+            `;
+            wrapper.appendChild(newGroup);
+
+            document.getElementById(`add-budget-${category}-${count}`).addEventListener('click', function() {
+                const budgetWrapper = document.getElementById(`${category}-budget-wrapper-${count}`);
+                const newBudgetGroup = document.createElement('div');
+                newBudgetGroup.classList.add('form-group');
+                newBudgetGroup.innerHTML = `
+                <label>Uraian Aktivitas</label>
+                <input type="text" name="uraian_${category}_${count}[]" class="form-control mt-2" placeholder="Uraian Aktivitas">
+
+                <label>Frekuensi</label>
+                <input type="number" name="frekwensi_${category}_${count}[]" class="form-control mt-2" placeholder="Frekuensi">
+
+                <label>Nominal Volume</label>
+                <input type="number" name="nominal_volume_${category}_${count}[]" class="form-control mt-2" placeholder="Nominal Volume">
+
+                <label>Satuan Volume</label>
+                <input type="text" name="satuan_volume_${category}_${count}[]" class="form-control mt-2" placeholder="Satuan Volume">
+
+                <label>Jumlah</label>
+                <input type="number" name="jumlah_${category}_${count}[]" class="form-control mt-2" placeholder="Jumlah">
+                `;
+                budgetWrapper.appendChild(newBudgetGroup);
+            });
+        });
+    });
+});
+</script>
