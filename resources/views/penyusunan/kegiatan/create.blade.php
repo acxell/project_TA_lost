@@ -55,37 +55,28 @@
                                         <div class="card-content">
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-md-6 col-12">
-                                                        <div class="form-group square-box">
-                                                            <label>Indikator</label>
-                                                            <input type="text" id="pic" class="form-control 
-                            @error ('pic') is-invalid
-                            @enderror"
-                                                                placeholder="Person In Charge" name="pic" value="{{ old('pic') }}">
-                                                            @error('pic')
-                                                            <div class="alert alert-danger">{{ $message }}</div>
-                                                            @enderror
+                                                    <!-- Form for Outcome -->
+                                                    <div class="col-md-12">
+                                                        <label for="outcome">Outcome</label>
+                                                        <div id="outcome-wrapper">
+                                                            <div class="form-group" id="outcome-group-1">
+                                                                <input type="text" name="outcomes[]" class="form-control" placeholder="Outcome">
+                                                            </div>
                                                         </div>
+                                                        <button type="button" class="btn btn-primary me-1 mb-1" id="add-outcome">Add More Outcome</button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-6 col-12">
-                                                        <div class="form-group square-box">
-                                                            <label>Outcome</label>
-                                                            <input type="text" id="pic" class="form-control 
-                            @error ('pic') is-invalid
-                            @enderror"
-                                                                placeholder="Person In Charge" name="pic" value="{{ old('pic') }}">
-                                                            @error('pic')
-                                                            <div class="alert alert-danger">{{ $message }}</div>
-                                                            @enderror
+
+                                                <div class="row mt-3">
+                                                    <!-- Form for Indikator -->
+                                                    <div class="col-md-12">
+                                                        <label for="indikator">Indikator</label>
+                                                        <div id="indikator-wrapper">
+                                                            <div class="form-group" id="indikator-group-1">
+                                                                <input type="text" name="indikators[]" class="form-control" placeholder="Indikator">
+                                                            </div>
                                                         </div>
+                                                        <button type="button" class="btn btn-primary me-1 mb-1" id="add-indikator">Add More Indikator</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -209,27 +200,26 @@
                                             @enderror
                                         </div>
                                     </div>
-
+<!--
                                     <div class="card">
                                         <div class="card-content">
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-md-6 col-12">
-                                                        <div class="form-group square-box">
-                                                            <label>Aktivitas</label>
-                                                            <input type="text" id="pic" class="form-control 
-                            @error ('pic') is-invalid
-                            @enderror"
-                                                                placeholder="Person In Charge" name="pic" value="{{ old('pic') }}">
-                                                            @error('pic')
-                                                            <div class="alert alert-danger">{{ $message }}</div>
-                                                            @enderror
+                                                    Form for Aktivitase
+                                                    <div class="col-md-12">
+                                                        <label for="aktivitas">Aktivitas</label>
+                                                        <div id="outcome-wrapper">
+                                                            <div class="form-group" id="aktivitas-group-1">
+                                                                <input type="text" name="aktivitas[]" class="form-control" placeholder="Aktivitas">
+                                                            </div>
                                                         </div>
+                                                        <button type="button" class="btn btn-primary me-1 mb-1" id="add-aktivitas">Add More Aktivitas</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+-->
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Biaya Keperluan</label>

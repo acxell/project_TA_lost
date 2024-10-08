@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\coa;
+use App\Models\indikatorKegiatan;
 use App\Models\Kegiatan;
+use App\Models\outcomeKegiatan;
 use App\Models\pengguna;
 use App\Models\ProgramKerja;
 use Illuminate\Http\Request;
@@ -55,19 +57,37 @@ class KegiatanController extends Controller
             'biaya_keperluan' => 'numeric|required',
             'persen_dana' => 'numeric|required',
             'dana_bulan_berjalan' => 'numeric|required',
+            'outcomes' => 'array|required',
+            'outcomes.*' => 'string|required',
+            'indikators' => 'array|required',
+            'indikators.*' => 'string|required',
         ]);
 
         $validateData['user_id'] = Auth::id();
 
         $user = Auth::user();
-
         $validateData['unit_id'] = $user->unit_id;
-
         $validateData['satuan_id'] = $user->unit->satuan_id;
 
         $kegiatan = Kegiatan::create($validateData);
 
         if ($kegiatan) {
+            // Store outcomes
+            foreach ($request->outcomes as $outcome) {
+                outcomeKegiatan::create([
+                    'kegiatan_id' => $kegiatan->id,
+                    'outcome' => $outcome,
+                ]);
+            }
+
+            // Store indicators
+            foreach ($request->indikators as $indikator) {
+                indikatorKegiatan::create([
+                    'kegiatan_id' => $kegiatan->id,
+                    'indikator' => $indikator,
+                ]);
+            }
+
             return to_route('penyusunan.kegiatan.view')->with('success', 'Data Telah Ditambahkan');
         } else {
             return to_route('penyusunan.kegiatan.view')->with('failed', 'Data Gagal Ditambahkan');

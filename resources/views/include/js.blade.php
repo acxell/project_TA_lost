@@ -44,17 +44,28 @@
     });
 </script>
 
-{{-- script Addmore Buttons Program Kerja --}}
 <script>
-    document.getElementById('add-more').addEventListener('click', function() {
-        // Clone the row of input fields
-        const dynamicForm = document.getElementById('dynamic-form');
-        const newRow = document.querySelector('.program-kerja-row').cloneNode(true);
+    // Adding dynamic Outcome input fields
+    let outcomeCount = 1;
+    document.getElementById('add-outcome').addEventListener('click', function() {
+        outcomeCount++;
+        const outcomeWrapper = document.getElementById('outcome-wrapper');
+        const newOutcomeGroup = document.createElement('div');
+        newOutcomeGroup.classList.add('form-group');
+        newOutcomeGroup.id = 'outcome-group-' + outcomeCount;
+        newOutcomeGroup.innerHTML = `<input type="text" name="outcomes[]" class="form-control" placeholder="Outcome">`;
+        outcomeWrapper.appendChild(newOutcomeGroup);
+    });
 
-        // Clear input values in the cloned row
-        newRow.querySelectorAll('input').forEach(input => input.value = '');
-
-        // Append the cloned row
-        dynamicForm.appendChild(newRow);
+    // Adding dynamic Indikator input fields
+    let indikatorCount = 1;
+    document.getElementById('add-indikator').addEventListener('click', function() {
+        indikatorCount++;
+        const indikatorWrapper = document.getElementById('indikator-wrapper');
+        const newIndikatorGroup = document.createElement('div');
+        newIndikatorGroup.classList.add('form-group');
+        newIndikatorGroup.id = 'indikator-group-' + indikatorCount;
+        newIndikatorGroup.innerHTML = `<input type="text" name="indikators[]" class="form-control" placeholder="Indikator">`;
+        indikatorWrapper.appendChild(newIndikatorGroup);
     });
 </script>
