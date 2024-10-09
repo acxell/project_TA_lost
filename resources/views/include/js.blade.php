@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-    // Adding dynamic Outcome input fields
     let outcomeCount = 1;
     document.getElementById('add-outcome').addEventListener('click', function() {
         outcomeCount++;
@@ -111,7 +110,6 @@ document.addEventListener('DOMContentLoaded', function() {
         indikatorWrapper.appendChild(newIndikatorGroup);
     });
 
-    // Adding dynamic Aktivitas input fields for each category with cleaner form structure
     const categories = ['persiapan', 'pelaksanaan', 'pelaporan'];
 
     categories.forEach(function(category) {
@@ -130,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Event delegation to remove dynamic aktivitas forms
     document.addEventListener('click', function(event) {
         categories.forEach(function(category) {
             if (event.target.classList.contains('remove-' + category)) {
@@ -139,8 +136,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
-    // Event delegation to remove outcome/indikator/aktivitas
     document.addEventListener('click', function(event) {
         if (event.target.classList.contains('remove-outcome')) {
             event.target.parentElement.remove();

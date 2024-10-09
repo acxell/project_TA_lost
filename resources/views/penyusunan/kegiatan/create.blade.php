@@ -203,11 +203,7 @@
                                             @enderror
                                         </div>
                                     </div>
-
-                                    @php
-                                    $categories = ['Persiapan', 'Pelaksanaan', 'Pelaporan'];
-                                    @endphp
-
+                                    
                                     @php
                                     $categories = ['Persiapan', 'Pelaksanaan', 'Pelaporan'];
                                     @endphp
