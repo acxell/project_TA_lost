@@ -110,29 +110,51 @@ document.addEventListener('DOMContentLoaded', function() {
         indikatorWrapper.appendChild(newIndikatorGroup);
     });
 
-    const categories = ['persiapan', 'pelaksanaan', 'pelaporan'];
+    document.addEventListener('DOMContentLoaded', function() {
+        const categories = ['persiapan', 'pelaksanaan', 'pelaporan'];
 
-    categories.forEach(function(category) {
-        let count = 1;
-        document.getElementById('add-' + category).addEventListener('click', function() {
-            count++;
-            const wrapper = document.getElementById(category + '-wrapper');
-            const newGroup = document.createElement('div');
-            newGroup.classList.add('form-group', 'd-flex', 'align-items-center', 'mb-2');
-            newGroup.id = category + '-group-' + count;
-            newGroup.innerHTML = `
-            <input type="date" name="waktu_${category}[]" class="form-control me-2" placeholder="Waktu ${category}">
-            <textarea name="penjelasan_${category}[]" class="form-control me-2" placeholder="Penjelasan ${category}" rows="1"></textarea>
-            <button type="button" class="btn btn-danger remove-${category}">Delete</button>`;
-            wrapper.appendChild(newGroup);
-        });
-    });
-
-    document.addEventListener('click', function(event) {
         categories.forEach(function(category) {
-            if (event.target.classList.contains('remove-' + category)) {
-                event.target.parentElement.remove();
-            }
+            let aktivitasCount = 1;
+            let kebutuhanCount = 1;
+
+            // Tambah Aktivitas (Add More for Aktivitas)
+            document.querySelector(`.add-aktivitas[data-category="${category}"]`).addEventListener('click', function() {
+                aktivitasCount++;
+                const wrapper = document.getElementById(`${category}-wrapper`);
+                const newGroup = document.createElement('div');
+                newGroup.classList.add('form-group', 'd-flex', 'align-items-center', 'mb-2');
+                newGroup.id = `${category}-group-${aktivitasCount}`;
+                newGroup.innerHTML = `
+                <input type="date" name="waktu_${category}[]" class="form-control me-2" placeholder="Waktu ${category}">
+                <textarea name="penjelasan_${category}[]" class="form-control me-2" placeholder="Penjelasan ${category}" rows="1"></textarea>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kebutuhanAnggaranModal-${category}">Tambah Kebutuhan Anggaran</button>
+            `;
+                wrapper.appendChild(newGroup);
+            });
+
+            // Tambah Kebutuhan Anggaran (Add More for Kebutuhan Anggaran)
+            document.querySelector(`.add-kebutuhan-anggaran[data-category="${category}"]`).addEventListener('click', function() {
+                kebutuhanCount++;
+                const wrapper = document.getElementById(`kebutuhan-anggaran-wrapper-${category}`);
+                const newGroup = document.createElement('div');
+                newGroup.classList.add('form-group', 'd-flex', 'align-items-center', 'mb-2');
+                newGroup.id = `kebutuhan-anggaran-group-${kebutuhanCount}-${category}`;
+                newGroup.innerHTML = `
+                <input type="text" name="uraian_aktivitas_${category}[]" class="form-control me-2" placeholder="Uraian Aktivitas">
+                <input type="number" name="frekwensi_${category}[]" class="form-control me-2" placeholder="Frekwensi">
+                <input type="number" name="nominal_volume_${category}[]" class="form-control me-2" placeholder="Nominal Volume">
+                <input type="text" name="satuan_volume_${category}[]" class="form-control me-2" placeholder="Satuan Volume">
+                <button type="button" class="btn btn-danger remove-kebutuhan-anggaran">Hapus</button>
+            `;
+                wrapper.appendChild(newGroup);
+            });
+
+            // Hapus Kebutuhan Anggaran
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('remove-kebutuhan-anggaran')) {
+                    event.target.parentElement.remove();
+                }
+            });
         });
     });
 
