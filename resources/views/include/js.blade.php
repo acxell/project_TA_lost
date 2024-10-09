@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Tambah Aktivitas (Add More for Aktivitas)
             document.querySelector(`.add-aktivitas[data-category="${category}"]`).addEventListener('click', function() {
                 aktivitasCount++;
+                kebutuhanCount = 1; // Reset kebutuhanCount for new aktivitas
                 const wrapper = document.getElementById(`${category}-wrapper`);
                 const newGroup = document.createElement('div');
                 newGroup.classList.add('form-group', 'd-flex', 'align-items-center', 'mb-2');
@@ -127,26 +128,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 newGroup.innerHTML = `
                 <input type="date" name="waktu_${category}[]" class="form-control me-2" placeholder="Waktu ${category}">
                 <textarea name="penjelasan_${category}[]" class="form-control me-2" placeholder="Penjelasan ${category}" rows="1"></textarea>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kebutuhanAnggaranModal-${category}">Tambah Kebutuhan Anggaran</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kebutuhanAnggaranModal-${category}-${aktivitasCount}">Tambah Kebutuhan Anggaran</button>
             `;
                 wrapper.appendChild(newGroup);
+
+                // Add corresponding modal for each new aktivitas
+                createKebutuhanModal(category, aktivitasCount);
             });
 
             // Tambah Kebutuhan Anggaran (Add More for Kebutuhan Anggaran)
-            document.querySelector(`.add-kebutuhan-anggaran[data-category="${category}"]`).addEventListener('click', function() {
-                kebutuhanCount++;
-                const wrapper = document.getElementById(`kebutuhan-anggaran-wrapper-${category}`);
-                const newGroup = document.createElement('div');
-                newGroup.classList.add('form-group', 'd-flex', 'align-items-center', 'mb-2');
-                newGroup.id = `kebutuhan-anggaran-group-${kebutuhanCount}-${category}`;
-                newGroup.innerHTML = `
-                <input type="text" name="uraian_aktivitas_${category}[]" class="form-control me-2" placeholder="Uraian Aktivitas">
-                <input type="number" name="frekwensi_${category}[]" class="form-control me-2" placeholder="Frekwensi">
-                <input type="number" name="nominal_volume_${category}[]" class="form-control me-2" placeholder="Nominal Volume">
-                <input type="text" name="satuan_volume_${category}[]" class="form-control me-2" placeholder="Satuan Volume">
-                <button type="button" class="btn btn-danger remove-kebutuhan-anggaran">Hapus</button>
-            `;
-                wrapper.appendChild(newGroup);
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('add-kebutuhan-anggaran')) {
+                    const aktivitasId = event.target.getAttribute('data-aktivitas-id');
+                    kebutuhanCount++;
+                    const wrapper = document.getElementById(`kebutuhan-anggaran-wrapper-${category}-${aktivitasId}`);
+                    const newGroup = document.createElement('div');
+                    newGroup.classList.add('form-group', 'd-flex', 'align-items-center', 'mb-2');
+                    newGroup.id = `kebutuhan-anggaran-group-${kebutuhanCount}-${category}-${aktivitasId}`;
+                    newGroup.innerHTML = `
+                    <input type="text" name="uraian_aktivitas_${category}[]" class="form-control me-2" placeholder="Uraian Aktivitas">
+                    <input type="number" name="frekwensi_${category}[]" class="form-control me-2" placeholder="Frekwensi">
+                    <input type="number" name="nominal_volume_${category}[]" class="form-control me-2" placeholder="Nominal Volume">
+                    <input type="text" name="satuan_volume_${category}[]" class="form-control me-2" placeholder="Satuan Volume">
+                    <button type="button" class="btn btn-danger remove-kebutuhan-anggaran">Hapus</button>
+                `;
+                    wrapper.appendChild(newGroup);
+                }
             });
 
             // Hapus Kebutuhan Anggaran
@@ -155,8 +162,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     event.target.parentElement.remove();
                 }
             });
+
+            // Function to create a new modal for each aktivitas
+            function createKebutuhanModal(category, aktivitasCount) {
+                const modalHtml = `
+                <div class="modal fade" id="kebutuhanAnggaranModal-${category}-${aktivitasCount}" tabindex="-1" aria-labelledby="kebutuhanAnggaranModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="kebutuhanAnggaranModalLabel">Tambah Kebutuhan Anggaran - ${category}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="kebutuhan-anggaran-wrapper-${category}-${aktivitasCount}">
+                                    <div class="form-group d-flex align-items-center mb-2" id="kebutuhan-anggaran-group-1-${category}-${aktivitasCount}">
+                                        <input type="text" name="uraian_aktivitas_${category}[]" class="form-control me-2" placeholder="Uraian Aktivitas">
+                                        <input type="number" name="frekwensi_${category}[]" class="form-control me-2" placeholder="Frekwensi">
+                                        <input type="number" name="nominal_volume_${category}[]" class="form-control me-2" placeholder="Nominal Volume">
+                                        <input type="text" name="satuan_volume_${category}[]" class="form-control me-2" placeholder="Satuan Volume">
+                                        <button type="button" class="btn btn-danger remove-kebutuhan-anggaran">Hapus</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary me-1 mb-1 add-kebutuhan-anggaran" data-category="${category}" data-aktivitas-id="${aktivitasCount}">Tambah Lagi</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Simpan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+                document.body.insertAdjacentHTML('beforeend', modalHtml);
+            }
         });
     });
+
 
     document.addEventListener('click', function(event) {
         if (event.target.classList.contains('remove-outcome')) {

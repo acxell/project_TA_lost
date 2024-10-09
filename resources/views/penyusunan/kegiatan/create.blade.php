@@ -220,7 +220,7 @@
                                                             <div class="form-group d-flex align-items-center mb-2" id="{{ strtolower($category) }}-group-1">
                                                                 <input type="date" name="waktu_{{ strtolower($category) }}[]" class="form-control me-2" placeholder="Waktu {{ $category }}">
                                                                 <textarea name="penjelasan_{{ strtolower($category) }}[]" class="form-control me-2" placeholder="Penjelasan {{ $category }}" rows="1"></textarea>
-                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kebutuhanAnggaranModal-{{ strtolower($category) }}">Tambah Kebutuhan Anggaran</button>
+                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kebutuhanAnggaranModal-{{ strtolower($category) }}-1">Tambah Kebutuhan Anggaran</button>
                                                             </div>
                                                         </div>
                                                         <button type="button" class="btn btn-primary me-1 mb-1 add-aktivitas" data-category="{{ strtolower($category) }}">Tambah Aktivitas {{ $category }}</button>
@@ -233,7 +233,7 @@
 
                                     <!-- Modal for Adding Kebutuhan Anggaran -->
                                     @foreach($categories as $category)
-                                    <div class="modal fade" id="kebutuhanAnggaranModal-{{ strtolower($category) }}" tabindex="-1" aria-labelledby="kebutuhanAnggaranModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="kebutuhanAnggaranModal-{{ strtolower($category) }}-1" tabindex="-1" aria-labelledby="kebutuhanAnggaranModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -241,8 +241,8 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div id="kebutuhan-anggaran-wrapper-{{ strtolower($category) }}">
-                                                        <div class="form-group d-flex align-items-center mb-2" id="kebutuhan-anggaran-group-1-{{ strtolower($category) }}">
+                                                    <div id="kebutuhan-anggaran-wrapper-{{ strtolower($category) }}-1">
+                                                        <div class="form-group d-flex align-items-center mb-2" id="kebutuhan-anggaran-group-1-{{ strtolower($category) }}-1">
                                                             <input type="text" name="uraian_aktivitas_{{ strtolower($category) }}[]" class="form-control me-2" placeholder="Uraian Aktivitas">
                                                             <input type="number" name="frekwensi_{{ strtolower($category) }}[]" class="form-control me-2" placeholder="Frekwensi">
                                                             <input type="number" name="nominal_volume_{{ strtolower($category) }}[]" class="form-control me-2" placeholder="Nominal Volume">
@@ -250,7 +250,7 @@
                                                             <button type="button" class="btn btn-danger remove-kebutuhan-anggaran">Hapus</button>
                                                         </div>
                                                     </div>
-                                                    <button type="button" class="btn btn-primary me-1 mb-1 add-kebutuhan-anggaran" data-category="{{ strtolower($category) }}">Tambah Lagi</button>
+                                                    <button type="button" class="btn btn-primary me-1 mb-1 add-kebutuhan-anggaran" data-category="{{ strtolower($category) }}" data-aktivitas-id="1">Tambah Lagi</button>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -260,6 +260,7 @@
                                         </div>
                                     </div>
                                     @endforeach
+
 
 
                                     <div class="col-md-6 col-12">
